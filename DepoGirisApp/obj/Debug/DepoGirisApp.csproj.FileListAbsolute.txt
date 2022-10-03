@@ -1,0 +1,15 @@
+C:\Users\ufukg\Documents\GitHub\DepoGirisApp\DepoGirisApp\bin\Debug\DepoGirisApp.exe.config
+C:\Users\ufukg\Documents\GitHub\DepoGirisApp\DepoGirisApp\bin\Debug\DepoGirisApp.exe
+C:\Users\ufukg\Documents\GitHub\DepoGirisApp\DepoGirisApp\bin\Debug\DepoGirisApp.pdb
+C:\Users\ufukg\Documents\GitHub\DepoGirisApp\DepoGirisApp\obj\Debug\DepoGirisApp.csproj.AssemblyReference.cache
+C:\Users\ufukg\Documents\GitHub\DepoGirisApp\DepoGirisApp\obj\Debug\DepoGirisApp.csproj.SuggestedBindingRedirects.cache
+C:\Users\ufukg\Documents\GitHub\DepoGirisApp\DepoGirisApp\obj\Debug\DepoGirisApp.Properties.Resources.resources
+C:\Users\ufukg\Documents\GitHub\DepoGirisApp\DepoGirisApp\obj\Debug\DepoGirisApp.csproj.GenerateResource.cache
+C:\Users\ufukg\Documents\GitHub\DepoGirisApp\DepoGirisApp\obj\Debug\DepoGirisApp.csproj.CoreCompileInputs.cache
+C:\Users\ufukg\Documents\GitHub\DepoGirisApp\DepoGirisApp\obj\Debug\DepoGirisApp.exe
+C:\Users\ufukg\Documents\GitHub\DepoGirisApp\DepoGirisApp\obj\Debug\DepoGirisApp.pdb
+C:\Users\ufukg\Documents\GitHub\DepoGirisApp\DepoGirisApp\obj\Debug\DepoGirisApp.KullaniciGiris.resources
+C:\Users\ufukg\Documents\GitHub\DepoGirisApp\DepoGirisApp\obj\Debug\DepoGirisApp.AnaForm.resources
+C:\Users\ufukg\Documents\GitHub\DepoGirisApp\DepoGirisApp\bin\Debug\DataAccessLayer.dll
+C:\Users\ufukg\Documents\GitHub\DepoGirisApp\DepoGirisApp\bin\Debug\DataAccessLayer.pdb
+C:\Users\ufukg\Documents\GitHub\DepoGirisApp\DepoGirisApp\obj\Debug\DepoGirisApp.csproj.CopyComplete
