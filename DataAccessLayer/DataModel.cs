@@ -65,5 +65,20 @@ namespace DataAccessLayer
             }
         }
         #endregion
+        #region Product Metotları
+        public void BarkodNoGöreProductBul(string barkodno)
+        {
+            List<Product> products = new List<Product>();
+            try
+            {
+                cmd.CommandText = "SELECT * FROM Products WHERE Barcode=@barcode";
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #endregion
     }
 }
