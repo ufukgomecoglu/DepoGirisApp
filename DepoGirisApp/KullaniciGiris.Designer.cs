@@ -67,6 +67,7 @@
             this.tb_sifre.Name = "tb_sifre";
             this.tb_sifre.Size = new System.Drawing.Size(229, 20);
             this.tb_sifre.TabIndex = 3;
+            this.tb_sifre.Text = "1";
             this.tb_sifre.UseSystemPasswordChar = true;
             // 
             // tb_kullaniciAdi
@@ -75,6 +76,7 @@
             this.tb_kullaniciAdi.Name = "tb_kullaniciAdi";
             this.tb_kullaniciAdi.Size = new System.Drawing.Size(229, 20);
             this.tb_kullaniciAdi.TabIndex = 2;
+            this.tb_kullaniciAdi.Text = "admin";
             // 
             // label2
             // 
