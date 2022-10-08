@@ -38,7 +38,6 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.iŞLEMLERToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.manuelGirişToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.paletBarkoduÇıkartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tIRYüklemesiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ürünTakipToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -147,19 +146,12 @@
             // iŞLEMLERToolStripMenuItem
             // 
             this.iŞLEMLERToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.manuelGirişToolStripMenuItem,
             this.paletBarkoduÇıkartToolStripMenuItem,
             this.tIRYüklemesiToolStripMenuItem,
             this.ürünTakipToolStripMenuItem});
             this.iŞLEMLERToolStripMenuItem.Name = "iŞLEMLERToolStripMenuItem";
             this.iŞLEMLERToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
             this.iŞLEMLERToolStripMenuItem.Text = "İŞLEMLER";
-            // 
-            // manuelGirişToolStripMenuItem
-            // 
-            this.manuelGirişToolStripMenuItem.Name = "manuelGirişToolStripMenuItem";
-            this.manuelGirişToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
-            this.manuelGirişToolStripMenuItem.Text = "Manuel Giriş";
             // 
             // paletBarkoduÇıkartToolStripMenuItem
             // 
@@ -211,7 +203,6 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem iŞLEMLERToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem manuelGirişToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem paletBarkoduÇıkartToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tIRYüklemesiToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ürünTakipToolStripMenuItem;
