@@ -16,16 +16,14 @@ namespace DepoGirisApp
     {
         public static kullanici_listeLogin LoginUser;
         DataModel dm = new DataModel();
+        //string kod = "";
+        string path = @"C:\Esvit 1.0\RProforma\" +  ".jpg";
         public AnaForm()
         {
             KullaniciGiris frm = new KullaniciGiris();
             frm.ShowDialog();
             InitializeComponent();
             this.WindowState = FormWindowState.Maximized;
-        }
-        private void GridDoldur(string barkodno)
-        {
-            dataGridView1.DataSource= dm.BarkodNoGöreProductBul(barkodno);
         }
         private void cb_doldur()
         {
@@ -37,17 +35,17 @@ namespace DepoGirisApp
         private void AnaForm_Load(object sender, EventArgs e)
         {
             cb_doldur();
-            tb_barkodno.Select();
+            mtb_barkodno.Select();
+            GridDoldur();
         }
         private void FornTemizle()
         {
-            tb_barkodno.Text = "";
+            mtb_barkodno.Text = "";
         }
 
         private void btn_ekle_Click(object sender, EventArgs e)
         {
-            GridDoldur(tb_barkodno.Text);
-            Product p = dm.BarkodNoGöreProductBul(tb_barkodno.Text);
+            Product p = dm.BarkodNoGöreProductBul(mtb_barkodno.Text);
             DepoGiris d = new DepoGiris();
             d.Barkod = p.Barcode;
             d.Sicil = LoginUser.Kimlik;
@@ -59,7 +57,21 @@ namespace DepoGirisApp
                 MessageBox.Show("Ekleme İşlemi Başarısız", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             FornTemizle();
-            tb_barkodno.Select();
+            mtb_barkodno.Select();
+            GridDoldur();
+        }
+        private void GridDoldur()
+        {
+            dataGridView1.DataSource = dm.DepogirisListReader(LoginUser.Kimlik);
+        }
+
+        private void TSMI_UrunTakip_Click(object sender, EventArgs e)
+        {
+            UrunTakip ut = new UrunTakip();
+            if (Application.OpenForms.OfType<UrunTakip>().Count() == 0)
+            {
+                ut.Show();
+            }
         }
     }
 }

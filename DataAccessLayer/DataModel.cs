@@ -42,7 +42,7 @@ namespace DataAccessLayer
                         k.kullanici_adi = reader.GetString(1);
                         k.sifre = reader.GetString(2);
                         k.ad_soyad = reader.GetString(3);
-                        if (!reader.IsDBNull (4))
+                        if (!reader.IsDBNull(4))
                         {
                             k.Departman = reader.GetString(4);
                         }
@@ -76,25 +76,25 @@ namespace DataAccessLayer
                 cmd.Parameters.AddWithValue("@barcode", barkodno);
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
-                while(reader.Read())
+                while (reader.Read())
                 {
-                    p= new Product()
+                    p = new Product()
                     {
                         Id = reader.GetInt32(0),
                         Barcode = reader.GetString(1),
                         ProductCode = reader.GetInt32(2),
                         CastDate = reader.GetDateTime(3),
-                        CastPersonel= reader.GetInt32(4),
-                        GlazingTerritory=reader.GetByte(5),
-                        Quality= reader.GetByte(6),
-                        Foult=reader.GetByte(7),
+                        CastPersonel = reader.GetInt32(4),
+                        GlazingTerritory = reader.GetByte(5),
+                        Quality = reader.GetByte(6),
+                        Foult = reader.GetByte(7),
                         ControlDate = reader.GetDateTime(8),
-                        ControlPersonel=reader.GetString(9),
-                        Kiln=reader.GetByte(10),    
+                        ControlPersonel = reader.GetString(9),
+                        Kiln = reader.GetByte(10),
                         Fring = reader.GetByte(11),
-                        Color=reader.GetByte(12),
-                        StockTerritory=reader.GetByte(13),
-                        ControlTime= reader.GetDateTime(14)
+                        Color = reader.GetByte(12),
+                        StockTerritory = reader.GetByte(13),
+                        ControlTime = reader.GetDateTime(14)
                     };
                 }
                 return p;
@@ -127,7 +127,7 @@ namespace DataAccessLayer
                         tanim = reader.GetString(1)
                     });
                 }
-                    return hatalar;
+                return hatalar;
             }
             catch (Exception)
             {
@@ -156,7 +156,7 @@ namespace DataAccessLayer
                 cmd.ExecuteNonQuery();
                 return true;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return false;
             }
@@ -165,7 +165,176 @@ namespace DataAccessLayer
                 con.Close();
             }
         }
+        public List<DepoGiris> DepogirisListReader(byte sicil)
+        {
+            DateTime date = DateTime.Now.Date;
+            List<DepoGiris> girisler = new List<DepoGiris>();
+            try
+            {
+                cmd.CommandText = "SELECT D.Id, D.Barkod, D.Sicil , D.KayitTarih, D.Hata_Id, K.tanim  FROM DepoGiris AS D JOIN Products AS P ON P.Id=D.Product_ID JOIN kod_liste AS K ON P.ProductCode = K.Kimlik WHERE D.Sicil=@sicil AND D.KayitTarih  BETWEEN @bugununtarihi AND @ertisigüntarihi  ";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@sicil", sicil);
+                cmd.Parameters.AddWithValue("@bugununtarihi", date);
+                cmd.Parameters.AddWithValue("@ertisigüntarihi ", DateTime.Today.AddDays(1));
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    DepoGiris dg = new DepoGiris();
+                    dg.Id = reader.GetInt32(0);
+                    dg.Barkod = reader.GetString(1);
+                    dg.Sicil = reader.GetByte(2);
+                    dg.KayitTarih = reader.GetDateTime(3);
+                    dg.Hata_Id = reader.GetByte(4);
+                    dg.UrunKodu = reader.GetString(5);
+                    girisler.Add(dg);
+                }
+                return girisler;
+            }
+            catch (Exception)
+            {
 
-        #endregion
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public List<DepoGiris> DepogirisListReader()
+        {
+            List<DepoGiris> girisler = new List<DepoGiris>();
+            try
+            {
+                cmd.CommandText = "SELECT D.Id, D.Barkod, D.Sicil , D.KayitTarih, D.Hata_Id, K.tanim  FROM DepoGiris AS D JOIN Products AS P ON P.Id=D.Product_ID JOIN kod_liste AS K ON P.ProductCode = K.Kimlik  ";
+                cmd.Parameters.Clear();
+
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    DepoGiris dg = new DepoGiris();
+                    dg.Id = reader.GetInt32(0);
+                    dg.Barkod = reader.GetString(1);
+                    dg.Sicil = reader.GetByte(2);
+                    dg.KayitTarih = reader.GetDateTime(3);
+                    dg.Hata_Id = reader.GetByte(4);
+                    dg.UrunKodu = reader.GetString(5);
+                    girisler.Add(dg);
+                }
+                return girisler;
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        public List<DepoGiris> DepogirisListReader(string urunkodu)
+        {
+            List<DepoGiris> girisler = new List<DepoGiris>();
+            try
+            {
+                cmd.CommandText = "SELECT D.Id, D.Barkod, D.Sicil , D.KayitTarih, D.Hata_Id, K.tanim  FROM DepoGiris AS D JOIN Products AS P ON P.Id=D.Product_ID JOIN kod_liste AS K ON P.ProductCode = K.Kimlik WHERE K.tanim=@tanim  ";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@tanim", urunkodu);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    DepoGiris dg = new DepoGiris();
+                    dg.Id = reader.GetInt32(0);
+                    dg.Barkod = reader.GetString(1);
+                    dg.Sicil = reader.GetByte(2);
+                    dg.KayitTarih = reader.GetDateTime(3);
+                    dg.Hata_Id = reader.GetByte(4);
+                    dg.UrunKodu = reader.GetString(5);
+                    girisler.Add(dg);
+                }
+                return girisler;
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        public List<DepoGiris> DepogirisListReaderSicilAra(byte sicil)
+        {
+            List<DepoGiris> girisler = new List<DepoGiris>();
+            try
+            {
+                cmd.CommandText = "SELECT D.Id, D.Barkod, D.Sicil , D.KayitTarih, D.Hata_Id, K.tanim  FROM DepoGiris AS D JOIN Products AS P ON P.Id=D.Product_ID JOIN kod_liste AS K ON P.ProductCode = K.Kimlik WHERE D.Sicil=@sicil ";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@sicil", sicil);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    DepoGiris dg = new DepoGiris();
+                    dg.Id = reader.GetInt32(0);
+                    dg.Barkod = reader.GetString(1);
+                    dg.Sicil = reader.GetByte(2);
+                    dg.KayitTarih = reader.GetDateTime(3);
+                    dg.Hata_Id = reader.GetByte(4);
+                    dg.UrunKodu = reader.GetString(5);
+                    girisler.Add(dg);
+                }
+                return girisler;
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        public List<DepoGiris> DepogirisListReader(DateTime baslangic, DateTime bitis)
+        {
+            List<DepoGiris> girisler = new List<DepoGiris>();
+            try
+            {
+                cmd.CommandText = "SELECT D.Id, D.Barkod, D.Sicil , D.KayitTarih, D.Hata_Id, K.tanim  FROM DepoGiris AS D JOIN Products AS P ON P.Id=D.Product_ID JOIN kod_liste AS K ON P.ProductCode = K.Kimlik WHERE D.KayitTarih  BETWEEN @bugununtarihi AND @ertisigüntarihi  ";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@bugununtarihi", baslangic);
+                cmd.Parameters.AddWithValue("@ertisigüntarihi", bitis);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    DepoGiris dg = new DepoGiris();
+                    dg.Id = reader.GetInt32(0);
+                    dg.Barkod = reader.GetString(1);
+                    dg.Sicil = reader.GetByte(2);
+                    dg.KayitTarih = reader.GetDateTime(3);
+                    dg.Hata_Id = reader.GetByte(4);
+                    dg.UrunKodu = reader.GetString(5);
+                    girisler.Add(dg);
+                }
+                return girisler;
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+            #endregion
+        }
     }
 }
