@@ -41,5 +41,15 @@ namespace DepoGirisApp
         {
 
         }
+
+        private void CMSMI_guncelle_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CMSMI_sil_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
