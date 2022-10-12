@@ -527,6 +527,92 @@ namespace DataAccessLayer
                 con.Close();
             }
         }
+        public Sevkiyat SevkiyatGetir(int id)
+        {
+            try
+            {
+                Sevkiyat s = new Sevkiyat();
+                cmd.CommandText = "SELECT S.ID, S.Musteri_ID, M.Isim,S.Kod_liste_Kimlik,K.tanim, K.aciklama, S.Miktar, S.SevkTarih, S.Renk_liste_kimlik, R.renkad, S.Kalite_liste_kimlik, KA.kaliteAd, S.Kullanici_ID , KU.ad_soyad, KU.kullanici_adi FROM Sevkiyat AS S JOIN Musteriler AS M ON M.ID= S.Musteri_ID JOIN kod_liste AS K ON S.Kod_liste_Kimlik=K.Kimlik JOIN renk_liste AS R ON R.Kimlik=S.Renk_liste_kimlik JOIN kalite_liste AS KA ON KA.Kimlik = S.Kalite_liste_kimlik JOIN kullanici_liste AS KU ON KU.Kimlik = S.Kullanici_ID WHERE S.ID= @id";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id", id);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    s.ID = reader.GetInt32(0);
+                    s.Musteri_ID = reader.GetInt32(1);
+                    s.MusteriIsim = reader.GetString(2);
+                    s.Kod_liste_Kimlik = reader.GetInt32(3);
+                    s.UrunKodu = reader.GetString(4);
+                    s.Aciklama = reader.GetString(5);
+                    s.Miktar = reader.GetInt32(6);
+                    s.SevkTarih = reader.GetDateTime(7);
+                    s.Renk_liste_kimlik = reader.GetByte(8);
+                    s.renkad = reader.GetString(9);
+                    s.Kalite_liste_kimlik = reader.GetByte(10);
+                    s.kaliteAd = reader.GetString(11);
+                    s.Kullanici_ID = reader.GetByte(12);
+                    s.ad_soyad = reader.GetString(13);
+                    s.kullanici_adi = reader.GetString(14);
+                }
+                return s;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        public bool SevkiyatGuncelle(Sevkiyat model)
+        {
+            try
+            {
+                cmd.CommandText = "UPDATE Sevkiyat SET Musteri_ID=@Musteri_ID, Kod_liste_Kimlik =@Kod_liste_Kimlik, Miktar = @Miktar, SevkTarih=@SevkTarih, Renk_liste_kimlik=@Renk_liste_kimlik, Kalite_liste_kimlik=@Kalite_liste_kimlik, Kullanici_ID=@Kullanici_ID WHERE ID=@id";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id", model.ID);
+                cmd.Parameters.AddWithValue("@Musteri_ID", model.Musteri_ID);
+                cmd.Parameters.AddWithValue("@Kod_liste_Kimlik", model.Kod_liste_Kimlik);
+                cmd.Parameters.AddWithValue("@Miktar", model.Miktar);
+                cmd.Parameters.AddWithValue("@SevkTarih", model.SevkTarih);
+                cmd.Parameters.AddWithValue("@Renk_liste_kimlik", model.Renk_liste_kimlik);
+                cmd.Parameters.AddWithValue("@Kalite_liste_kimlik", model.Kalite_liste_kimlik);
+                cmd.Parameters.AddWithValue("@Kullanici_ID", model.Kullanici_ID);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        public bool SevkiyatSil(int id)
+        {
+            try
+            {
+                cmd.CommandText = "DELETE Sevkiyat  WHERE ID= @id";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id", id);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
 
         #endregion
     }
