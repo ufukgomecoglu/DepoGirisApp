@@ -81,5 +81,14 @@ namespace DepoGirisApp
             }
 
         }
+
+        private void TSMI_TIRYuklemesi_Click_1(object sender, EventArgs e)
+        {
+            TIRYuklemesi ty = new TIRYuklemesi();
+            if (Application.OpenForms.OfType<UrunTakip>().Count() == 0)
+            {
+                ty.ShowDialog();
+            }
+        }
     }
 }

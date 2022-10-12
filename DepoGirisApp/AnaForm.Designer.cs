@@ -38,9 +38,10 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.iŞLEMLERToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_PaletBarkoduCikar = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_TirYuklemesi = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_SevkiyatOlustur = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_UrunTakip = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.TSMI_TIRYuklemesi = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -137,8 +138,9 @@
             // 
             this.iŞLEMLERToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TSMI_PaletBarkoduCikar,
-            this.TSMI_TirYuklemesi,
-            this.TSMI_UrunTakip});
+            this.TSMI_SevkiyatOlustur,
+            this.TSMI_UrunTakip,
+            this.TSMI_TIRYuklemesi});
             this.iŞLEMLERToolStripMenuItem.Name = "iŞLEMLERToolStripMenuItem";
             this.iŞLEMLERToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
             this.iŞLEMLERToolStripMenuItem.Text = "İŞLEMLER";
@@ -149,12 +151,12 @@
             this.TSMI_PaletBarkoduCikar.Size = new System.Drawing.Size(180, 22);
             this.TSMI_PaletBarkoduCikar.Text = "Palet barkodu çıkart";
             // 
-            // TSMI_TirYuklemesi
+            // TSMI_SevkiyatOlustur
             // 
-            this.TSMI_TirYuklemesi.Name = "TSMI_TirYuklemesi";
-            this.TSMI_TirYuklemesi.Size = new System.Drawing.Size(180, 22);
-            this.TSMI_TirYuklemesi.Text = "Sevkiyat Oluştur";
-            this.TSMI_TirYuklemesi.Click += new System.EventHandler(this.TSMI_TirYuklemesi_Click);
+            this.TSMI_SevkiyatOlustur.Name = "TSMI_SevkiyatOlustur";
+            this.TSMI_SevkiyatOlustur.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_SevkiyatOlustur.Text = "Sevkiyat Oluştur";
+            this.TSMI_SevkiyatOlustur.Click += new System.EventHandler(this.TSMI_TirYuklemesi_Click);
             // 
             // TSMI_UrunTakip
             // 
@@ -173,6 +175,13 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(1431, 249);
             this.dataGridView1.TabIndex = 2;
+            // 
+            // TSMI_TIRYuklemesi
+            // 
+            this.TSMI_TIRYuklemesi.Name = "TSMI_TIRYuklemesi";
+            this.TSMI_TIRYuklemesi.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_TIRYuklemesi.Text = "TIR Yüklemesi ";
+            this.TSMI_TIRYuklemesi.Click += new System.EventHandler(this.TSMI_TIRYuklemesi_Click_1);
             // 
             // AnaForm
             // 
@@ -205,10 +214,11 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem iŞLEMLERToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem TSMI_PaletBarkoduCikar;
-        private System.Windows.Forms.ToolStripMenuItem TSMI_TirYuklemesi;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_SevkiyatOlustur;
         private System.Windows.Forms.ToolStripMenuItem TSMI_UrunTakip;
         private System.Windows.Forms.Button btn_ekle;
         private System.Windows.Forms.MaskedTextBox mtb_barkodno;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_TIRYuklemesi;
     }
 }

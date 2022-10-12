@@ -15,3 +15,4 @@ C:\Users\ufukg\Documents\GitHub\DepoGirisApp\DepoGirisApp\bin\Debug\DataAccessLa
 C:\Users\ufukg\Documents\GitHub\DepoGirisApp\DepoGirisApp\obj\Debug\DepoGirisApp.csproj.CopyComplete
 C:\Users\ufukg\Documents\GitHub\DepoGirisApp\DepoGirisApp\obj\Debug\DepoGirisApp.UrunTakip.resources
 C:\Users\ufukg\Documents\GitHub\DepoGirisApp\DepoGirisApp\obj\Debug\DepoGirisApp.SevkiyatOlustur.resources
+C:\Users\ufukg\Documents\GitHub\DepoGirisApp\DepoGirisApp\obj\Debug\DepoGirisApp.TIRYuklemesi.resources

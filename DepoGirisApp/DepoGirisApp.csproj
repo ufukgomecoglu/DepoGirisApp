@@ -66,6 +66,12 @@
     <Compile Include="SevkiyatOlustur.Designer.cs">
       <DependentUpon>SevkiyatOlustur.cs</DependentUpon>
     </Compile>
+    <Compile Include="TIRYuklemesi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TIRYuklemesi.Designer.cs">
+      <DependentUpon>TIRYuklemesi.cs</DependentUpon>
+    </Compile>
     <Compile Include="UrunTakip.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +95,9 @@
     </Compile>
     <EmbeddedResource Include="SevkiyatOlustur.resx">
       <DependentUpon>SevkiyatOlustur.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TIRYuklemesi.resx">
+      <DependentUpon>TIRYuklemesi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UrunTakip.resx">
       <DependentUpon>UrunTakip.cs</DependentUpon>
