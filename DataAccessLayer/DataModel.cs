@@ -458,5 +458,8 @@ namespace DataAccessLayer
             }
         }
         #endregion
+        #region Sevkiyat Metotları
+        
+        #endregion
     }
 }

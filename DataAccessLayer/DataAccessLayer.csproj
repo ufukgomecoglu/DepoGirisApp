@@ -50,6 +50,7 @@
     <Compile Include="Model\Musteri.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\Renk.cs" />
+    <Compile Include="Model\Sevkiyat.cs" />
     <Compile Include="Model\UrunKod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -80,6 +80,18 @@ namespace DepoGirisApp
             btn_guncelle.Visible = false;
             btn_yeniekle.Enabled = false;
             CBDoldur();
+            GridDoldur();
         }
+        public void FormTemizle()
+        {
+            tb_miktar.Text = "";
+            CBDoldur();
+            GridDoldur();
+        }
+        public void GridDoldur()
+        {
+
+        }
+
     }
 }
