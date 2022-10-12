@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer;
+using DataAccessLayer.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,11 +19,32 @@ namespace DepoGirisApp
         public SevkiyatOlustur()
         {
             InitializeComponent();
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void btn_ekle_Click(object sender, EventArgs e)
         {
+            Sevkiyat s = new Sevkiyat()
+            {
+                Musteri_ID = Convert.ToInt32(cb_musteri.SelectedValue),
+                Kod_liste_Kimlik = Convert.ToInt32(cb_kod.SelectedValue),
+                Miktar = Convert.ToInt32(tb_miktar.Text),
+                SevkTarih = dtp_tarih.Value,
+                Renk_liste_kimlik = Convert.ToByte(cb_renk.SelectedValue),
+                Kalite_liste_kimlik = Convert.ToByte(cb_kalite.SelectedValue),
+                Kullanici_ID = AnaForm.LoginUser.Kimlik
+            };
+            if (dm.SevkiyatEkle(s))
+            {
+                GridDoldur();
+                FormTemizle();
+                MessageBox.Show("Ekleme İşlemi Başarılı", "Bilgi");
 
+            }
+            else
+            {
+                MessageBox.Show("Ekleme İşlemi Başarısız", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btn_yeniekle_Click(object sender, EventArgs e)
@@ -90,7 +112,7 @@ namespace DepoGirisApp
         }
         public void GridDoldur()
         {
-
+            dataGridView1.DataSource = dm.SevkiyatListele();
         }
 
     }

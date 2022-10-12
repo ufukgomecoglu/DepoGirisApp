@@ -459,7 +459,75 @@ namespace DataAccessLayer
         }
         #endregion
         #region Sevkiyat Metotları
-        
+        public bool SevkiyatEkle(Sevkiyat model)
+        {
+            try
+            {
+                cmd.CommandText = "INSERT INTO Sevkiyat(Musteri_ID, Kod_liste_kimlik, Miktar, SevkTarih, Renk_liste_kimlik, Kalite_liste_kimlik, Durum, Kullanici_ID) VALUES(@musteri_id, @kod_liste_kimlik, @miktar, @sevktarih, @renk_liste_kimlik, @kalite_liste_kimlik, 0, @Kullanici_ID)";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@musteri_id", model.Musteri_ID);
+                cmd.Parameters.AddWithValue("@kod_liste_kimlik", model.Kod_liste_Kimlik);
+                cmd.Parameters.AddWithValue("@miktar", model.Miktar);
+                cmd.Parameters.AddWithValue("@sevktarih", model.SevkTarih);
+                cmd.Parameters.AddWithValue("@renk_liste_kimlik", model.Renk_liste_kimlik);
+                cmd.Parameters.AddWithValue("@kalite_liste_kimlik", model.Kalite_liste_kimlik);
+                cmd.Parameters.AddWithValue("@Kullanici_ID", model.Kullanici_ID);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally 
+            {
+                con.Close();
+            }
+        }
+        public List<Sevkiyat> SevkiyatListele()
+        {
+            List<Sevkiyat> sevkiyatlar = new List<Sevkiyat>();
+            try
+            {
+                cmd.CommandText = "SELECT S.ID, S.Musteri_ID, M.Isim,S.Kod_liste_Kimlik,K.tanim, K.aciklama, S.Miktar, S.SevkTarih, S.Renk_liste_kimlik, R.renkad, S.Kalite_liste_kimlik, KA.kaliteAd, S.Kullanici_ID , KU.ad_soyad, KU.kullanici_adi FROM Sevkiyat AS S JOIN Musteriler AS M ON M.ID= S.Musteri_ID JOIN kod_liste AS K ON S.Kod_liste_Kimlik=K.Kimlik JOIN renk_liste AS R ON R.Kimlik=S.Renk_liste_kimlik JOIN kalite_liste AS KA ON KA.Kimlik = S.Kalite_liste_kimlik JOIN kullanici_liste AS KU ON KU.Kimlik = S.Kullanici_ID WHERE S.Durum= 0";
+                cmd.Parameters.Clear();
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Sevkiyat s = new Sevkiyat();
+                    s.ID = reader.GetInt32(0);
+                    s.Musteri_ID = reader.GetInt32(1);
+                    s.MusteriIsim = reader.GetString(2);
+                    s.Kod_liste_Kimlik = reader.GetInt32(3);
+                    s.UrunKodu = reader.GetString(4);
+                    s.Aciklama = reader.GetString(5);
+                    s.Miktar = reader.GetInt32(6);
+                    s.SevkTarih = reader.GetDateTime(7);
+                    s.Renk_liste_kimlik = reader.GetByte(8);
+                    s.renkad = reader.GetString(9);
+                    s.Kalite_liste_kimlik = reader.GetByte(10);
+                    s.kaliteAd = reader.GetString(11);
+                    s.Kullanici_ID = reader.GetByte(12);
+                    s.ad_soyad = reader.GetString(13);
+                    s.kullanici_adi = reader.GetString(14);
+                    sevkiyatlar.Add(s);
+                }
+                return sevkiyatlar;
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
         #endregion
     }
 }

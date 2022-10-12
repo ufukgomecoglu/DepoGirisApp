@@ -8,10 +8,6 @@ namespace DataAccessLayer.Model
 {
     public class Sevkiyat
     {
-        public Sevkiyat()
-        {
-            SevkEdielenTarih=DateTime.Now;
-        }
         public int ID { get; set; }
         public int Musteri_ID { get; set; }
         public string MusteriIsim { get; set; }
@@ -28,6 +24,7 @@ namespace DataAccessLayer.Model
         public bool Durum { get; set; }
         public DateTime SevkEdielenTarih { get; set; }
         public string ad_soyad { get; set; }
+        public byte Kullanici_ID { get; set; }
         public string kullanici_adi { get; set; }
     }
 }
