@@ -16,8 +16,6 @@ namespace DepoGirisApp
     {
         public static kullanici_listeLogin LoginUser;
         DataModel dm = new DataModel();
-        //string kod = "";
-        string path = @"C:\Esvit 1.0\RProforma\" +  ".jpg";
         public AnaForm()
         {
             KullaniciGiris frm = new KullaniciGiris();
@@ -70,8 +68,18 @@ namespace DepoGirisApp
             UrunTakip ut = new UrunTakip();
             if (Application.OpenForms.OfType<UrunTakip>().Count() == 0)
             {
-                ut.Show();
+                ut.ShowDialog();
             }
+        }
+
+        private void TSMI_TirYuklemesi_Click(object sender, EventArgs e)
+        {
+            SevkiyatOlustur so = new SevkiyatOlustur();
+            if (Application.OpenForms.OfType<UrunTakip>().Count() == 0)
+            {
+                so.ShowDialog();
+            }
+
         }
     }
 }

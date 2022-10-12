@@ -334,7 +334,129 @@ namespace DataAccessLayer
             {
                 con.Close();
             }
-            #endregion
         }
+        #endregion
+        #region Musteri Metotları
+        public List<Musteri> MusteriListele()
+        {
+            List<Musteri> musteriler = new List<Musteri>();
+            try
+            {
+                cmd.CommandText = "SELECT ID,Isim FROM Musteriler";
+                cmd.Parameters.Clear();
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while(reader.Read())
+                {
+                    musteriler.Add(new Musteri()
+                    {
+                        ID = reader.GetInt32(0),
+                        Isim =reader.GetString(1)
+                    });
+                }
+                return musteriler;
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        #endregion
+        #region Renk Metotları
+        public List<Renk> RenkListele()
+        {
+            List<Renk> renkler = new List<Renk>();
+            try
+            {
+                cmd.CommandText = "SELECT * FROM renk_liste";
+                cmd.Parameters.Clear();
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    renkler.Add(new Renk()
+                    {
+                        Kimlik = reader.GetByte(0),
+                        renkad = reader.GetString(1)
+                    });
+                }
+                return renkler;
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        #endregion
+        #region KaliteTipi Metotları
+        public List<KaliteTipi> KaliteTipiListele()
+        {
+            List<KaliteTipi> kaliteTipleri = new List<KaliteTipi>();
+            try
+            {
+                cmd.CommandText = "SELECT Kimlik,kaliteAd FROM kalite_liste";
+                cmd.Parameters.Clear();
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while(reader.Read())
+                {
+                    kaliteTipleri.Add(new KaliteTipi()
+                    {
+                        Kimlik = reader.GetByte(0),
+                        kaliteAd = reader.GetString(1)
+                    });
+                }
+                return kaliteTipleri;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        #endregion
+        #region Ürün kod metotları
+        public List<UrunKod> UrunKodListele()
+        {
+            List<UrunKod> urunKodlar = new List<UrunKod>();
+            try
+            {
+                cmd.CommandText = "SELECT Kimlik,tanim FROM kod_liste";
+                cmd.Parameters.Clear();
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    urunKodlar.Add(new UrunKod()
+                    {
+                        Kimlik = reader.GetInt32(0),
+                        tanim = reader.GetString(1)
+                    });
+                }
+                return urunKodlar;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        #endregion
     }
 }

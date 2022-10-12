@@ -67,7 +67,7 @@
             // mtb_barkodno
             // 
             this.mtb_barkodno.Font = new System.Drawing.Font("Microsoft Sans Serif", 26F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.mtb_barkodno.Location = new System.Drawing.Point(202, 17);
+            this.mtb_barkodno.Location = new System.Drawing.Point(240, 19);
             this.mtb_barkodno.Mask = "9999999999";
             this.mtb_barkodno.Name = "mtb_barkodno";
             this.mtb_barkodno.Size = new System.Drawing.Size(216, 47);
@@ -77,7 +77,7 @@
             // 
             this.btn_ekle.AutoSize = true;
             this.btn_ekle.Font = new System.Drawing.Font("Microsoft Sans Serif", 26F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btn_ekle.Location = new System.Drawing.Point(650, 103);
+            this.btn_ekle.Location = new System.Drawing.Point(688, 108);
             this.btn_ekle.Name = "btn_ekle";
             this.btn_ekle.Size = new System.Drawing.Size(142, 49);
             this.btn_ekle.TabIndex = 6;
@@ -98,7 +98,7 @@
             this.cb_hata.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_hata.Font = new System.Drawing.Font("Microsoft Sans Serif", 26F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.cb_hata.FormattingEnabled = true;
-            this.cb_hata.Location = new System.Drawing.Point(202, 103);
+            this.cb_hata.Location = new System.Drawing.Point(240, 108);
             this.cb_hata.Name = "cb_hata";
             this.cb_hata.Size = new System.Drawing.Size(422, 47);
             this.cb_hata.TabIndex = 3;
@@ -107,17 +107,17 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 26F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label2.Location = new System.Drawing.Point(87, 106);
+            this.label2.Location = new System.Drawing.Point(12, 116);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(109, 39);
+            this.label2.Size = new System.Drawing.Size(222, 39);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Hata :";
+            this.label2.Text = "Kalite Hatası:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 26F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label1.Location = new System.Drawing.Point(6, 27);
+            this.label1.Location = new System.Drawing.Point(44, 27);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(190, 39);
             this.label1.TabIndex = 0;
@@ -153,7 +153,8 @@
             // 
             this.TSMI_TirYuklemesi.Name = "TSMI_TirYuklemesi";
             this.TSMI_TirYuklemesi.Size = new System.Drawing.Size(180, 22);
-            this.TSMI_TirYuklemesi.Text = "TIR Yüklemesi";
+            this.TSMI_TirYuklemesi.Text = "Sevkiyat Oluştur";
+            this.TSMI_TirYuklemesi.Click += new System.EventHandler(this.TSMI_TirYuklemesi_Click);
             // 
             // TSMI_UrunTakip
             // 

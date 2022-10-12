@@ -1,6 +1,6 @@
 ﻿namespace DepoGirisApp
 {
-    partial class TIRYuklemesi
+    partial class SevkiyatOlustur
     {
         /// <summary>
         /// Required designer variable.
@@ -215,7 +215,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(775, 259);
             this.dataGridView1.TabIndex = 1;
-            this.dataGridView1.Click += new System.EventHandler(this.dataGridView1_Click);
+            this.dataGridView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseClick);
             // 
             // contextMenuStrip1
             // 
@@ -239,16 +239,16 @@
             this.CMSMI_sil.Text = "Sil";
             this.CMSMI_sil.Click += new System.EventHandler(this.CMSMI_sil_Click);
             // 
-            // TIRYuklemesi
+            // SevkiyatOlustur
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox1);
-            this.Name = "TIRYuklemesi";
-            this.Text = "TIRYuklemesi";
-            this.Load += new System.EventHandler(this.TIRYuklemesi_Load);
+            this.Name = "SevkiyatOlustur";
+            this.Text = "Sevkiyat Oluştur";
+            this.Load += new System.EventHandler(this.SevkiyatOlustur_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
