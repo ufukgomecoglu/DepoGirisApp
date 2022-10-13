@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -614,6 +615,59 @@ namespace DataAccessLayer
             }
         }
 
+        #endregion
+        #region DepoStok Metotları
+        public bool DepoStokEkleBulGuncelle(int urunkimlik,byte renkkimlik)
+        {
+            try
+            {
+                DepoStok ds = new DepoStok();
+                cmd.CommandText = "SELECT COUNT(*) FROM DepoStok WHERE Kod_liste_Kimlik=@Kod_liste_Kimlik AND Renk_liste_kimlik=@Renk_liste_kimlik";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@Kod_liste_Kimlik", urunkimlik);
+                cmd.Parameters.AddWithValue("@Renk_liste_kimlik", renkkimlik);
+                con.Open();
+                int sayi = Convert.ToInt32(cmd.ExecuteScalar());
+                if (sayi==0)
+                {
+                    cmd.CommandText = "INSERT INTO DepoStok(Kod_liste_Kimlik,Renk_liste_kimlik,Stok) VALUES(@Kod_liste_Kimlik,@Renk_liste_kimlik,1)";
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@Kod_liste_Kimlik", urunkimlik);
+                    cmd.Parameters.AddWithValue("@Renk_liste_kimlik", renkkimlik);
+                    cmd.ExecuteNonQuery();
+                }
+                if (sayi==1)
+                {
+                    cmd.CommandText = "SELECT Stok FROM DepoStok WHERE Kod_liste_Kimlik=@Kod_liste_Kimlik AND Renk_liste_kimlik=@Renk_liste_kimlik ";
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@Kod_liste_Kimlik", urunkimlik);
+                    cmd.Parameters.AddWithValue("@Renk_liste_kimlik", renkkimlik);
+                    cmd.Parameters.AddWithValue("@stok", renkkimlik);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        ds.Stok = reader.GetInt32(0);
+                    }
+                    reader.Close();
+                    cmd.CommandText = "UPDATE DepoStok SET Stok=@stok WHERE Kod_liste_Kimlik=@Kod_liste_Kimlik AND Renk_liste_kimlik=@Renk_liste_kimlik";
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@Kod_liste_Kimlik", urunkimlik);
+                    cmd.Parameters.AddWithValue("@Renk_liste_kimlik", renkkimlik);
+                    cmd.Parameters.AddWithValue("@stok", ds.Stok+1);
+                    cmd.ExecuteNonQuery();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
         #endregion
     }
 }

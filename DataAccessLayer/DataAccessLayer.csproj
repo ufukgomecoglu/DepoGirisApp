@@ -44,6 +44,7 @@
     <Compile Include="ConnectionStrings.cs" />
     <Compile Include="DataModel.cs" />
     <Compile Include="Model\DepoGiris.cs" />
+    <Compile Include="Model\DepoStok.cs" />
     <Compile Include="Model\Hata.cs" />
     <Compile Include="Model\KaliteTipi.cs" />
     <Compile Include="Model\kullanici_listeLogin.cs" />

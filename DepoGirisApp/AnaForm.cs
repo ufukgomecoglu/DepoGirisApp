@@ -16,6 +16,7 @@ namespace DepoGirisApp
     {
         public static kullanici_listeLogin LoginUser;
         DataModel dm = new DataModel();
+        int sayi = 0;
         public AnaForm()
         {
             KullaniciGiris frm = new KullaniciGiris();
@@ -35,6 +36,8 @@ namespace DepoGirisApp
             cb_doldur();
             mtb_barkodno.Select();
             GridDoldur();
+            sayi = 0;
+            lbl_EklenenUrunSayisi.Text = sayi.ToString();
         }
         private void FornTemizle()
         {
@@ -54,6 +57,9 @@ namespace DepoGirisApp
             {
                 MessageBox.Show("Ekleme İşlemi Başarısız", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            dm.DepoStokEkleBulGuncelle(p.ProductCode, p.Color);
+            sayi = sayi + 1;
+            lbl_EklenenUrunSayisi.Text = sayi.ToString();
             FornTemizle();
             mtb_barkodno.Select();
             GridDoldur();

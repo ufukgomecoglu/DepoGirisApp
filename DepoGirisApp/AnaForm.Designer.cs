@@ -40,8 +40,10 @@
             this.TSMI_PaletBarkoduCikar = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_SevkiyatOlustur = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_UrunTakip = new System.Windows.Forms.ToolStripMenuItem();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.TSMI_TIRYuklemesi = new System.Windows.Forms.ToolStripMenuItem();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.lbl_EklenenUrunSayisi = new System.Windows.Forms.Label();
+            this.btn_paletbarkod = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -52,6 +54,8 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.btn_paletbarkod);
+            this.groupBox1.Controls.Add(this.lbl_EklenenUrunSayisi);
             this.groupBox1.Controls.Add(this.mtb_barkodno);
             this.groupBox1.Controls.Add(this.btn_ekle);
             this.groupBox1.Controls.Add(this.label3);
@@ -148,22 +152,29 @@
             // TSMI_PaletBarkoduCikar
             // 
             this.TSMI_PaletBarkoduCikar.Name = "TSMI_PaletBarkoduCikar";
-            this.TSMI_PaletBarkoduCikar.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_PaletBarkoduCikar.Size = new System.Drawing.Size(179, 22);
             this.TSMI_PaletBarkoduCikar.Text = "Palet barkodu çıkart";
             // 
             // TSMI_SevkiyatOlustur
             // 
             this.TSMI_SevkiyatOlustur.Name = "TSMI_SevkiyatOlustur";
-            this.TSMI_SevkiyatOlustur.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_SevkiyatOlustur.Size = new System.Drawing.Size(179, 22);
             this.TSMI_SevkiyatOlustur.Text = "Sevkiyat Oluştur";
             this.TSMI_SevkiyatOlustur.Click += new System.EventHandler(this.TSMI_TirYuklemesi_Click);
             // 
             // TSMI_UrunTakip
             // 
             this.TSMI_UrunTakip.Name = "TSMI_UrunTakip";
-            this.TSMI_UrunTakip.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_UrunTakip.Size = new System.Drawing.Size(179, 22);
             this.TSMI_UrunTakip.Text = "Ürün Takip";
             this.TSMI_UrunTakip.Click += new System.EventHandler(this.TSMI_UrunTakip_Click);
+            // 
+            // TSMI_TIRYuklemesi
+            // 
+            this.TSMI_TIRYuklemesi.Name = "TSMI_TIRYuklemesi";
+            this.TSMI_TIRYuklemesi.Size = new System.Drawing.Size(179, 22);
+            this.TSMI_TIRYuklemesi.Text = "TIR Yüklemesi ";
+            this.TSMI_TIRYuklemesi.Click += new System.EventHandler(this.TSMI_TIRYuklemesi_Click_1);
             // 
             // dataGridView1
             // 
@@ -176,12 +187,25 @@
             this.dataGridView1.Size = new System.Drawing.Size(1431, 249);
             this.dataGridView1.TabIndex = 2;
             // 
-            // TSMI_TIRYuklemesi
+            // lbl_EklenenUrunSayisi
             // 
-            this.TSMI_TIRYuklemesi.Name = "TSMI_TIRYuklemesi";
-            this.TSMI_TIRYuklemesi.Size = new System.Drawing.Size(180, 22);
-            this.TSMI_TIRYuklemesi.Text = "TIR Yüklemesi ";
-            this.TSMI_TIRYuklemesi.Click += new System.EventHandler(this.TSMI_TIRYuklemesi_Click_1);
+            this.lbl_EklenenUrunSayisi.AutoSize = true;
+            this.lbl_EklenenUrunSayisi.Font = new System.Drawing.Font("Microsoft Sans Serif", 26F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbl_EklenenUrunSayisi.Location = new System.Drawing.Point(1114, 27);
+            this.lbl_EklenenUrunSayisi.Name = "lbl_EklenenUrunSayisi";
+            this.lbl_EklenenUrunSayisi.Size = new System.Drawing.Size(0, 39);
+            this.lbl_EklenenUrunSayisi.TabIndex = 8;
+            // 
+            // btn_paletbarkod
+            // 
+            this.btn_paletbarkod.AutoSize = true;
+            this.btn_paletbarkod.Font = new System.Drawing.Font("Microsoft Sans Serif", 26F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btn_paletbarkod.Location = new System.Drawing.Point(1009, 111);
+            this.btn_paletbarkod.Name = "btn_paletbarkod";
+            this.btn_paletbarkod.Size = new System.Drawing.Size(335, 49);
+            this.btn_paletbarkod.TabIndex = 9;
+            this.btn_paletbarkod.Text = "Palet Barkodu Çıkar";
+            this.btn_paletbarkod.UseVisualStyleBackColor = true;
             // 
             // AnaForm
             // 
@@ -220,5 +244,7 @@
         private System.Windows.Forms.MaskedTextBox mtb_barkodno;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ToolStripMenuItem TSMI_TIRYuklemesi;
+        private System.Windows.Forms.Button btn_paletbarkod;
+        private System.Windows.Forms.Label lbl_EklenenUrunSayisi;
     }
 }
