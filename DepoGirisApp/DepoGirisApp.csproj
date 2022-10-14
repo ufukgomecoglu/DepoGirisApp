@@ -90,6 +90,9 @@
     <EmbeddedResource Include="KullaniciGiris.resx">
       <DependentUpon>KullaniciGiris.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PaletlemeIslemleri.resx">
+      <DependentUpon>PaletlemeIslemleri.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

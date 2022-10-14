@@ -16,3 +16,4 @@ C:\Users\ufukg\Documents\GitHub\DepoGirisApp\DepoGirisApp\obj\Debug\DepoGirisApp
 C:\Users\ufukg\Documents\GitHub\DepoGirisApp\DepoGirisApp\obj\Debug\DepoGirisApp.UrunTakip.resources
 C:\Users\ufukg\Documents\GitHub\DepoGirisApp\DepoGirisApp\obj\Debug\DepoGirisApp.SevkiyatOlustur.resources
 C:\Users\ufukg\Documents\GitHub\DepoGirisApp\DepoGirisApp\obj\Debug\DepoGirisApp.TIRYuklemesi.resources
+C:\Users\ufukg\Documents\GitHub\DepoGirisApp\DepoGirisApp\obj\Debug\DepoGirisApp.PaletlemeIslemleri.resources

@@ -148,27 +148,28 @@
             // TSMI_PaletBarkoduCikar
             // 
             this.TSMI_PaletBarkoduCikar.Name = "TSMI_PaletBarkoduCikar";
-            this.TSMI_PaletBarkoduCikar.Size = new System.Drawing.Size(179, 22);
-            this.TSMI_PaletBarkoduCikar.Text = "Palet barkodu çıkart";
+            this.TSMI_PaletBarkoduCikar.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_PaletBarkoduCikar.Text = "Paletleme İşlemleri";
+            this.TSMI_PaletBarkoduCikar.Click += new System.EventHandler(this.TSMI_PaletBarkoduCikar_Click);
             // 
             // TSMI_SevkiyatOlustur
             // 
             this.TSMI_SevkiyatOlustur.Name = "TSMI_SevkiyatOlustur";
-            this.TSMI_SevkiyatOlustur.Size = new System.Drawing.Size(179, 22);
+            this.TSMI_SevkiyatOlustur.Size = new System.Drawing.Size(180, 22);
             this.TSMI_SevkiyatOlustur.Text = "Sevkiyat Oluştur";
             this.TSMI_SevkiyatOlustur.Click += new System.EventHandler(this.TSMI_TirYuklemesi_Click);
             // 
             // TSMI_UrunTakip
             // 
             this.TSMI_UrunTakip.Name = "TSMI_UrunTakip";
-            this.TSMI_UrunTakip.Size = new System.Drawing.Size(179, 22);
+            this.TSMI_UrunTakip.Size = new System.Drawing.Size(180, 22);
             this.TSMI_UrunTakip.Text = "Ürün Takip";
             this.TSMI_UrunTakip.Click += new System.EventHandler(this.TSMI_UrunTakip_Click);
             // 
             // TSMI_TIRYuklemesi
             // 
             this.TSMI_TIRYuklemesi.Name = "TSMI_TIRYuklemesi";
-            this.TSMI_TIRYuklemesi.Size = new System.Drawing.Size(179, 22);
+            this.TSMI_TIRYuklemesi.Size = new System.Drawing.Size(180, 22);
             this.TSMI_TIRYuklemesi.Text = "TIR Yüklemesi ";
             this.TSMI_TIRYuklemesi.Click += new System.EventHandler(this.TSMI_TIRYuklemesi_Click_1);
             // 

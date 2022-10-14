@@ -92,5 +92,14 @@ namespace DepoGirisApp
                 ty.ShowDialog();
             }
         }
+
+        private void TSMI_PaletBarkoduCikar_Click(object sender, EventArgs e)
+        {
+            PaletlemeIslemleri pi = new PaletlemeIslemleri();
+            if (Application.OpenForms.OfType<UrunTakip>().Count() == 0)
+            {
+                pi.ShowDialog();
+            }
+        }
     }
 }
