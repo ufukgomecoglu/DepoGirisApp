@@ -16,5 +16,6 @@ namespace DataAccessLayer.Model
         public int Product_ID { get; set; }
         public byte Hata_Id { get; set; }
         public string UrunKodu { get; set; }
+        public int DepoPaletliUrun_ID { get; set; }
     }
 }
