@@ -336,6 +336,41 @@ namespace DataAccessLayer
                 con.Close();
             }
         }
+        public DepoGiris DepoGirisGetir(string barkodno)
+        {
+            try
+            {
+                DepoGiris dg = new DepoGiris();
+                cmd.CommandText = "SELECT Id,Barkod,Sicil,KayitTarih,Product_ID,Hata_Id,DepoPaletliUrun_ID FROM DepoGiris WHERE Barkod = @barkod";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@barkod", barkodno);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    dg = new DepoGiris()
+                    {
+                        Id = reader.GetInt32(0),
+                        Barkod = reader.GetString(1),
+                        Sicil = reader.GetByte(2),
+                        KayitTarih = reader.GetDateTime(3),
+                        Product_ID = reader.GetInt32(4),
+                        Hata_Id=reader.GetByte(5),
+                        DepoPaletliUrun_ID = reader.IsDBNull(6) ? 0 : reader.GetInt32(6),
+                    };
+                }
+                return dg;
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
         #endregion
         #region Musteri Metotları
         public List<Musteri> MusteriListele()
@@ -668,6 +703,9 @@ namespace DataAccessLayer
                 con.Close();
             }
         }
+        #endregion
+        #region DepoPaletliUrun Metotları
+        
         #endregion
     }
 }

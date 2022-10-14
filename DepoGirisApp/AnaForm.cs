@@ -16,7 +16,6 @@ namespace DepoGirisApp
     {
         public static kullanici_listeLogin LoginUser;
         DataModel dm = new DataModel();
-        int sayi = 0;
         public AnaForm()
         {
             KullaniciGiris frm = new KullaniciGiris();
@@ -63,6 +62,7 @@ namespace DepoGirisApp
         private void GridDoldur()
         {
             dataGridView1.DataSource = dm.DepogirisListReader(LoginUser.Kimlik);
+            dataGridView1.Columns["Product_Id"].Visible = dataGridView1.Columns["DepoPaletliUrun_ID"].Visible = false;
         }
 
         private void TSMI_UrunTakip_Click(object sender, EventArgs e)

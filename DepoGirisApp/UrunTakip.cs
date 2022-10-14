@@ -24,7 +24,7 @@ namespace DepoGirisApp
         private void UrunTakip_Load(object sender, EventArgs e)
         {
             dataGridView1.DataSource = dm.DepogirisListReader();
-            dataGridView1.Columns["Product_Id"].Visible = false;
+            dataGridView1.Columns["Product_Id"].Visible = dataGridView1.Columns["DepoPaletliUrun_ID"].Visible = false;
         }
 
         private void btn_kodara_Click(object sender, EventArgs e)
