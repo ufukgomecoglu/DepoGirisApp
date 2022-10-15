@@ -202,7 +202,6 @@ namespace DataAccessLayer
                 con.Close();
             }
         }
-
         public List<DepoGiris> DepogirisListReader()
         {
             List<DepoGiris> girisler = new List<DepoGiris>();

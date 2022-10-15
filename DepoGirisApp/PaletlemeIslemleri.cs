@@ -30,16 +30,26 @@ namespace DepoGirisApp
 
         private void PaletlemeIslemleri_Load(object sender, EventArgs e)
         {
-            mtb_barkodno.Select();
+            tb_barkodno.Select();
             label2.Text = "";
         }
 
-        private void mtb_barkodno_TextChanged(object sender, EventArgs e)
-       {
-            if (mtb_barkodno.Text.Length == 10)
+        private void FormTemizle()
+        {
+            tb_barkodno.Text = "";
+        }
+        private void GridDoldur(List<DepoGiris> depoGirisler)
+        {
+            dataGridView1.DataSource = depoGirisler;
+            dataGridView1.Columns["Product_Id"].Visible = dataGridView1.Columns["DepoPaletliUrun_ID"].Visible = dataGridView1.Columns["UrunKodu"].Visible = false;
+        }
+
+        private void tb_barkodno_TextChanged(object sender, EventArgs e)
+        {
+            if (tb_barkodno.Text.Length == 10)
             {
-                DepoGiris dg = dm.DepoGirisGetir(mtb_barkodno.Text);
-                if (dg.DepoPaletliUrun_ID==0)
+                DepoGiris dg = dm.DepoGirisGetir(tb_barkodno.Text);
+                if (dg.DepoPaletliUrun_ID == 0)
                 {
                     sayi = sayi + 1;
                     depoGirisler.Add(dg);
@@ -48,18 +58,17 @@ namespace DepoGirisApp
                 dataGridView1.DataSource = null;
                 GridDoldur(depoGirisler);
                 FormTemizle();
+                tb_barkodno.Select();
             }
         }
-        private void FormTemizle()
-        {
-            mtb_barkodno.Text="" ;
-        }
-        private void GridDoldur(List<DepoGiris> depoGirisler)
-        {
-            dataGridView1.Refresh();
-            dataGridView1.DataSource = depoGirisler;
-        }
 
-       
+        private void btn_paletbarkodnocıkart_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void PaletBarkodNoOlustur()
+        { 
+        
+        }
     }
 }
