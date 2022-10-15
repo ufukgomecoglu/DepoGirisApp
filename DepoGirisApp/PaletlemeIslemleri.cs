@@ -66,9 +66,10 @@ namespace DepoGirisApp
         {
 
         }
-        private void PaletBarkodNoOlustur()
-        { 
-        
+        private string PaletBarkodNoOlustur(int sayi)
+        {
+            string barkod = (sayi+1).ToString("D10");
+            return barkod;
         }
     }
 }
