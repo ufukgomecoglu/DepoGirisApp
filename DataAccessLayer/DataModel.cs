@@ -704,7 +704,69 @@ namespace DataAccessLayer
         }
         #endregion
         #region DepoPaletliUrun Metotları
-        
+        public bool DepoPaletEkle(DepoPaletliUrun dpu)
+        {
+            try
+            {
+                cmd.CommandText = "INSERT INTO DepoPaletliUrunler(BarkodNo, Adet, Kod_liste_Kimlik, Renk_liste_kimlik, kullanici_liste_kimlik) VALUES(@barkodNo, @adet, @kod_liste_Kimlik, @renk_liste_kimlik, @kullanici_liste_kimlik)";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@barkodNo", dpu.BarkodNo);
+                cmd.Parameters.AddWithValue("@adet", dpu.Adet);
+                cmd.Parameters.AddWithValue("@kod_liste_Kimlik", dpu.Kod_liste_Kimlik);
+                cmd.Parameters.AddWithValue("@renk_liste_kimlik", dpu.Renk_liste_kimlik);
+                cmd.Parameters.AddWithValue("@Renk_liste_kimlik", dpu.kullanici_liste_kimlik);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        public List<DepoPaletliUrun> DepoPaletListele()
+        {
+            List<DepoPaletliUrun> depoPaletliUrunler = new List<DepoPaletliUrun>();
+            try
+            {
+                cmd.CommandText = "SELECT DP.ID, DP.BarkodNo, DP.Adet, DP.Kod_liste_Kimlik, K.tanim, K.aciklama, DP.Renk_liste_kimlik, R.renkad, DP.kullanici_liste_kimlik, KU.kullanici_adi, KU.ad_soyad FROM DepoPaletliUrunler AS DP JOIN kod_liste AS K ON K.Kimlik=DP.Kod_liste_Kimlik JOIN renk_liste AS R ON R.Kimlik=DP.Renk_liste_kimlik JOIN kullanici_liste AS KU ON KU.Kimlik=DP.kullanici_liste_kimlik";
+                cmd.Parameters.Clear();
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    depoPaletliUrunler.Add(new DepoPaletliUrun()
+                    {
+                        ID = reader.GetInt32(0),
+                        BarkodNo = reader.GetString(1),
+                        Adet = reader.GetInt32(2),
+                        Kod_liste_Kimlik= reader.GetInt32(3),
+                        UrunKod = reader.GetString(4),
+                        aciklama = reader.GetString(5),
+                        Renk_liste_kimlik = reader.GetByte(6),
+                        renkad = reader.GetString(7),
+                        kullanici_liste_kimlik= reader.GetByte(8),
+                        kullanici_adi = reader.GetString(9),
+                        ad_soyad = reader.GetString(10),
+                    });
+                }
+                return depoPaletliUrunler;
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
         #endregion
     }
 }

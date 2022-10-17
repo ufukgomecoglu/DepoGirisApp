@@ -40,6 +40,7 @@ namespace DepoGirisApp
         }
         private void GridDoldur(List<DepoGiris> depoGirisler)
         {
+            dataGridView1.DataSource = null;
             dataGridView1.DataSource = depoGirisler;
             dataGridView1.Columns["Product_Id"].Visible = dataGridView1.Columns["DepoPaletliUrun_ID"].Visible = dataGridView1.Columns["UrunKodu"].Visible = false;
         }
@@ -55,7 +56,6 @@ namespace DepoGirisApp
                     depoGirisler.Add(dg);
                 }
                 label2.Text = sayi.ToString();
-                dataGridView1.DataSource = null;
                 GridDoldur(depoGirisler);
                 FormTemizle();
                 tb_barkodno.Select();
@@ -64,11 +64,13 @@ namespace DepoGirisApp
 
         private void btn_paletbarkodnocıkart_Click(object sender, EventArgs e)
         {
-
+            DepoPaletliUrun dpu = new DepoPaletliUrun();
+            int barkodno = 0;
+            dpu.BarkodNo = PaletBarkodNoOlustur(barkodno);
         }
-        private string PaletBarkodNoOlustur(int sayi)
+        private string PaletBarkodNoOlustur(int barkodno)
         {
-            string barkod = (sayi+1).ToString("D10");
+            string barkod = (barkodno+1).ToString("D10");
             return barkod;
         }
     }
