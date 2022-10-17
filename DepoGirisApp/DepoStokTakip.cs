@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAccessLayer;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,16 @@ namespace DepoGirisApp
 {
     public partial class DepoStokTakip : Form
     {
+        DataModel dm = new DataModel();
         public DepoStokTakip()
         {
             InitializeComponent();
+            this.WindowState = FormWindowState.Maximized;
+        }
+
+        private void DepoStokTakip_Load(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = dm.DepoStokListele();
         }
     }
 }

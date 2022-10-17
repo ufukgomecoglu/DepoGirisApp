@@ -10,7 +10,10 @@ namespace DataAccessLayer.Model
     {
         public int ID { get; set; }
         public int Kod_liste_Kimlik { get; set; }
+        public string UrunKod { get; set; }
+        public string aciklama { get; set; }
         public byte Renk_liste_kimlik { get; set; }
+        public string renkad { get; set; }
         public int Stok { get; set; }
     }
 }

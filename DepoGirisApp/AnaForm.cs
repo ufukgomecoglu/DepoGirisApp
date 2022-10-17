@@ -53,8 +53,8 @@ namespace DepoGirisApp
             if (!dm.DepoGirisEkle(d))
             {
                 MessageBox.Show("Ekleme İşlemi Başarısız", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                dm.DepoStokEkleBulGuncelle(p.ProductCode, p.Color);
             }
-            dm.DepoStokEkleBulGuncelle(p.ProductCode, p.Color);
             FornTemizle();
             mtb_barkodno.Select();
             GridDoldur();
@@ -77,7 +77,7 @@ namespace DepoGirisApp
         private void TSMI_TirYuklemesi_Click(object sender, EventArgs e)
         {
             SevkiyatOlustur so = new SevkiyatOlustur();
-            if (Application.OpenForms.OfType<UrunTakip>().Count() == 0)
+            if (Application.OpenForms.OfType<SevkiyatOlustur>().Count() == 0)
             {
                 so.ShowDialog();
             }
@@ -87,7 +87,7 @@ namespace DepoGirisApp
         private void TSMI_TIRYuklemesi_Click_1(object sender, EventArgs e)
         {
             TIRYuklemesi ty = new TIRYuklemesi();
-            if (Application.OpenForms.OfType<UrunTakip>().Count() == 0)
+            if (Application.OpenForms.OfType<TIRYuklemesi>().Count() == 0)
             {
                 ty.ShowDialog();
             }
@@ -96,7 +96,7 @@ namespace DepoGirisApp
         private void TSMI_PaletBarkoduCikar_Click(object sender, EventArgs e)
         {
             PaletlemeIslemleri pi = new PaletlemeIslemleri();
-            if (Application.OpenForms.OfType<UrunTakip>().Count() == 0)
+            if (Application.OpenForms.OfType<PaletlemeIslemleri>().Count() == 0)
             {
                 pi.ShowDialog();
             }
@@ -104,8 +104,8 @@ namespace DepoGirisApp
 
         private void TSMI_DepoStokTakip_Click(object sender, EventArgs e)
         {
-            PaletlemeIslemleri pi = new PaletlemeIslemleri();
-            if (Application.OpenForms.OfType<UrunTakip>().Count() == 0)
+            DepoStokTakip pi = new DepoStokTakip();
+            if (Application.OpenForms.OfType<DepoStokTakip>().Count() == 0)
             {
                 pi.ShowDialog();
             }

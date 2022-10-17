@@ -93,6 +93,9 @@
     <EmbeddedResource Include="AnaForm.resx">
       <DependentUpon>AnaForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DepoStokTakip.resx">
+      <DependentUpon>DepoStokTakip.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="KullaniciGiris.resx">
       <DependentUpon>KullaniciGiris.cs</DependentUpon>
     </EmbeddedResource>
