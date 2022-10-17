@@ -15,6 +15,7 @@ namespace DepoGirisApp
         public TIRYuklemesi()
         {
             InitializeComponent();
+            this.WindowState = FormWindowState.Maximized;
         }
     }
 }
