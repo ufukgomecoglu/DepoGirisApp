@@ -139,7 +139,6 @@
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.Size = new System.Drawing.Size(762, 113);
             this.dataGridView2.TabIndex = 0;
-            this.dataGridView2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView2_MouseClick);
             // 
             // PaletlemeIslemleri
             // 

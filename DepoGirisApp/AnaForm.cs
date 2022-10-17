@@ -101,5 +101,14 @@ namespace DepoGirisApp
                 pi.ShowDialog();
             }
         }
+
+        private void TSMI_DepoStokTakip_Click(object sender, EventArgs e)
+        {
+            PaletlemeIslemleri pi = new PaletlemeIslemleri();
+            if (Application.OpenForms.OfType<UrunTakip>().Count() == 0)
+            {
+                pi.ShowDialog();
+            }
+        }
     }
 }

@@ -17,32 +17,34 @@ namespace DepoGirisApp
         DataModel dm = new DataModel();
         List<DepoGiris> depoGirisler = new List<DepoGiris>();
         int sayi = 0;
+        int kod_liste_kimlik = 0;
+        byte renk_liste_kimlik = 0;
         public PaletlemeIslemleri()
         {
             InitializeComponent();
             this.WindowState = FormWindowState.Maximized;
         }
 
-        private void dataGridView2_MouseClick(object sender, MouseEventArgs e)
-        {
-
-        }
+        
 
         private void PaletlemeIslemleri_Load(object sender, EventArgs e)
         {
             tb_barkodno.Select();
             label2.Text = "";
+            GridDoldur();
         }
 
         private void FormTemizle()
         {
             tb_barkodno.Text = "";
         }
-        private void GridDoldur(List<DepoGiris> depoGirisler)
+        private void GridDoldur()
         {
             dataGridView1.DataSource = null;
             dataGridView1.DataSource = depoGirisler;
             dataGridView1.Columns["Product_Id"].Visible = dataGridView1.Columns["DepoPaletliUrun_ID"].Visible = dataGridView1.Columns["UrunKodu"].Visible = false;
+            dataGridView2.DataSource = dm.DepoPaletListele();
+            dataGridView2.Columns["Kod_liste_Kimlik"].Visible = dataGridView2.Columns["Renk_liste_kimlik"].Visible = dataGridView2.Columns["kullanici_liste_kimlik"].Visible = false;
         }
 
         private void tb_barkodno_TextChanged(object sender, EventArgs e)
@@ -50,13 +52,16 @@ namespace DepoGirisApp
             if (tb_barkodno.Text.Length == 10)
             {
                 DepoGiris dg = dm.DepoGirisGetir(tb_barkodno.Text);
+                Product p = dm.BarkodNoGöreProductBul(tb_barkodno.Text);
                 if (dg.DepoPaletliUrun_ID == 0)
                 {
                     sayi = sayi + 1;
+                    kod_liste_kimlik = p.ProductCode;
+                    renk_liste_kimlik = p.Color;
                     depoGirisler.Add(dg);
                 }
                 label2.Text = sayi.ToString();
-                GridDoldur(depoGirisler);
+                GridDoldur();
                 FormTemizle();
                 tb_barkodno.Select();
             }
@@ -65,8 +70,25 @@ namespace DepoGirisApp
         private void btn_paletbarkodnocıkart_Click(object sender, EventArgs e)
         {
             DepoPaletliUrun dpu = new DepoPaletliUrun();
-            int barkodno = 0;
+            int barkodno = dm.DepoPaletListele().Count;
             dpu.BarkodNo = PaletBarkodNoOlustur(barkodno);
+            dpu.Adet = sayi;
+            dpu.Kod_liste_Kimlik = kod_liste_kimlik;
+            dpu.Renk_liste_kimlik= renk_liste_kimlik;
+            dpu.kullanici_liste_kimlik = AnaForm.LoginUser.Kimlik;
+            if (dm.DepoPaletEkle(dpu))
+            {
+                if (dm.DepoGirisDepoPaletIDGuncelle(depoGirisler, dm.DepoPaletListele().Count))
+                {
+                    depoGirisler.Clear();
+                    sayi = 0;
+                    kod_liste_kimlik = 0;
+                    renk_liste_kimlik = 0;
+                    GridDoldur();
+                    FormTemizle();
+                    tb_barkodno.Select();
+                }
+            }
         }
         private string PaletBarkodNoOlustur(int barkodno)
         {

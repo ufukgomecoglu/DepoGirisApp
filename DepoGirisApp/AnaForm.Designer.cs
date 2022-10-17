@@ -42,6 +42,7 @@
             this.TSMI_UrunTakip = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_TIRYuklemesi = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.TSMI_DepoStokTakip = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -140,7 +141,8 @@
             this.TSMI_PaletBarkoduCikar,
             this.TSMI_SevkiyatOlustur,
             this.TSMI_UrunTakip,
-            this.TSMI_TIRYuklemesi});
+            this.TSMI_TIRYuklemesi,
+            this.TSMI_DepoStokTakip});
             this.iŞLEMLERToolStripMenuItem.Name = "iŞLEMLERToolStripMenuItem";
             this.iŞLEMLERToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
             this.iŞLEMLERToolStripMenuItem.Text = "İŞLEMLER";
@@ -184,6 +186,13 @@
             this.dataGridView1.Size = new System.Drawing.Size(1431, 402);
             this.dataGridView1.TabIndex = 2;
             // 
+            // TSMI_DepoStokTakip
+            // 
+            this.TSMI_DepoStokTakip.Name = "TSMI_DepoStokTakip";
+            this.TSMI_DepoStokTakip.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_DepoStokTakip.Text = "Depo Stok Takip";
+            this.TSMI_DepoStokTakip.Click += new System.EventHandler(this.TSMI_DepoStokTakip_Click);
+            // 
             // AnaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -221,5 +230,6 @@
         private System.Windows.Forms.MaskedTextBox mtb_barkodno;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ToolStripMenuItem TSMI_TIRYuklemesi;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_DepoStokTakip;
     }
 }
