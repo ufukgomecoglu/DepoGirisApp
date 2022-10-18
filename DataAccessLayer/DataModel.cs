@@ -590,6 +590,48 @@ namespace DataAccessLayer
                 con.Close();
             }
         }
+        public List<Sevkiyat> SevkiyatListele(DateTime sevktarih)
+        {
+            List<Sevkiyat> sevkiyatlar = new List<Sevkiyat>();
+            try
+            {
+                cmd.CommandText = "SELECT S.ID, S.Musteri_ID, M.Isim,S.Kod_liste_Kimlik,K.tanim, K.aciklama, S.Miktar, S.SevkTarih, S.Renk_liste_kimlik, R.renkad, S.Kalite_liste_kimlik, KA.kaliteAd, S.Kullanici_ID , KU.ad_soyad, KU.kullanici_adi FROM Sevkiyat AS S JOIN Musteriler AS M ON M.ID= S.Musteri_ID JOIN kod_liste AS K ON S.Kod_liste_Kimlik=K.Kimlik JOIN renk_liste AS R ON R.Kimlik=S.Renk_liste_kimlik JOIN kalite_liste AS KA ON KA.Kimlik = S.Kalite_liste_kimlik JOIN kullanici_liste AS KU ON KU.Kimlik = S.Kullanici_ID WHERE S.Durum= 0 AND S.SevkTarih=@sevkTarih";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@sevkTarih", sevktarih);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Sevkiyat s = new Sevkiyat();
+                    s.ID = reader.GetInt32(0);
+                    s.Musteri_ID = reader.GetInt32(1);
+                    s.MusteriIsim = reader.GetString(2);
+                    s.Kod_liste_Kimlik = reader.GetInt32(3);
+                    s.UrunKodu = reader.GetString(4);
+                    s.Aciklama = reader.GetString(5);
+                    s.Miktar = reader.GetInt32(6);
+                    s.SevkTarih = reader.GetDateTime(7);
+                    s.Renk_liste_kimlik = reader.GetByte(8);
+                    s.renkad = reader.GetString(9);
+                    s.Kalite_liste_kimlik = reader.GetByte(10);
+                    s.kaliteAd = reader.GetString(11);
+                    s.Kullanici_ID = reader.GetByte(12);
+                    s.ad_soyad = reader.GetString(13);
+                    s.kullanici_adi = reader.GetString(14);
+                    sevkiyatlar.Add(s);
+                }
+                return sevkiyatlar;
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
         public Sevkiyat SevkiyatGetir(int id)
         {
             try

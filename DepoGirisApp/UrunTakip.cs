@@ -39,7 +39,7 @@ namespace DepoGirisApp
 
         private void btn_tarihara_Click(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = dm.DepogirisListReader(dtp_baslangic.Value, dtp_bitis.Value);
+            dataGridView1.DataSource = dm.DepogirisListReader(dtp_baslangic.Value.Date, dtp_bitis.Value.Date);
         }
 
         private void btn_sifirla_Click(object sender, EventArgs e)
