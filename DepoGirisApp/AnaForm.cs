@@ -50,10 +50,13 @@ namespace DepoGirisApp
             d.KayitTarih = DateTime.Now;
             d.Product_ID = p.Id;
             d.Hata_Id = Convert.ToByte(cb_hata.SelectedValue);
-            if (!dm.DepoGirisEkle(d))
+            if (dm.DepoGirisEkle(d))
+            {
+                dm.DepoStokEkleBulGuncelle(p.ProductCode, p.Color);
+            }
+            else
             {
                 MessageBox.Show("Ekleme İşlemi Başarısız", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                dm.DepoStokEkleBulGuncelle(p.ProductCode, p.Color);
             }
             FornTemizle();
             mtb_barkodno.Select();
