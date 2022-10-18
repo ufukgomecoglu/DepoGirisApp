@@ -18,3 +18,4 @@ C:\Users\ufukg\Documents\GitHub\DepoGirisApp\DepoGirisApp\obj\Debug\DepoGirisApp
 C:\Users\ufukg\Documents\GitHub\DepoGirisApp\DepoGirisApp\obj\Debug\DepoGirisApp.TIRYuklemesi.resources
 C:\Users\ufukg\Documents\GitHub\DepoGirisApp\DepoGirisApp\obj\Debug\DepoGirisApp.PaletlemeIslemleri.resources
 C:\Users\ufukg\Documents\GitHub\DepoGirisApp\DepoGirisApp\obj\Debug\DepoGirisApp.DepoStokTakip.resources
+C:\Users\ufukg\Documents\GitHub\DepoGirisApp\DepoGirisApp\bin\Debug\Zen.Barcode.Core.dll

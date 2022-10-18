@@ -5,10 +5,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Zen.Barcode;
 
 namespace DepoGirisApp
 {
@@ -84,6 +86,7 @@ namespace DepoGirisApp
                     sayi = 0;
                     kod_liste_kimlik = 0;
                     renk_liste_kimlik = 0;
+                    printDoc(dpu.BarkodNo);
                     GridDoldur();
                     FormTemizle();
                     tb_barkodno.Select();
@@ -94,6 +97,20 @@ namespace DepoGirisApp
         {
             string barkod = (barkodno+1).ToString("D10");
             return barkod;
+        }
+        private void printDoc(string barkod)
+        {
+
+            PrintDocument document = new PrintDocument();
+            BarcodeDraw bdraw = BarcodeDrawFactory.GetSymbology(BarcodeSymbology.Code128);
+            Image barcodeImage = bdraw.Draw(barkod, 50);
+
+            document.PrintPage += delegate (object sender, PrintPageEventArgs e)
+            {
+                e.Graphics.DrawImage(barcodeImage, 0, 0);
+                e.Graphics.DrawString(barkod, new Font("arial", 8), new SolidBrush(Color.Black), 0, 50);
+            };
+            document.Print();
         }
     }
 }
