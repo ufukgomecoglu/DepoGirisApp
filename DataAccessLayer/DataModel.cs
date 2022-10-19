@@ -828,7 +828,7 @@ namespace DataAccessLayer
             List<DepoStok> depoStoklar = new List<DepoStok>();
             try
             {
-                cmd.CommandText = "SELECT D.ID, D.Kod_liste_Kimlik, K.tanim, K.aciklama, D.Renk_liste_kimlik, R.renkad, D.Stok FROM DepoStok AS D JOIN kod_liste AS K ON D.Kod_liste_Kimlik=K.Kimlik JOIN renk_liste AS R ON D.Renk_liste_kimlik= R.Kimlik ";
+                cmd.CommandText = "SELECT D.ID, D.Urun_ID, K.tanim, K.aciklama, D.Renk_ID, R.renkad, D.Kalite_ID, KA.kaliteAd, D.Stok FROM DepoStoklar AS D JOIN kod_liste AS K ON D.Urun_ID=K.Kimlik JOIN renk_liste AS R ON D.Renk_ID= R.Kimlik JOIN kalite_liste AS KA ON KA.Kimlik=D.Kalite_ID ";
                 cmd.Parameters.Clear();
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -842,7 +842,9 @@ namespace DataAccessLayer
                         UrunAciklama = reader.GetString(3),
                         Renk_ID = reader.GetByte(4),
                         Renk_Isim = reader.GetString(5),
-                        Stok = reader.GetInt32(6)
+                        Kalite_ID = reader.GetByte(6),
+                        Kalite_Isim = reader.GetString(7),
+                        Stok = reader.GetInt32(8)
                     });
                 }
                 return depoStoklar;

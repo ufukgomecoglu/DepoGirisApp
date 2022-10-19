@@ -32,11 +32,11 @@
             this.iŞLEMLERToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_PaletBarkoduCikar = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_TIRYuklemesi = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_DepoStokTakip = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btn_sevkiyatolustur = new System.Windows.Forms.Button();
             this.btn_uruntakip = new System.Windows.Forms.Button();
             this.btn_urungir = new System.Windows.Forms.Button();
-            this.btn_sevkiyatolustur = new System.Windows.Forms.Button();
+            this.btn_depostok = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -55,8 +55,7 @@
             // 
             this.iŞLEMLERToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TSMI_PaletBarkoduCikar,
-            this.TSMI_TIRYuklemesi,
-            this.TSMI_DepoStokTakip});
+            this.TSMI_TIRYuklemesi});
             this.iŞLEMLERToolStripMenuItem.Name = "iŞLEMLERToolStripMenuItem";
             this.iŞLEMLERToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
             this.iŞLEMLERToolStripMenuItem.Text = "İŞLEMLER";
@@ -75,15 +74,9 @@
             this.TSMI_TIRYuklemesi.Text = "TIR Yüklemesi ";
             this.TSMI_TIRYuklemesi.Click += new System.EventHandler(this.TSMI_TIRYuklemesi_Click_1);
             // 
-            // TSMI_DepoStokTakip
-            // 
-            this.TSMI_DepoStokTakip.Name = "TSMI_DepoStokTakip";
-            this.TSMI_DepoStokTakip.Size = new System.Drawing.Size(180, 22);
-            this.TSMI_DepoStokTakip.Text = "Depo Stok Takip";
-            this.TSMI_DepoStokTakip.Click += new System.EventHandler(this.TSMI_DepoStokTakip_Click);
-            // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btn_depostok);
             this.groupBox1.Controls.Add(this.btn_sevkiyatolustur);
             this.groupBox1.Controls.Add(this.btn_uruntakip);
             this.groupBox1.Controls.Add(this.btn_urungir);
@@ -93,6 +86,17 @@
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
+            // 
+            // btn_sevkiyatolustur
+            // 
+            this.btn_sevkiyatolustur.AutoSize = true;
+            this.btn_sevkiyatolustur.Location = new System.Drawing.Point(170, 17);
+            this.btn_sevkiyatolustur.Name = "btn_sevkiyatolustur";
+            this.btn_sevkiyatolustur.Size = new System.Drawing.Size(94, 23);
+            this.btn_sevkiyatolustur.TabIndex = 2;
+            this.btn_sevkiyatolustur.Text = "Sevkiyat Oluştur";
+            this.btn_sevkiyatolustur.UseVisualStyleBackColor = true;
+            this.btn_sevkiyatolustur.Click += new System.EventHandler(this.btn_sevkiyatolustur_Click);
             // 
             // btn_uruntakip
             // 
@@ -114,16 +118,15 @@
             this.btn_urungir.UseVisualStyleBackColor = true;
             this.btn_urungir.Click += new System.EventHandler(this.btn_urungir_Click);
             // 
-            // btn_sevkiyatolustur
+            // btn_depostok
             // 
-            this.btn_sevkiyatolustur.AutoSize = true;
-            this.btn_sevkiyatolustur.Location = new System.Drawing.Point(170, 17);
-            this.btn_sevkiyatolustur.Name = "btn_sevkiyatolustur";
-            this.btn_sevkiyatolustur.Size = new System.Drawing.Size(94, 23);
-            this.btn_sevkiyatolustur.TabIndex = 2;
-            this.btn_sevkiyatolustur.Text = "Sevkiyat Oluştur";
-            this.btn_sevkiyatolustur.UseVisualStyleBackColor = true;
-            this.btn_sevkiyatolustur.Click += new System.EventHandler(this.btn_sevkiyatolustur_Click);
+            this.btn_depostok.Location = new System.Drawing.Point(271, 16);
+            this.btn_depostok.Name = "btn_depostok";
+            this.btn_depostok.Size = new System.Drawing.Size(75, 23);
+            this.btn_depostok.TabIndex = 3;
+            this.btn_depostok.Text = "Depo Stok";
+            this.btn_depostok.UseVisualStyleBackColor = true;
+            this.btn_depostok.Click += new System.EventHandler(this.btn_depostok_Click);
             // 
             // AnaForm
             // 
@@ -148,10 +151,10 @@
         private System.Windows.Forms.ToolStripMenuItem iŞLEMLERToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem TSMI_PaletBarkoduCikar;
         private System.Windows.Forms.ToolStripMenuItem TSMI_TIRYuklemesi;
-        private System.Windows.Forms.ToolStripMenuItem TSMI_DepoStokTakip;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btn_urungir;
         private System.Windows.Forms.Button btn_uruntakip;
         private System.Windows.Forms.Button btn_sevkiyatolustur;
+        private System.Windows.Forms.Button btn_depostok;
     }
 }
