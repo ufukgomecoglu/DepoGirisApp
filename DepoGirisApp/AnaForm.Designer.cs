@@ -31,12 +31,12 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.iŞLEMLERToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_PaletBarkoduCikar = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_SevkiyatOlustur = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_TIRYuklemesi = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_DepoStokTakip = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btn_uruntakip = new System.Windows.Forms.Button();
             this.btn_urungir = new System.Windows.Forms.Button();
+            this.btn_sevkiyatolustur = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -55,7 +55,6 @@
             // 
             this.iŞLEMLERToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TSMI_PaletBarkoduCikar,
-            this.TSMI_SevkiyatOlustur,
             this.TSMI_TIRYuklemesi,
             this.TSMI_DepoStokTakip});
             this.iŞLEMLERToolStripMenuItem.Name = "iŞLEMLERToolStripMenuItem";
@@ -68,13 +67,6 @@
             this.TSMI_PaletBarkoduCikar.Size = new System.Drawing.Size(180, 22);
             this.TSMI_PaletBarkoduCikar.Text = "Paletleme İşlemleri";
             this.TSMI_PaletBarkoduCikar.Click += new System.EventHandler(this.TSMI_PaletBarkoduCikar_Click);
-            // 
-            // TSMI_SevkiyatOlustur
-            // 
-            this.TSMI_SevkiyatOlustur.Name = "TSMI_SevkiyatOlustur";
-            this.TSMI_SevkiyatOlustur.Size = new System.Drawing.Size(180, 22);
-            this.TSMI_SevkiyatOlustur.Text = "Sevkiyat Oluştur";
-            this.TSMI_SevkiyatOlustur.Click += new System.EventHandler(this.TSMI_TirYuklemesi_Click);
             // 
             // TSMI_TIRYuklemesi
             // 
@@ -92,6 +84,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btn_sevkiyatolustur);
             this.groupBox1.Controls.Add(this.btn_uruntakip);
             this.groupBox1.Controls.Add(this.btn_urungir);
             this.groupBox1.Location = new System.Drawing.Point(12, 27);
@@ -121,6 +114,17 @@
             this.btn_urungir.UseVisualStyleBackColor = true;
             this.btn_urungir.Click += new System.EventHandler(this.btn_urungir_Click);
             // 
+            // btn_sevkiyatolustur
+            // 
+            this.btn_sevkiyatolustur.AutoSize = true;
+            this.btn_sevkiyatolustur.Location = new System.Drawing.Point(170, 17);
+            this.btn_sevkiyatolustur.Name = "btn_sevkiyatolustur";
+            this.btn_sevkiyatolustur.Size = new System.Drawing.Size(94, 23);
+            this.btn_sevkiyatolustur.TabIndex = 2;
+            this.btn_sevkiyatolustur.Text = "Sevkiyat Oluştur";
+            this.btn_sevkiyatolustur.UseVisualStyleBackColor = true;
+            this.btn_sevkiyatolustur.Click += new System.EventHandler(this.btn_sevkiyatolustur_Click);
+            // 
             // AnaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -133,6 +137,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -142,11 +147,11 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem iŞLEMLERToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem TSMI_PaletBarkoduCikar;
-        private System.Windows.Forms.ToolStripMenuItem TSMI_SevkiyatOlustur;
         private System.Windows.Forms.ToolStripMenuItem TSMI_TIRYuklemesi;
         private System.Windows.Forms.ToolStripMenuItem TSMI_DepoStokTakip;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btn_urungir;
         private System.Windows.Forms.Button btn_uruntakip;
+        private System.Windows.Forms.Button btn_sevkiyatolustur;
     }
 }

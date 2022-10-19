@@ -78,5 +78,14 @@ namespace DepoGirisApp
                 ut.ShowDialog();
             }
         }
+
+        private void btn_sevkiyatolustur_Click(object sender, EventArgs e)
+        {
+            SevkiyatOlustur so = new SevkiyatOlustur();
+            if (Application.OpenForms.OfType<SevkiyatOlustur>().Count() == 0)
+            {
+                so.ShowDialog();
+            }
+        }
     }
 }

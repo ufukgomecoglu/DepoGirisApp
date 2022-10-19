@@ -65,6 +65,35 @@ namespace DataAccessLayer
                 con.Close();
             }
         }
+        public List<kullanici_listeLogin> KullaniciReader()
+        {
+            List<kullanici_listeLogin> kullanicilar = new List<kullanici_listeLogin>();
+            try
+            {
+                cmd.CommandText = "SELECT Kimlik, kullanici_adi FROM kullanici_liste";
+                cmd.Parameters.Clear();
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    kullanicilar.Add(new kullanici_listeLogin()
+                    {
+                        Kimlik = reader.GetByte(0),
+                        kullanici_adi = reader.GetString(1)
+                    });
+                }
+                return kullanicilar;
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
         #endregion
         #region Product Metotları
         public Product BarkodNoGöreProductBul(string barkodno)
@@ -171,7 +200,7 @@ namespace DataAccessLayer
             List<DepoGiris> girisler = new List<DepoGiris>();
             try
             {
-                cmd.CommandText = "SELECT D.Id, D.Barkod, D.Sicil , D.KayitTarih, P.Fault, H.numara, H.tanim, P.ProductCode, K.tanim, K.aciklama, P.Color, R.renkad, P.Quality, KA.kaliteAd FROM DepoGiris AS D JOIN Products AS P ON P.Id=D.Product_ID JOIN renk_liste AS R ON P.Color =R.Kimlik JOIN hata_liste AS H ON P.Fault= H.Kimlik JOIN kod_liste AS K ON P.ProductCode = K.Kimlik JOIN kalite_liste AS KA ON P.Quality = KA.Kimlik WHERE D.Sicil=@sicil AND  D.Durum=1 AND D.KayitTarih  BETWEEN @bugununtarihi AND @ertisigüntarihi   ";
+                cmd.CommandText = "SELECT D.Id, D.Barkod, D.Sicil ,KU.kullanici_adi, D.KayitTarih, P.Fault, H.numara, H.tanim, P.ProductCode, K.tanim, K.aciklama, P.Color, R.renkad, P.Quality, KA.kaliteAd FROM DepoGiris AS D JOIN Products AS P ON P.Id=D.Product_ID JOIN renk_liste AS R ON P.Color =R.Kimlik JOIN hata_liste AS H ON P.Fault= H.Kimlik JOIN kod_liste AS K ON P.ProductCode = K.Kimlik JOIN kalite_liste AS KA ON P.Quality = KA.Kimlik JOIN kullanici_liste AS KU ON KU.Kimlik = D.Sicil  WHERE D.Sicil=@sicil AND  D.Durum=1 AND D.KayitTarih  BETWEEN @bugununtarihi AND @ertisigüntarihi   ";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@sicil", sicil);
                 cmd.Parameters.AddWithValue("@bugununtarihi", date);
@@ -184,17 +213,18 @@ namespace DataAccessLayer
                     dg.Id = reader.GetInt32(0);
                     dg.Barkod = reader.GetString(1);
                     dg.Sicil = reader.GetByte(2);
-                    dg.KayitTarih = reader.GetDateTime(3);
-                    dg.KaliteHata_Id = reader.GetByte(4);
-                    dg.KaliteHata_Kod = reader.GetInt16(5);
-                    dg.KaliteHata_Isim = reader.GetString(6);
-                    dg.Urun_ID = reader.GetInt32(7);
-                    dg.UrunKodu = reader.GetString(8);
-                    dg.UrunAciklama = reader.GetString(9);
-                    dg.Renk_ID = reader.GetByte(10);
-                    dg.Renk_Isim = reader.GetString(11);
-                    dg.Kalite_ID = reader.GetByte(12);
-                    dg.Kalite_Isim = reader.GetString(13);
+                    dg.Kullanici_Isim = reader.GetString(3);
+                    dg.KayitTarih = reader.GetDateTime(4);
+                    dg.KaliteHata_Id = reader.GetByte(5);
+                    dg.KaliteHata_Kod = reader.GetInt16(6);
+                    dg.KaliteHata_Isim = reader.GetString(7);
+                    dg.Urun_ID = reader.GetInt32(8);
+                    dg.UrunKodu = reader.GetString(9);
+                    dg.UrunAciklama = reader.GetString(10);
+                    dg.Renk_ID = reader.GetByte(11);
+                    dg.Renk_Isim = reader.GetString(12);
+                    dg.Kalite_ID = reader.GetByte(13);
+                    dg.Kalite_Isim = reader.GetString(14);
                     girisler.Add(dg);
                 }
                 return girisler;
@@ -214,7 +244,7 @@ namespace DataAccessLayer
             List<DepoGiris> girisler = new List<DepoGiris>();
             try
             {
-                cmd.CommandText = "SELECT D.Id, D.Barkod, D.Sicil , D.KayitTarih, P.Fault, H.numara, H.tanim, P.ProductCode, K.tanim, K.aciklama, P.Color, R.renkad, P.Quality, KA.kaliteAd FROM DepoGiris AS D JOIN Products AS P ON P.Id=D.Product_ID JOIN renk_liste AS R ON P.Color =R.Kimlik JOIN hata_liste AS H ON P.Fault= H.Kimlik JOIN kod_liste AS K ON P.ProductCode = K.Kimlik JOIN kalite_liste AS KA ON P.Quality = KA.Kimlik WHERE D.Durum=1 ";
+                cmd.CommandText = "SELECT D.Id, D.Barkod, D.Sicil ,KU.kullanici_adi, D.KayitTarih, P.Fault, H.numara, H.tanim, P.ProductCode, K.tanim, K.aciklama, P.Color, R.renkad, P.Quality, KA.kaliteAd FROM DepoGiris AS D JOIN Products AS P ON P.Id=D.Product_ID JOIN renk_liste AS R ON P.Color =R.Kimlik JOIN hata_liste AS H ON P.Fault= H.Kimlik JOIN kod_liste AS K ON P.ProductCode = K.Kimlik JOIN kalite_liste AS KA ON P.Quality = KA.Kimlik JOIN kullanici_liste AS KU ON KU.Kimlik = D.Sicil WHERE D.Durum=1 ";
                 cmd.Parameters.Clear();
 
                 con.Open();
@@ -225,17 +255,18 @@ namespace DataAccessLayer
                     dg.Id = reader.GetInt32(0);
                     dg.Barkod = reader.GetString(1);
                     dg.Sicil = reader.GetByte(2);
-                    dg.KayitTarih = reader.GetDateTime(3);
-                    dg.KaliteHata_Id = reader.GetByte(4);
-                    dg.KaliteHata_Kod = reader.GetInt16(5);
-                    dg.KaliteHata_Isim = reader.GetString(6);
-                    dg.Urun_ID = reader.GetInt32(7);
-                    dg.UrunKodu = reader.GetString(8);
-                    dg.UrunAciklama = reader.GetString(9);
-                    dg.Renk_ID = reader.GetByte(10);
-                    dg.Renk_Isim = reader.GetString(11);
-                    dg.Kalite_ID = reader.GetByte(12);
-                    dg.Kalite_Isim = reader.GetString(13);
+                    dg.Kullanici_Isim = reader.GetString(3);
+                    dg.KayitTarih = reader.GetDateTime(4);
+                    dg.KaliteHata_Id = reader.GetByte(5);
+                    dg.KaliteHata_Kod = reader.GetInt16(6);
+                    dg.KaliteHata_Isim = reader.GetString(7);
+                    dg.Urun_ID = reader.GetInt32(8);
+                    dg.UrunKodu = reader.GetString(9);
+                    dg.UrunAciklama = reader.GetString(10);
+                    dg.Renk_ID = reader.GetByte(11);
+                    dg.Renk_Isim = reader.GetString(12);
+                    dg.Kalite_ID = reader.GetByte(13);
+                    dg.Kalite_Isim = reader.GetString(14);
                     girisler.Add(dg);
                 }
                 return girisler;
@@ -250,14 +281,47 @@ namespace DataAccessLayer
                 con.Close();
             }
         }
-        public List<DepoGiris> DepogirisListReader(string urunkod, byte sicil, string renkad ,DateTime baslangictarih , DateTime bitistarih, string kaliteisim )
+        public List<DepoGiris> DepogirisListReader(string urunkod, string kullaniciadi, string renkad ,DateTime baslangictarih , DateTime bitistarih, string kaliteisim )
         {
             List<DepoGiris> girisler = new List<DepoGiris>();
             try
             {
-                cmd.CommandText = "SELECT D.Id, D.Barkod, D.Sicil , D.KayitTarih, P.Fault, H.numara, H.tanim, P.ProductCode, K.tanim, K.aciklama, P.Color, R.renkad, P.Quality, KA.kaliteAd FROM DepoGiris AS D JOIN Products AS P ON P.Id=D.Product_ID JOIN renk_liste AS R ON P.Color =R.Kimlik JOIN hata_liste AS H ON P.Fault= H.Kimlik JOIN kod_liste AS K ON P.ProductCode = K.Kimlik JOIN kalite_liste AS KA ON P.Quality = KA.Kimlik WHERE D.Durum=1 AND K.tanim = @urunkod AND D.Sicil = @sicil, AND  R.renkad = @renkad AND KA.kaliteAd=@kaliteisim AND D.KayitTarih  BETWEEN @baslangictarih AND @bitistarih";
+                cmd.CommandText = "SELECT D.Id, D.Barkod, D.Sicil ,KU.kullanici_adi, D.KayitTarih, P.Fault, H.numara, H.tanim, P.ProductCode, K.tanim, K.aciklama, P.Color, R.renkad, P.Quality, KA.kaliteAd FROM DepoGiris AS D JOIN Products AS P ON P.Id=D.Product_ID JOIN renk_liste AS R ON P.Color =R.Kimlik JOIN hata_liste AS H ON P.Fault= H.Kimlik JOIN kod_liste AS K ON P.ProductCode = K.Kimlik JOIN kalite_liste AS KA ON P.Quality = KA.Kimlik JOIN kullanici_liste AS KU ON KU.Kimlik = D.Sicil WHERE D.Durum=1 AND K.tanim = @urunkod AND KU.kullanici_adi = @kullanici_adi AND  R.renkad = @renkad AND KA.kaliteAd=@kaliteisim AND D.KayitTarih  BETWEEN @baslangictarih AND @bitistarih";
                 cmd.Parameters.Clear();
-
+                if (urunkod!="")
+                {
+                    cmd.Parameters.AddWithValue("@urunkod", urunkod);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@urunkod","K.tanim");
+                }
+                if (kullaniciadi!="")
+                {
+                    cmd.Parameters.AddWithValue("@kullanici_adi", kullaniciadi);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@kullanici_adi", "KU.kullanici_adi");
+                }
+                if (renkad != "")
+                {
+                    cmd.Parameters.AddWithValue("@renkad", renkad);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@renkad", "R.renkad");
+                }
+                if (kaliteisim != "")
+                {
+                    cmd.Parameters.AddWithValue("@kaliteisim", kaliteisim);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@kaliteisim", "KA.kaliteAd");
+                }
+                cmd.Parameters.AddWithValue("@baslangictarih", baslangictarih);
+                cmd.Parameters.AddWithValue("@bitistarih", bitistarih);
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
@@ -266,17 +330,18 @@ namespace DataAccessLayer
                     dg.Id = reader.GetInt32(0);
                     dg.Barkod = reader.GetString(1);
                     dg.Sicil = reader.GetByte(2);
-                    dg.KayitTarih = reader.GetDateTime(3);
-                    dg.KaliteHata_Id = reader.GetByte(4);
-                    dg.KaliteHata_Kod = reader.GetInt16(5);
-                    dg.KaliteHata_Isim = reader.GetString(6);
-                    dg.Urun_ID = reader.GetInt32(7);
-                    dg.UrunKodu = reader.GetString(8);
-                    dg.UrunAciklama = reader.GetString(9);
-                    dg.Renk_ID = reader.GetByte(10);
-                    dg.Renk_Isim = reader.GetString(11);
-                    dg.Kalite_ID = reader.GetByte(12);
-                    dg.Kalite_Isim = reader.GetString(13);
+                    dg.Kullanici_Isim = reader.GetString(3);
+                    dg.KayitTarih = reader.GetDateTime(4);
+                    dg.KaliteHata_Id = reader.GetByte(5);
+                    dg.KaliteHata_Kod = reader.GetInt16(6);
+                    dg.KaliteHata_Isim = reader.GetString(7);
+                    dg.Urun_ID = reader.GetInt32(8);
+                    dg.UrunKodu = reader.GetString(9);
+                    dg.UrunAciklama = reader.GetString(10);
+                    dg.Renk_ID = reader.GetByte(11);
+                    dg.Renk_Isim = reader.GetString(12);
+                    dg.Kalite_ID = reader.GetByte(13);
+                    dg.Kalite_Isim = reader.GetString(14);
                     girisler.Add(dg);
                 }
                 return girisler;
@@ -510,7 +575,7 @@ namespace DataAccessLayer
         {
             try
             {
-                cmd.CommandText = "INSERT INTO Sevkiyat(Musteri_ID, Kod_liste_kimlik, Miktar, SevkTarih, Renk_liste_kimlik, Kalite_liste_kimlik, Durum, Kullanici_ID) VALUES(@musteri_id, @kod_liste_kimlik, @miktar, @sevktarih, @renk_liste_kimlik, @kalite_liste_kimlik, 0, @Kullanici_ID)";
+                cmd.CommandText = "INSERT INTO Sevkiyatlar(Musteri_ID, Kod_liste_kimlik, Miktar, SevkTarih, Renk_liste_kimlik, Kalite_liste_kimlik, Durum, Kullanici_ID) VALUES(@musteri_id, @kod_liste_kimlik, @miktar, @sevktarih, @renk_liste_kimlik, @kalite_liste_kimlik, 0, @Kullanici_ID)";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@musteri_id", model.Musteri_ID);
                 cmd.Parameters.AddWithValue("@kod_liste_kimlik", model.Kod_liste_Kimlik);
@@ -538,7 +603,7 @@ namespace DataAccessLayer
             List<Sevkiyat> sevkiyatlar = new List<Sevkiyat>();
             try
             {
-                cmd.CommandText = "SELECT S.ID, S.Musteri_ID, M.Isim,S.Kod_liste_Kimlik,K.tanim, K.aciklama, S.Miktar, S.SevkTarih, S.Renk_liste_kimlik, R.renkad, S.Kalite_liste_kimlik, KA.kaliteAd, S.Kullanici_ID , KU.ad_soyad, KU.kullanici_adi FROM Sevkiyat AS S JOIN Musteriler AS M ON M.ID= S.Musteri_ID JOIN kod_liste AS K ON S.Kod_liste_Kimlik=K.Kimlik JOIN renk_liste AS R ON R.Kimlik=S.Renk_liste_kimlik JOIN kalite_liste AS KA ON KA.Kimlik = S.Kalite_liste_kimlik JOIN kullanici_liste AS KU ON KU.Kimlik = S.Kullanici_ID WHERE S.Durum= 0";
+                cmd.CommandText = "SELECT S.ID, S.Musteri_ID, M.Isim,S.Kod_liste_Kimlik,K.tanim, K.aciklama, S.Miktar, S.SevkTarih, S.Renk_liste_kimlik, R.renkad, S.Kalite_liste_kimlik, KA.kaliteAd, S.Kullanici_ID , KU.ad_soyad, KU.kullanici_adi FROM Sevkiyatlar AS S JOIN Musteriler AS M ON M.ID= S.Musteri_ID JOIN kod_liste AS K ON S.Kod_liste_Kimlik=K.Kimlik JOIN renk_liste AS R ON R.Kimlik=S.Renk_liste_kimlik JOIN kalite_liste AS KA ON KA.Kimlik = S.Kalite_liste_kimlik JOIN kullanici_liste AS KU ON KU.Kimlik = S.Kullanici_ID WHERE S.Durum= 0";
                 cmd.Parameters.Clear();
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -621,7 +686,7 @@ namespace DataAccessLayer
             try
             {
                 Sevkiyat s = new Sevkiyat();
-                cmd.CommandText = "SELECT S.ID, S.Musteri_ID, M.Isim,S.Kod_liste_Kimlik,K.tanim, K.aciklama, S.Miktar, S.SevkTarih, S.Renk_liste_kimlik, R.renkad, S.Kalite_liste_kimlik, KA.kaliteAd, S.Kullanici_ID , KU.ad_soyad, KU.kullanici_adi FROM Sevkiyat AS S JOIN Musteriler AS M ON M.ID= S.Musteri_ID JOIN kod_liste AS K ON S.Kod_liste_Kimlik=K.Kimlik JOIN renk_liste AS R ON R.Kimlik=S.Renk_liste_kimlik JOIN kalite_liste AS KA ON KA.Kimlik = S.Kalite_liste_kimlik JOIN kullanici_liste AS KU ON KU.Kimlik = S.Kullanici_ID WHERE S.ID= @id";
+                cmd.CommandText = "SELECT S.ID, S.Musteri_ID, M.Isim,S.Kod_liste_Kimlik,K.tanim, K.aciklama, S.Miktar, S.SevkTarih, S.Renk_liste_kimlik, R.renkad, S.Kalite_liste_kimlik, KA.kaliteAd, S.Kullanici_ID , KU.ad_soyad, KU.kullanici_adi FROM Sevkiyatlar AS S JOIN Musteriler AS M ON M.ID= S.Musteri_ID JOIN kod_liste AS K ON S.Kod_liste_Kimlik=K.Kimlik JOIN renk_liste AS R ON R.Kimlik=S.Renk_liste_kimlik JOIN kalite_liste AS KA ON KA.Kimlik = S.Kalite_liste_kimlik JOIN kullanici_liste AS KU ON KU.Kimlik = S.Kullanici_ID WHERE S.ID= @id";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@id", id);
                 con.Open();
@@ -659,7 +724,7 @@ namespace DataAccessLayer
         {
             try
             {
-                cmd.CommandText = "UPDATE Sevkiyat SET Musteri_ID=@Musteri_ID, Kod_liste_Kimlik =@Kod_liste_Kimlik, Miktar = @Miktar, SevkTarih=@SevkTarih, Renk_liste_kimlik=@Renk_liste_kimlik, Kalite_liste_kimlik=@Kalite_liste_kimlik, Kullanici_ID=@Kullanici_ID WHERE ID=@id";
+                cmd.CommandText = "UPDATE Sevkiyatlar SET Musteri_ID=@Musteri_ID, Kod_liste_Kimlik =@Kod_liste_Kimlik, Miktar = @Miktar, SevkTarih=@SevkTarih, Renk_liste_kimlik=@Renk_liste_kimlik, Kalite_liste_kimlik=@Kalite_liste_kimlik, Kullanici_ID=@Kullanici_ID WHERE ID=@id";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@id", model.ID);
                 cmd.Parameters.AddWithValue("@Musteri_ID", model.Musteri_ID);
@@ -686,7 +751,7 @@ namespace DataAccessLayer
         {
             try
             {
-                cmd.CommandText = "DELETE Sevkiyat  WHERE ID= @id";
+                cmd.CommandText = "DELETE Sevkiyatlar  WHERE ID= @id";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@id", id);
                 con.Open();

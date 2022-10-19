@@ -34,7 +34,7 @@ namespace DepoGirisApp
 
         private void btn_ara_Click(object sender, EventArgs e)
         {
-
+            dataGridView1.DataSource = dm.DepogirisListReader(cb_urunkod.Text, cb_sicil.Text, cb_renk.Text, dtp_baslangic.Value.Date, dtp_bitis.Value.Date, cb_kalite.Text);
         }
         private void CbDoldur()
         {
@@ -47,11 +47,14 @@ namespace DepoGirisApp
             cb_kalite.DataSource = dm.KaliteTipiListele();
             cb_kalite.ValueMember = "Kimlik";
             cb_kalite.DisplayMember = "kaliteAd";
+            cb_sicil.DataSource = dm.KullaniciReader();
+            cb_sicil.ValueMember = "Kimlik";
+            cb_sicil.DisplayMember = "kullanici_adi";
         }
         private void GridDoldur()
         {
             dataGridView1.DataSource = dm.DepogirisListReader();
-            dataGridView1.Columns["Product_Id"].Visible = dataGridView1.Columns["KaliteHata_Id"].Visible = dataGridView1.Columns["Urun_ID"].Visible = dataGridView1.Columns["Renk_ID"].Visible = dataGridView1.Columns["Kalite_ID"].Visible = dataGridView1.Columns["DepoPalet_ID"].Visible = dataGridView1.Columns["Sevkiyat_ID"].Visible = dataGridView1.Columns["DepoHata_ID"].Visible = false;
+            dataGridView1.Columns["Product_Id"].Visible = dataGridView1.Columns["KaliteHata_Id"].Visible = dataGridView1.Columns["Urun_ID"].Visible = dataGridView1.Columns["Renk_ID"].Visible = dataGridView1.Columns["Kalite_ID"].Visible = dataGridView1.Columns["DepoPalet_ID"].Visible = dataGridView1.Columns["Sevkiyat_ID"].Visible = dataGridView1.Columns["DepoHata_ID"].Visible = dataGridView1.Columns["Sicil"].Visible = false;
             dataGridView1.Columns["UrunAciklama"].Width = 500;
         }
     }

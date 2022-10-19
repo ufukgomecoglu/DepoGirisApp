@@ -12,6 +12,7 @@ namespace DataAccessLayer.Model
         public int Id { get; set; }
         public string Barkod { get; set; }
         public byte Sicil { get; set; }
+        public string Kullanici_Isim { get; set; }
         public DateTime KayitTarih { get; set; }
         public int Product_ID { get; set; }
         public byte KaliteHata_Id { get; set; }
