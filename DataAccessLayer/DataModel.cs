@@ -146,13 +146,12 @@ namespace DataAccessLayer
         {
             try
             {
-                cmd.CommandText = "INSERT INTO DepoGiris(Barkod,Sicil,KayitTarih,Product_ID,Hata_Id,BolumNo,Durum) VALUES(@barkod,@sicil,@kayittarih,@product_id,@hata_id,0,1)";
+                cmd.CommandText = "INSERT INTO DepoGiris(Barkod,Sicil,KayitTarih,Product_ID,Durum) VALUES(@barkod,@sicil,@kayittarih,@product_id,1)";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@barkod", model.Barkod);
                 cmd.Parameters.AddWithValue("@sicil", model.Sicil);
                 cmd.Parameters.AddWithValue("@kayittarih", model.KayitTarih);
                 cmd.Parameters.AddWithValue("@product_id", model.Product_ID);
-                cmd.Parameters.AddWithValue("@hata_id", model.Hata_Id);
                 con.Open();
                 cmd.ExecuteNonQuery();
                 return true;
@@ -172,7 +171,7 @@ namespace DataAccessLayer
             List<DepoGiris> girisler = new List<DepoGiris>();
             try
             {
-                cmd.CommandText = "SELECT D.Id, D.Barkod, D.Sicil , D.KayitTarih, D.Hata_Id, K.tanim  FROM DepoGiris AS D JOIN Products AS P ON P.Id=D.Product_ID JOIN kod_liste AS K ON P.ProductCode = K.Kimlik WHERE D.Sicil=@sicil AND  D.Durum=1 AND D.KayitTarih  BETWEEN @bugununtarihi AND @ertisigüntarihi   ";
+                cmd.CommandText = "ELECT D.Id, D.Barkod, D.Sicil , D.KayitTarih, P.Fault, H.numara, H.tanim, P.ProductCode, K.tanim, K.aciklama, P.Color, R.renkad, P.Quality, KA.kaliteAd FROM DepoGiris AS D JOIN Products AS P ON P.Id=D.Product_ID JOIN renk_liste AS R ON P.Color =R.Kimlik JOIN hata_liste AS H ON P.Fault= H.Kimlik JOIN kod_liste AS K ON P.ProductCode = K.Kimlik JOIN kalite_liste AS KA ON P.Quality = KA.Kimlik WHERE D.Sicil=@sicil AND  D.Durum=1 AND D.KayitTarih  BETWEEN @bugununtarihi AND @ertisigüntarihi   ";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@sicil", sicil);
                 cmd.Parameters.AddWithValue("@bugununtarihi", date);
@@ -186,8 +185,16 @@ namespace DataAccessLayer
                     dg.Barkod = reader.GetString(1);
                     dg.Sicil = reader.GetByte(2);
                     dg.KayitTarih = reader.GetDateTime(3);
-                    dg.Hata_Id = reader.GetByte(4);
-                    dg.UrunKodu = reader.GetString(5);
+                    dg.KaliteHata_Id = reader.GetByte(4);
+                    dg.KaliteHata_Kod = reader.GetInt16(5);
+                    dg.KaliteHata_Isim = reader.GetString(6);
+                    dg.Urun_ID = reader.GetInt32(7);
+                    dg.UrunKodu = reader.GetString(8);
+                    dg.UrunAciklama = reader.GetString(9);
+                    dg.Renk_ID = reader.GetByte(10);
+                    dg.Renk_Isim = reader.GetString(11);
+                    dg.Kalite_ID = reader.GetByte(12);
+                    dg.Kalite_Isim = reader.GetString(13);
                     girisler.Add(dg);
                 }
                 return girisler;
@@ -219,107 +226,7 @@ namespace DataAccessLayer
                     dg.Barkod = reader.GetString(1);
                     dg.Sicil = reader.GetByte(2);
                     dg.KayitTarih = reader.GetDateTime(3);
-                    dg.Hata_Id = reader.GetByte(4);
-                    dg.UrunKodu = reader.GetString(5);
-                    girisler.Add(dg);
-                }
-                return girisler;
-            }
-            catch (Exception)
-            {
-
-                return null;
-            }
-            finally
-            {
-                con.Close();
-            }
-        }
-        public List<DepoGiris> DepogirisListReader(string urunkodu)
-        {
-            List<DepoGiris> girisler = new List<DepoGiris>();
-            try
-            {
-                cmd.CommandText = "SELECT D.Id, D.Barkod, D.Sicil , D.KayitTarih, D.Hata_Id, K.tanim  FROM DepoGiris AS D JOIN Products AS P ON P.Id=D.Product_ID JOIN kod_liste AS K ON P.ProductCode = K.Kimlik WHERE K.tanim=@tanim AND D.Durum=1 ";
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@tanim", urunkodu);
-                con.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    DepoGiris dg = new DepoGiris();
-                    dg.Id = reader.GetInt32(0);
-                    dg.Barkod = reader.GetString(1);
-                    dg.Sicil = reader.GetByte(2);
-                    dg.KayitTarih = reader.GetDateTime(3);
-                    dg.Hata_Id = reader.GetByte(4);
-                    dg.UrunKodu = reader.GetString(5);
-                    girisler.Add(dg);
-                }
-                return girisler;
-            }
-            catch (Exception)
-            {
-
-                return null;
-            }
-            finally
-            {
-                con.Close();
-            }
-        }
-        public List<DepoGiris> DepogirisListReaderSicilAra(byte sicil)
-        {
-            List<DepoGiris> girisler = new List<DepoGiris>();
-            try
-            {
-                cmd.CommandText = "SELECT D.Id, D.Barkod, D.Sicil , D.KayitTarih, D.Hata_Id, K.tanim  FROM DepoGiris AS D JOIN Products AS P ON P.Id=D.Product_ID JOIN kod_liste AS K ON P.ProductCode = K.Kimlik WHERE D.Sicil=@sicil AND D.Durum=1";
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@sicil", sicil);
-                con.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    DepoGiris dg = new DepoGiris();
-                    dg.Id = reader.GetInt32(0);
-                    dg.Barkod = reader.GetString(1);
-                    dg.Sicil = reader.GetByte(2);
-                    dg.KayitTarih = reader.GetDateTime(3);
-                    dg.Hata_Id = reader.GetByte(4);
-                    dg.UrunKodu = reader.GetString(5);
-                    girisler.Add(dg);
-                }
-                return girisler;
-            }
-            catch (Exception)
-            {
-
-                return null;
-            }
-            finally
-            {
-                con.Close();
-            }
-        }
-        public List<DepoGiris> DepogirisListReader(DateTime baslangic, DateTime bitis)
-        {
-            List<DepoGiris> girisler = new List<DepoGiris>();
-            try
-            {
-                cmd.CommandText = "SELECT D.Id, D.Barkod, D.Sicil , D.KayitTarih, D.Hata_Id, K.tanim  FROM DepoGiris AS D JOIN Products AS P ON P.Id=D.Product_ID JOIN kod_liste AS K ON P.ProductCode = K.Kimlik WHERE D.Durum=1 AND D.KayitTarih  BETWEEN @bugununtarihi AND @ertisigüntarihi  ";
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@bugununtarihi", baslangic);
-                cmd.Parameters.AddWithValue("@ertisigüntarihi", bitis);
-                con.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    DepoGiris dg = new DepoGiris();
-                    dg.Id = reader.GetInt32(0);
-                    dg.Barkod = reader.GetString(1);
-                    dg.Sicil = reader.GetByte(2);
-                    dg.KayitTarih = reader.GetDateTime(3);
-                    dg.Hata_Id = reader.GetByte(4);
+                    dg.KaliteHata_Id = reader.GetByte(4);
                     dg.UrunKodu = reader.GetString(5);
                     girisler.Add(dg);
                 }
@@ -354,8 +261,8 @@ namespace DataAccessLayer
                         Sicil = reader.GetByte(2),
                         KayitTarih = reader.GetDateTime(3),
                         Product_ID = reader.GetInt32(4),
-                        Hata_Id=reader.GetByte(5),
-                        DepoPaletliUrun_ID = reader.IsDBNull(6) ? 0 : reader.GetInt32(6),
+                        KaliteHata_Id=reader.GetByte(5),
+                        DepoPalet_ID = reader.IsDBNull(6) ? 0 : reader.GetInt32(6),
                     };
                 }
                 return dg;
@@ -397,6 +304,34 @@ namespace DataAccessLayer
                 return false;
             }
             
+        }
+        public bool DepoGirisUniqBarkod(string barkod)
+        {
+            try
+            {
+                cmd.CommandText = "SELECT COUNT(*) FROM DepoGiris WHERE Barkod=@barkod";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@barkod", barkod);
+                con.Open();
+                int number = Convert.ToInt32(cmd.ExecuteScalar());
+                if (number != 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
         }
         #endregion
         #region Musteri Metotları
@@ -721,42 +656,44 @@ namespace DataAccessLayer
 
         #endregion
         #region DepoStok Metotları
-        public bool DepoStokEkleBulGuncelle(int urunkimlik,byte renkkimlik)
+        public bool DepoStokEkleBulGuncelle(int urun_id,byte renk_id, byte kalite_id)
         {
             try
             {
                 DepoStok ds = new DepoStok();
-                cmd.CommandText = "SELECT COUNT(*) FROM DepoStok WHERE Kod_liste_Kimlik=@Kod_liste_Kimlik AND Renk_liste_kimlik=@Renk_liste_kimlik";
+                cmd.CommandText = "SELECT COUNT(*) FROM DepoStoklar WHERE Urun_ID=@urun_ID AND Renk_ID=@renk_ID AND Kalite_ID=@kalite_ID";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@Kod_liste_Kimlik", urunkimlik);
-                cmd.Parameters.AddWithValue("@Renk_liste_kimlik", renkkimlik);
+                cmd.Parameters.AddWithValue("@urun_ID", urun_id);
+                cmd.Parameters.AddWithValue("@renk_ID", renk_id);
+                cmd.Parameters.AddWithValue("@kalite_ID", kalite_id);
                 con.Open();
                 int sayi = Convert.ToInt32(cmd.ExecuteScalar());
                 if (sayi==0)
                 {
-                    cmd.CommandText = "INSERT INTO DepoStok(Kod_liste_Kimlik,Renk_liste_kimlik,Stok) VALUES(@Kod_liste_Kimlik,@Renk_liste_kimlik,1)";
+                    cmd.CommandText = "INSERT INTO DepoStoklar(Urun_ID, Renk_ID, Kalite_ID, Stok) VALUES(@urun_ID, @renk_ID, @kalite_ID,1)";
                     cmd.Parameters.Clear();
-                    cmd.Parameters.AddWithValue("@Kod_liste_Kimlik", urunkimlik);
-                    cmd.Parameters.AddWithValue("@Renk_liste_kimlik", renkkimlik);
+                    cmd.Parameters.AddWithValue("@urun_ID", urun_id);
+                    cmd.Parameters.AddWithValue("@renk_ID", renk_id);
+                    cmd.Parameters.AddWithValue("@kalite_ID", kalite_id);
                     cmd.ExecuteNonQuery();
                 }
                 if (sayi==1)
                 {
-                    cmd.CommandText = "SELECT Stok FROM DepoStok WHERE Kod_liste_Kimlik=@Kod_liste_Kimlik AND Renk_liste_kimlik=@Renk_liste_kimlik ";
+                    cmd.CommandText = "SELECT ID, Stok FROM DepoStoklar WHERE Urun_ID=@urun_ID AND Renk_ID=@renk_ID AND Kalite_ID=@kalite_ID";
                     cmd.Parameters.Clear();
-                    cmd.Parameters.AddWithValue("@Kod_liste_Kimlik", urunkimlik);
-                    cmd.Parameters.AddWithValue("@Renk_liste_kimlik", renkkimlik);
-                    cmd.Parameters.AddWithValue("@stok", renkkimlik);
+                    cmd.Parameters.AddWithValue("@urun_ID", urun_id);
+                    cmd.Parameters.AddWithValue("@renk_ID", renk_id);
+                    cmd.Parameters.AddWithValue("@kalite_ID", kalite_id);
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        ds.Stok = reader.GetInt32(0);
+                        ds.ID = reader.GetInt32(0);
+                        ds.Stok = reader.GetInt32(1);
                     }
                     reader.Close();
-                    cmd.CommandText = "UPDATE DepoStok SET Stok=@stok WHERE Kod_liste_Kimlik=@Kod_liste_Kimlik AND Renk_liste_kimlik=@Renk_liste_kimlik";
+                    cmd.CommandText = "UPDATE DepoStoklar SET Stok=@stok WHERE ID = @id ";
                     cmd.Parameters.Clear();
-                    cmd.Parameters.AddWithValue("@Kod_liste_Kimlik", urunkimlik);
-                    cmd.Parameters.AddWithValue("@Renk_liste_kimlik", renkkimlik);
+                    cmd.Parameters.AddWithValue("@id", ds.ID);
                     cmd.Parameters.AddWithValue("@stok", ds.Stok+1);
                     cmd.ExecuteNonQuery();
                 }

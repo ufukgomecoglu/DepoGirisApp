@@ -104,11 +104,12 @@ namespace DepoGirisApp
             PrintDocument document = new PrintDocument();
             BarcodeDraw bdraw = BarcodeDrawFactory.GetSymbology(BarcodeSymbology.Code128);
             Image barcodeImage = bdraw.Draw(barkod, 50);
-
+            document.PrinterSettings.Copies = 1;
+            //document.PrinterSettings.PrinterName = "ZDesigner TLP 2844";
             document.PrintPage += delegate (object sender, PrintPageEventArgs e)
             {
-                e.Graphics.DrawImage(barcodeImage, 0, 0);
-                e.Graphics.DrawString(barkod, new Font("arial", 8), new SolidBrush(Color.Black), 0, 50);
+                e.Graphics.DrawImage(barcodeImage, 50, 20);
+                e.Graphics.DrawString(barkod, new Font("arial", 8), new SolidBrush(Color.Black), 50, 70);
             };
             document.Print();
         }

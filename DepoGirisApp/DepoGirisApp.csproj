@@ -55,6 +55,12 @@
     <Compile Include="AnaForm.Designer.cs">
       <DependentUpon>AnaForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DepoGirisIslemleri.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DepoGirisIslemleri.Designer.cs">
+      <DependentUpon>DepoGirisIslemleri.cs</DependentUpon>
+    </Compile>
     <Compile Include="DepoStokTakip.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +101,9 @@
     </Compile>
     <EmbeddedResource Include="AnaForm.resx">
       <DependentUpon>AnaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DepoGirisIslemleri.resx">
+      <DependentUpon>DepoGirisIslemleri.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DepoStokTakip.resx">
       <DependentUpon>DepoStokTakip.cs</DependentUpon>
