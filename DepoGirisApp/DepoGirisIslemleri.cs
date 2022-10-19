@@ -14,7 +14,6 @@ namespace DepoGirisApp
 {
     public partial class DepoGirisIslemleri : Form
     {
-        public static kullanici_listeLogin LoginUser;
         DataModel dm = new DataModel();
         public DepoGirisIslemleri()
         {
@@ -25,6 +24,7 @@ namespace DepoGirisApp
         private void DepoGirisIslemleri_Load(object sender, EventArgs e)
         {
             GridDoldur();
+            mtb_barkodno.Select();
         }
         
         private void FornTemizle()
@@ -37,7 +37,7 @@ namespace DepoGirisApp
             Product p = dm.BarkodNoGöreProductBul(mtb_barkodno.Text);
             DepoGiris d = new DepoGiris();
             d.Barkod = p.Barcode;
-            d.Sicil = LoginUser.Kimlik;
+            d.Sicil = AnaForm.LoginUser.Kimlik;
             d.KayitTarih = DateTime.Now;
             d.Product_ID = p.Id;
             if (dm.DepoGirisUniqBarkod(mtb_barkodno.Text))
@@ -61,8 +61,9 @@ namespace DepoGirisApp
         }
         private void GridDoldur()
         {
-            dataGridView1.DataSource = dm.DepogirisListReader(LoginUser.Kimlik);
-            dataGridView1.Columns["Product_Id"].Visible = dataGridView1.Columns["DepoPaletliUrun_ID"].Visible = false;
+            dataGridView1.DataSource = dm.DepogirisListReader(AnaForm.LoginUser.Kimlik);
+            dataGridView1.Columns["Product_Id"].Visible = dataGridView1.Columns["KaliteHata_Id"].Visible = dataGridView1.Columns["Urun_ID"].Visible = dataGridView1.Columns["Renk_ID"].Visible = dataGridView1.Columns["Kalite_ID"].Visible = dataGridView1.Columns["DepoPalet_ID"].Visible = dataGridView1.Columns["Sevkiyat_ID"].Visible = dataGridView1.Columns["DepoHata_ID"].Visible = false;
+            dataGridView1.Columns["UrunAciklama"].Width = 500;
         }
     }
 }

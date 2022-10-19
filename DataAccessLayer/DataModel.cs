@@ -171,7 +171,7 @@ namespace DataAccessLayer
             List<DepoGiris> girisler = new List<DepoGiris>();
             try
             {
-                cmd.CommandText = "ELECT D.Id, D.Barkod, D.Sicil , D.KayitTarih, P.Fault, H.numara, H.tanim, P.ProductCode, K.tanim, K.aciklama, P.Color, R.renkad, P.Quality, KA.kaliteAd FROM DepoGiris AS D JOIN Products AS P ON P.Id=D.Product_ID JOIN renk_liste AS R ON P.Color =R.Kimlik JOIN hata_liste AS H ON P.Fault= H.Kimlik JOIN kod_liste AS K ON P.ProductCode = K.Kimlik JOIN kalite_liste AS KA ON P.Quality = KA.Kimlik WHERE D.Sicil=@sicil AND  D.Durum=1 AND D.KayitTarih  BETWEEN @bugununtarihi AND @ertisigüntarihi   ";
+                cmd.CommandText = "SELECT D.Id, D.Barkod, D.Sicil , D.KayitTarih, P.Fault, H.numara, H.tanim, P.ProductCode, K.tanim, K.aciklama, P.Color, R.renkad, P.Quality, KA.kaliteAd FROM DepoGiris AS D JOIN Products AS P ON P.Id=D.Product_ID JOIN renk_liste AS R ON P.Color =R.Kimlik JOIN hata_liste AS H ON P.Fault= H.Kimlik JOIN kod_liste AS K ON P.ProductCode = K.Kimlik JOIN kalite_liste AS KA ON P.Quality = KA.Kimlik WHERE D.Sicil=@sicil AND  D.Durum=1 AND D.KayitTarih  BETWEEN @bugununtarihi AND @ertisigüntarihi   ";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@sicil", sicil);
                 cmd.Parameters.AddWithValue("@bugununtarihi", date);
@@ -723,11 +723,11 @@ namespace DataAccessLayer
                     depoStoklar.Add(new DepoStok()
                     {
                         ID = reader.GetInt32(0),
-                        Kod_liste_Kimlik = reader.GetInt32(1),
+                        Urun_ID = reader.GetInt32(1),
                         UrunKod = reader.GetString(2),
-                        aciklama = reader.GetString(3),
-                        Renk_liste_kimlik = reader.GetByte(4),
-                        renkad = reader.GetString(5),
+                        UrunAciklama = reader.GetString(3),
+                        Renk_ID = reader.GetByte(4),
+                        Renk_Isim = reader.GetString(5),
                         Stok = reader.GetInt32(6)
                     });
                 }

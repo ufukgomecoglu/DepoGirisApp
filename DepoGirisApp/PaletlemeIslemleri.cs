@@ -55,7 +55,7 @@ namespace DepoGirisApp
             {
                 DepoGiris dg = dm.DepoGirisGetir(tb_barkodno.Text);
                 Product p = dm.BarkodNoGöreProductBul(tb_barkodno.Text);
-                if (dg.DepoPaletliUrun_ID == 0)
+                if (dg.DepoPalet_ID == 0)
                 {
                     sayi = sayi + 1;
                     kod_liste_kimlik = p.ProductCode;

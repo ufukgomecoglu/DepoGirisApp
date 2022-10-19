@@ -63,7 +63,7 @@
             this.groupBox1.Size = new System.Drawing.Size(1432, 118);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "DEPO-SEVKİYAT";
+            this.groupBox1.Text = "Ürün Bilgisi";
             // 
             // mtb_barkodno
             // 
@@ -112,7 +112,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox1);
             this.Name = "DepoGirisIslemleri";
-            this.Text = "DepoGirisIslemleri";
+            this.Text = "Depo Ürün Kayıt";
             this.Load += new System.EventHandler(this.DepoGirisIslemleri_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
