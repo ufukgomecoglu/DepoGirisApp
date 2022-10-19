@@ -214,7 +214,7 @@ namespace DataAccessLayer
             List<DepoGiris> girisler = new List<DepoGiris>();
             try
             {
-                cmd.CommandText = "SELECT D.Id, D.Barkod, D.Sicil , D.KayitTarih, D.Hata_Id, K.tanim  FROM DepoGiris AS D JOIN Products AS P ON P.Id=D.Product_ID JOIN kod_liste AS K ON P.ProductCode = K.Kimlik AND D.Durum=1  ";
+                cmd.CommandText = "SELECT D.Id, D.Barkod, D.Sicil , D.KayitTarih, P.Fault, H.numara, H.tanim, P.ProductCode, K.tanim, K.aciklama, P.Color, R.renkad, P.Quality, KA.kaliteAd FROM DepoGiris AS D JOIN Products AS P ON P.Id=D.Product_ID JOIN renk_liste AS R ON P.Color =R.Kimlik JOIN hata_liste AS H ON P.Fault= H.Kimlik JOIN kod_liste AS K ON P.ProductCode = K.Kimlik JOIN kalite_liste AS KA ON P.Quality = KA.Kimlik WHERE D.Durum=1 ";
                 cmd.Parameters.Clear();
 
                 con.Open();
@@ -227,7 +227,56 @@ namespace DataAccessLayer
                     dg.Sicil = reader.GetByte(2);
                     dg.KayitTarih = reader.GetDateTime(3);
                     dg.KaliteHata_Id = reader.GetByte(4);
-                    dg.UrunKodu = reader.GetString(5);
+                    dg.KaliteHata_Kod = reader.GetInt16(5);
+                    dg.KaliteHata_Isim = reader.GetString(6);
+                    dg.Urun_ID = reader.GetInt32(7);
+                    dg.UrunKodu = reader.GetString(8);
+                    dg.UrunAciklama = reader.GetString(9);
+                    dg.Renk_ID = reader.GetByte(10);
+                    dg.Renk_Isim = reader.GetString(11);
+                    dg.Kalite_ID = reader.GetByte(12);
+                    dg.Kalite_Isim = reader.GetString(13);
+                    girisler.Add(dg);
+                }
+                return girisler;
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        public List<DepoGiris> DepogirisListReader(string urunkod, byte sicil, string renkad ,DateTime baslangictarih , DateTime bitistarih, string kaliteisim )
+        {
+            List<DepoGiris> girisler = new List<DepoGiris>();
+            try
+            {
+                cmd.CommandText = "SELECT D.Id, D.Barkod, D.Sicil , D.KayitTarih, P.Fault, H.numara, H.tanim, P.ProductCode, K.tanim, K.aciklama, P.Color, R.renkad, P.Quality, KA.kaliteAd FROM DepoGiris AS D JOIN Products AS P ON P.Id=D.Product_ID JOIN renk_liste AS R ON P.Color =R.Kimlik JOIN hata_liste AS H ON P.Fault= H.Kimlik JOIN kod_liste AS K ON P.ProductCode = K.Kimlik JOIN kalite_liste AS KA ON P.Quality = KA.Kimlik WHERE D.Durum=1 AND K.tanim = @urunkod AND D.Sicil = @sicil, AND  R.renkad = @renkad AND KA.kaliteAd=@kaliteisim AND D.KayitTarih  BETWEEN @baslangictarih AND @bitistarih";
+                cmd.Parameters.Clear();
+
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    DepoGiris dg = new DepoGiris();
+                    dg.Id = reader.GetInt32(0);
+                    dg.Barkod = reader.GetString(1);
+                    dg.Sicil = reader.GetByte(2);
+                    dg.KayitTarih = reader.GetDateTime(3);
+                    dg.KaliteHata_Id = reader.GetByte(4);
+                    dg.KaliteHata_Kod = reader.GetInt16(5);
+                    dg.KaliteHata_Isim = reader.GetString(6);
+                    dg.Urun_ID = reader.GetInt32(7);
+                    dg.UrunKodu = reader.GetString(8);
+                    dg.UrunAciklama = reader.GetString(9);
+                    dg.Renk_ID = reader.GetByte(10);
+                    dg.Renk_Isim = reader.GetString(11);
+                    dg.Kalite_ID = reader.GetByte(12);
+                    dg.Kalite_Isim = reader.GetString(13);
                     girisler.Add(dg);
                 }
                 return girisler;

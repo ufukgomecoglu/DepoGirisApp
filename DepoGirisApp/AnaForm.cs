@@ -24,15 +24,6 @@ namespace DepoGirisApp
             this.WindowState = FormWindowState.Maximized;
         }
         
-        private void TSMI_UrunTakip_Click(object sender, EventArgs e)
-        {
-            UrunTakip ut = new UrunTakip();
-            if (Application.OpenForms.OfType<UrunTakip>().Count() == 0)
-            {
-                ut.ShowDialog();
-            }
-        }
-
         private void TSMI_TirYuklemesi_Click(object sender, EventArgs e)
         {
             SevkiyatOlustur so = new SevkiyatOlustur();
@@ -76,6 +67,15 @@ namespace DepoGirisApp
             if (Application.OpenForms.OfType<DepoGirisIslemleri>().Count() == 0)
             {
                 dgi.ShowDialog();
+            }
+        }
+
+        private void btn_uruntakip_Click(object sender, EventArgs e)
+        {
+            UrunTakip ut = new UrunTakip();
+            if (Application.OpenForms.OfType<UrunTakip>().Count() == 0)
+            {
+                ut.ShowDialog();
             }
         }
     }
