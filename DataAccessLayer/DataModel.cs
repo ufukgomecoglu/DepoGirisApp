@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer.Model;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Security.Policy;
@@ -283,42 +284,31 @@ namespace DataAccessLayer
         }
         public List<DepoGiris> DepogirisListReader(string urunkod, string kullaniciadi, string renkad ,DateTime baslangictarih , DateTime bitistarih, string kaliteisim )
         {
+
+            string parameterurunkod = (urunkod != "")? "@urunkod": "K.tanim";
+            string parameterkullaniciadi = (kullaniciadi != "") ? "@kullanici_adi" : "KU.kullanici_adi";
+            string parameterrenkad = (renkad != "") ? "@renkad" : "R.renkad";
+            string parameterkaliteisim = (kaliteisim != "") ? "@kaliteisim" : "KA.kaliteAd";
             List<DepoGiris> girisler = new List<DepoGiris>();
             try
             {
-                cmd.CommandText = "SELECT D.Id, D.Barkod, D.Sicil ,KU.kullanici_adi, D.KayitTarih, P.Fault, H.numara, H.tanim, P.ProductCode, K.tanim, K.aciklama, P.Color, R.renkad, P.Quality, KA.kaliteAd FROM DepoGiris AS D JOIN Products AS P ON P.Id=D.Product_ID JOIN renk_liste AS R ON P.Color =R.Kimlik JOIN hata_liste AS H ON P.Fault= H.Kimlik JOIN kod_liste AS K ON P.ProductCode = K.Kimlik JOIN kalite_liste AS KA ON P.Quality = KA.Kimlik JOIN kullanici_liste AS KU ON KU.Kimlik = D.Sicil WHERE D.Durum=1 AND K.tanim = @urunkod AND KU.kullanici_adi = @kullanici_adi AND  R.renkad = @renkad AND KA.kaliteAd=@kaliteisim AND D.KayitTarih  BETWEEN @baslangictarih AND @bitistarih";
+                cmd.CommandText = $"SELECT D.Id, D.Barkod, D.Sicil ,KU.kullanici_adi, D.KayitTarih, P.Fault, H.numara, H.tanim, P.ProductCode, K.tanim, K.aciklama, P.Color, R.renkad, P.Quality, KA.kaliteAd FROM DepoGiris AS D JOIN Products AS P ON P.Id=D.Product_ID JOIN renk_liste AS R ON P.Color =R.Kimlik JOIN hata_liste AS H ON P.Fault= H.Kimlik JOIN kod_liste AS K ON P.ProductCode = K.Kimlik JOIN kalite_liste AS KA ON P.Quality = KA.Kimlik JOIN kullanici_liste AS KU ON KU.Kimlik = D.Sicil WHERE D.Durum=1 AND K.tanim={parameterurunkod} AND KU.kullanici_adi={parameterkullaniciadi} AND  R.renkad={parameterrenkad} AND KA.kaliteAd={parameterkaliteisim} AND D.KayitTarih  BETWEEN @baslangictarih AND @bitistarih";
                 cmd.Parameters.Clear();
                 if (urunkod!="")
                 {
-                    cmd.Parameters.AddWithValue("@urunkod", urunkod);
-                }
-                else
-                {
-                    cmd.Parameters.AddWithValue("@urunkod","K.tanim");
+                    cmd.Parameters.AddWithValue($"{parameterurunkod}", urunkod);
                 }
                 if (kullaniciadi!="")
                 {
-                    cmd.Parameters.AddWithValue("@kullanici_adi", kullaniciadi);
-                }
-                else
-                {
-                    cmd.Parameters.AddWithValue("@kullanici_adi", "KU.kullanici_adi");
+                    cmd.Parameters.AddWithValue($"{parameterkullaniciadi}", kullaniciadi);
                 }
                 if (renkad != "")
                 {
-                    cmd.Parameters.AddWithValue("@renkad", renkad);
-                }
-                else
-                {
-                    cmd.Parameters.AddWithValue("@renkad", "R.renkad");
+                    cmd.Parameters.AddWithValue($"{parameterrenkad}", renkad);
                 }
                 if (kaliteisim != "")
                 {
-                    cmd.Parameters.AddWithValue("@kaliteisim", kaliteisim);
-                }
-                else
-                {
-                    cmd.Parameters.AddWithValue("@kaliteisim", "KA.kaliteAd");
+                    cmd.Parameters.AddWithValue($"{parameterkaliteisim}", kaliteisim);
                 }
                 cmd.Parameters.AddWithValue("@baslangictarih", baslangictarih);
                 cmd.Parameters.AddWithValue("@bitistarih", bitistarih);
