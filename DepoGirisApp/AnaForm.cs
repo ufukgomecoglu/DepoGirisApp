@@ -65,10 +65,10 @@ namespace DepoGirisApp
 
         private void btn_sevkiyatolustur_Click(object sender, EventArgs e)
         {
-            SevkiyatOlustur so = new SevkiyatOlustur();
-            if (Application.OpenForms.OfType<SevkiyatOlustur>().Count() == 0)
+            SevkiyatIslemleri si = new SevkiyatIslemleri();
+            if (Application.OpenForms.OfType<SevkiyatIslemleri>().Count() == 0)
             {
-                so.ShowDialog();
+                si.ShowDialog();
             }
         }
 

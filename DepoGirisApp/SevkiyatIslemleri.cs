@@ -15,6 +15,7 @@ namespace DepoGirisApp
         public SevkiyatIslemleri()
         {
             InitializeComponent();
+            this.WindowState = FormWindowState.Maximized;
         }
     }
 }
