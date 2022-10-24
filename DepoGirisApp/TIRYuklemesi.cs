@@ -45,7 +45,7 @@ namespace DepoGirisApp
         }
         private void GridDoldur()
         {
-            dataGridView2.DataSource = dm.SevkiyatListele(dtp_sevkiyagunu.Value.Date);
+            
         }
 
         private void dtp_sevkiyagunu_ValueChanged(object sender, EventArgs e)
