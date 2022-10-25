@@ -10,5 +10,7 @@ namespace DataAccessLayer.Model
     {
         public int Kimlik { get; set; }
         public string tanim { get; set; }
+        public string Aciklama { get; set; }
+
     }
 }

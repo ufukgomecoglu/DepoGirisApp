@@ -16,7 +16,7 @@ namespace DepoGirisApp
     {
         DataModel dm = new DataModel();
         int sevkiyatid = 0;
-
+        List<SevkiyatDetay> sevkiyatDetaylar = new List<SevkiyatDetay>();
         public SevkiyatIslemleri()
         {
             InitializeComponent();
@@ -48,7 +48,22 @@ namespace DepoGirisApp
 
         private void btn_ekle_Click(object sender, EventArgs e)
         {
-
+            SevkiyatDetay sd = new SevkiyatDetay();
+            sd.Urun_ID = Convert.ToInt32(cb_urun.SelectedValue);
+            UrunKod u = dm.UrunGetir(sd.Urun_ID);
+            sd.UrunKodu = u.tanim;
+            sd.UrunAciklama = u.Aciklama;
+            sd.Renk_ID = Convert.ToByte(cb_renk.SelectedValue);
+            Renk r = dm.RenkGetir(sd.Renk_ID);
+            sd.Renk_Isim = r.renkad;
+            sd.Kalite_ID = Convert.ToByte(cb_kalite.SelectedValue);
+            KaliteTipi k = dm.KaliteGetir(sd.Kalite_ID);
+            sd.Kalite_Isim = k.kaliteAd;
+            sd.Miktar = Convert.ToInt32( tb_miktar.Text);
+            sevkiyatDetaylar.Add(sd);
+            dataGridView2.DataSource = null;
+            dataGridView2.DataSource = sevkiyatDetaylar;
+            dataGridView2.Columns["ID"].Visible = dataGridView2.Columns["Urun_ID"].Visible = dataGridView2.Columns["Renk_ID"].Visible = dataGridView2.Columns["Kalite_ID"].Visible = dataGridView2.Columns["Sevkiyat_ID"].Visible = false;
         }
         private void CBDoldur()
         {
@@ -78,7 +93,6 @@ namespace DepoGirisApp
             if (e.Button == MouseButtons.Right)
             {
                 var hit = dataGridView1.HitTest(e.X, e.Y);
-                //MessageBox.Show(hit.RowIndex.ToString());
                 dataGridView1.ClearSelection();
                 if (hit.RowIndex != -1)
                 {

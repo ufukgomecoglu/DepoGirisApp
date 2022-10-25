@@ -13,7 +13,6 @@ namespace DataAccessLayer
     public class DataModel
     {
         SqlConnection con; SqlCommand cmd;
-
         public DataModel()
         {
             con = new SqlConnection(ConnectionStrings.ConStrTest);
@@ -497,6 +496,36 @@ namespace DataAccessLayer
                 con.Close();
             }
         }
+        public Renk RenkGetir(byte renkid )
+        {
+            Renk r = new Renk();
+            try
+            {
+                cmd.CommandText = "SELECT * FROM renk_liste WHERE Kimlik=@Kimlik";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@Kimlik", renkid);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    r=new Renk()
+                    {
+                        Kimlik = reader.GetByte(0),
+                        renkad = reader.GetString(1)
+                    };
+                }
+                return r; 
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
         #endregion
         #region KaliteTipi Metotları
         public List<KaliteTipi> KaliteTipiListele()
@@ -527,6 +556,35 @@ namespace DataAccessLayer
                 con.Close();
             }
         }
+        public KaliteTipi KaliteGetir( byte kaliteid)
+        {
+            KaliteTipi k = new KaliteTipi();
+            try
+            {
+                cmd.CommandText = "SELECT Kimlik,kaliteAd FROM kalite_liste WHERE Kimlik=@Kimlik";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@Kimlik", kaliteid);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    k=new KaliteTipi()
+                    {
+                        Kimlik = reader.GetByte(0),
+                        kaliteAd = reader.GetString(1)
+                    };
+                }
+                return k;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
         #endregion
         #region Ürün kod metotları
         public List<UrunKod> UrunKodListele()
@@ -547,6 +605,36 @@ namespace DataAccessLayer
                     });
                 }
                 return urunKodlar;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        public UrunKod UrunGetir(int urunid)
+        {
+            UrunKod u = new UrunKod();
+            try
+            {
+                cmd.CommandText = "SELECT Kimlik,tanim, aciklama FROM kod_liste WHERE Kimlik = @Kimlik ";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@Kimlik", urunid);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    u = new UrunKod()
+                    {
+                        Kimlik = reader.GetInt32(0),
+                        tanim = reader.GetString(1),
+                        Aciklama = reader.GetString(2)
+                    };
+                }
+                return u;
             }
             catch (Exception)
             {
@@ -768,6 +856,23 @@ namespace DataAccessLayer
             {
                 con.Close();
             }
+        }
+        #endregion
+        #region SevkiyatDetayMetotları
+        public void SevkiyatDetayEkle(List<SevkiyatDetay> s)
+        {
+            cmd.CommandText = "INSERT INTO SevkiyatDetay(Urun_ID, Renk_ID, Kalite_ID, Sevkiyat_ID, Miktar) VALUES(@Urun_ID, @Renk_ID, @Kalite_ID,  @Miktar) ";
+            con.Open();
+            foreach (SevkiyatDetay item in s)
+            {
+               
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@Urun_ID", item.Urun_ID);
+                cmd.Parameters.AddWithValue("@Renk_ID", item.Renk_ID);
+                cmd.Parameters.AddWithValue("@Kalite_ID", item.Kalite_ID);
+
+            }
+           con.Close();
         }
         #endregion
     }
