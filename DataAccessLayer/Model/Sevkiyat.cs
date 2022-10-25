@@ -13,7 +13,7 @@ namespace DataAccessLayer.Model
         public string MusteriIsim { get; set; }
         public DateTime SevkTarih { get; set; }
         public bool Durum { get; set; }
-        public DateTime SevkEdielenTarih { get; set; }
+        public DateTime SevkEdilenTarih { get; set; }
         public byte Kullanici_ID { get; set; }
         public string kullanici_adi { get; set; }
     }

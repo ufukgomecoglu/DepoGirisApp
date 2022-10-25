@@ -247,7 +247,6 @@ namespace DataAccessLayer
             {
                 cmd.CommandText = "SELECT D.Id, D.Barkod, D.Sicil ,KU.kullanici_adi, D.KayitTarih, P.Fault, H.numara, H.tanim, P.ProductCode, K.tanim, K.aciklama, P.Color, R.renkad, P.Quality, KA.kaliteAd FROM DepoGiris AS D JOIN Products AS P ON P.Id=D.Product_ID JOIN renk_liste AS R ON P.Color =R.Kimlik JOIN hata_liste AS H ON P.Fault= H.Kimlik JOIN kod_liste AS K ON P.ProductCode = K.Kimlik JOIN kalite_liste AS KA ON P.Quality = KA.Kimlik JOIN kullanici_liste AS KU ON KU.Kimlik = D.Sicil WHERE D.Durum=1 ";
                 cmd.Parameters.Clear();
-
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
@@ -274,7 +273,6 @@ namespace DataAccessLayer
             }
             catch (Exception)
             {
-
                 return null;
             }
             finally
@@ -561,8 +559,60 @@ namespace DataAccessLayer
         }
         #endregion
         #region Sevkiyat Metotları
-        
-
+        public bool SevkiyatEkle(Sevkiyat model)
+        {
+            try
+            {
+                cmd.CommandText = "INSERT INTO Sevkiyatlar(Musteri_ID,SevkTarih,Kullanici_ID,Durum) VALUES(@Musteri_ID,@SevkTarih,@Kullanici_ID,0)";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@Musteri_ID", model.Musteri_ID);
+                cmd.Parameters.AddWithValue("@SevkTarih", model.SevkTarih);
+                cmd.Parameters.AddWithValue("@Kullanici_ID", model.Kullanici_ID);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        public List<Sevkiyat> SevkiyatListReader()
+        {
+            List<Sevkiyat> sevkiyatlar = new List<Sevkiyat>();
+            try
+            {
+                cmd.CommandText = "SELECT S.ID, S.Musteri_ID, M.Isim, S.SevkTarih, S.Kullanici_ID, K.kullanici_adi FROM Sevkiyatlar AS S JOIN Musteriler AS M ON M.ID= S.Musteri_ID JOIN kullanici_liste AS K ON K.Kimlik = S.Kullanici_ID WHERE S.Durum = 0";
+                cmd.Parameters.Clear();
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    sevkiyatlar.Add(new Sevkiyat()
+                    {
+                        ID = reader.GetInt32(0),
+                        Musteri_ID = reader.GetInt32(1),
+                        MusteriIsim = reader.GetString(2),
+                        SevkTarih = reader.GetDateTime(3),
+                        Kullanici_ID = reader.GetByte(4),
+                        kullanici_adi = reader.GetString(5)
+                    });
+                }
+                return sevkiyatlar;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
         #endregion
         #region DepoStok Metotları
         public bool DepoStokEkleBulGuncelle(int urun_id,byte renk_id, byte kalite_id)
