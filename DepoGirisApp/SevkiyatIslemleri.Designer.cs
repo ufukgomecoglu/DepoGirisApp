@@ -52,6 +52,11 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CMSMI_detaygoster = new System.Windows.Forms.ToolStripMenuItem();
             this.CMSMI_SevkiyatDetayEkle = new System.Windows.Forms.ToolStripMenuItem();
+            this.CMSMI_Sil = new System.Windows.Forms.ToolStripMenuItem();
+            this.CMSMI_Düzenle = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CMSMI_Sil2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.CMSMI_Düzenle2 = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -59,6 +64,7 @@
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
+            this.contextMenuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -261,28 +267,67 @@
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.Size = new System.Drawing.Size(1139, 193);
             this.dataGridView2.TabIndex = 0;
+            this.dataGridView2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView2_MouseClick);
             // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CMSMI_detaygoster,
-            this.CMSMI_SevkiyatDetayEkle});
+            this.CMSMI_SevkiyatDetayEkle,
+            this.CMSMI_Sil,
+            this.CMSMI_Düzenle});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(175, 92);
             // 
             // CMSMI_detaygoster
             // 
             this.CMSMI_detaygoster.Name = "CMSMI_detaygoster";
-            this.CMSMI_detaygoster.Size = new System.Drawing.Size(180, 22);
+            this.CMSMI_detaygoster.Size = new System.Drawing.Size(174, 22);
             this.CMSMI_detaygoster.Text = "Detay Göster";
             this.CMSMI_detaygoster.Click += new System.EventHandler(this.CMSMI_detaygoster_Click);
             // 
             // CMSMI_SevkiyatDetayEkle
             // 
             this.CMSMI_SevkiyatDetayEkle.Name = "CMSMI_SevkiyatDetayEkle";
-            this.CMSMI_SevkiyatDetayEkle.Size = new System.Drawing.Size(180, 22);
+            this.CMSMI_SevkiyatDetayEkle.Size = new System.Drawing.Size(174, 22);
             this.CMSMI_SevkiyatDetayEkle.Text = "Sevkiyat Detay Ekle";
             this.CMSMI_SevkiyatDetayEkle.Click += new System.EventHandler(this.CMSMI_SevkiyatDetayEkle_Click);
+            // 
+            // CMSMI_Sil
+            // 
+            this.CMSMI_Sil.Name = "CMSMI_Sil";
+            this.CMSMI_Sil.Size = new System.Drawing.Size(174, 22);
+            this.CMSMI_Sil.Text = "Sil";
+            this.CMSMI_Sil.Click += new System.EventHandler(this.CMSMI_Sil_Click);
+            // 
+            // CMSMI_Düzenle
+            // 
+            this.CMSMI_Düzenle.Name = "CMSMI_Düzenle";
+            this.CMSMI_Düzenle.Size = new System.Drawing.Size(174, 22);
+            this.CMSMI_Düzenle.Text = "Düzenle";
+            this.CMSMI_Düzenle.Click += new System.EventHandler(this.CMSMI_Düzenle_Click);
+            // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CMSMI_Sil2,
+            this.CMSMI_Düzenle2});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(117, 48);
+            // 
+            // CMSMI_Sil2
+            // 
+            this.CMSMI_Sil2.Name = "CMSMI_Sil2";
+            this.CMSMI_Sil2.Size = new System.Drawing.Size(180, 22);
+            this.CMSMI_Sil2.Text = "Sil";
+            this.CMSMI_Sil2.Click += new System.EventHandler(this.CMSMI_Sil2_Click);
+            // 
+            // CMSMI_Düzenle2
+            // 
+            this.CMSMI_Düzenle2.Name = "CMSMI_Düzenle2";
+            this.CMSMI_Düzenle2.Size = new System.Drawing.Size(180, 22);
+            this.CMSMI_Düzenle2.Text = "Düzenle";
+            this.CMSMI_Düzenle2.Click += new System.EventHandler(this.CMSMI_Düzenle2_Click);
             // 
             // SevkiyatIslemleri
             // 
@@ -304,6 +349,7 @@
             this.groupBox4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
+            this.contextMenuStrip2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -333,5 +379,10 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem CMSMI_detaygoster;
         private System.Windows.Forms.ToolStripMenuItem CMSMI_SevkiyatDetayEkle;
+        private System.Windows.Forms.ToolStripMenuItem CMSMI_Sil;
+        private System.Windows.Forms.ToolStripMenuItem CMSMI_Düzenle;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem CMSMI_Sil2;
+        private System.Windows.Forms.ToolStripMenuItem CMSMI_Düzenle2;
     }
 }

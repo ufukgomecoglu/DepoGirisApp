@@ -859,20 +859,66 @@ namespace DataAccessLayer
         }
         #endregion
         #region SevkiyatDetayMetotları
-        public void SevkiyatDetayEkle(List<SevkiyatDetay> s)
+        public void SevkiyatDetayEkle(List<SevkiyatDetay> s, int sevkiyatid)
         {
-            cmd.CommandText = "INSERT INTO SevkiyatDetay(Urun_ID, Renk_ID, Kalite_ID, Sevkiyat_ID, Miktar) VALUES(@Urun_ID, @Renk_ID, @Kalite_ID,  @Miktar) ";
+            cmd.CommandText = "INSERT INTO SevkiyatDetay(Urun_ID, Renk_ID, Kalite_ID, Sevkiyat_ID, Miktar) VALUES(@Urun_ID, @Renk_ID, @Kalite_ID, @Sevkiyat_ID, @Miktar) ";
             con.Open();
             foreach (SevkiyatDetay item in s)
             {
-               
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@Urun_ID", item.Urun_ID);
                 cmd.Parameters.AddWithValue("@Renk_ID", item.Renk_ID);
                 cmd.Parameters.AddWithValue("@Kalite_ID", item.Kalite_ID);
-
+                cmd.Parameters.AddWithValue("@Sevkiyat_ID", sevkiyatid);
+                cmd.Parameters.AddWithValue("@Miktar", item.Miktar);
+                cmd.ExecuteNonQuery();
             }
            con.Close();
+        }
+        public List<SevkiyatDetay> SevkiyatDetayGöster(int sevkiyatid)
+        {
+            List<SevkiyatDetay> sevkiyatDetaylar = new List<SevkiyatDetay>();
+            try
+            {
+                cmd.CommandText = "SELECT S.ID, S.Urun_ID, K.tanim, K.aciklama, S.Renk_ID, R.renkad, S.Kalite_ID, KA.kaliteAd, S.Miktar FROM SevkiyatDetay AS S JOIN kod_liste AS K ON K.Kimlik = S.ID JOIN renk_liste AS R ON R.Kimlik = S.ID JOIN kalite_liste AS KA ON KA.Kimlik = S.ID WHERE S.Sevkiyat_ID= @ID ";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@ID", sevkiyatid);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    sevkiyatDetaylar.Add(new SevkiyatDetay()
+                    {
+                        ID = reader.GetInt32(0),
+                        Urun_ID = reader.GetInt32(1),
+                        UrunKodu = reader.GetString(2),
+                        UrunAciklama = reader.GetString(3),
+                        Renk_ID = reader.GetByte(4),
+                        Renk_Isim = reader.GetString(5),
+                        Kalite_ID = reader.GetByte(6),
+                        Kalite_Isim = reader.GetString(7),
+                        Miktar = reader.GetInt32(8),
+                    });
+                }
+                return sevkiyatDetaylar;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        public void SevkiyatDetaySil(int sevkiyatdetayid)
+        {
+            cmd.CommandText = "DELETE SevkiyatDetay WHERE ID=@id";
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@id", sevkiyatdetayid);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
         }
         #endregion
     }
