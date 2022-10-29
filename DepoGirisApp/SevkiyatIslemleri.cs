@@ -26,6 +26,7 @@ namespace DepoGirisApp
 
         private void btn_sevkiyatolustur_Click(object sender, EventArgs e)
         {
+            btn_guncelle.Visible = false;
             Sevkiyat s = new Sevkiyat();
             s.Musteri_ID = Convert.ToInt32(cb_musteri.SelectedValue);
             s.SevkTarih = dtp_sevkiyattarih.Value.Date;
@@ -43,12 +44,14 @@ namespace DepoGirisApp
 
         private void SevkiyatIslemleri_Load(object sender, EventArgs e)
         {
+            btn_guncelle.Visible = false;
             CBDoldur();
             GridDoldur();
         }
 
         private void btn_ekle_Click(object sender, EventArgs e)
         {
+            btn_guncelle.Visible = false;
             SevkiyatDetay sd = new SevkiyatDetay();
             sd.Urun_ID = Convert.ToInt32(cb_urun.SelectedValue);
             UrunKod u = dm.UrunGetir(sd.Urun_ID);
@@ -110,11 +113,14 @@ namespace DepoGirisApp
 
         private void CMSMI_detaygoster_Click(object sender, EventArgs e)
         {
+            btn_guncelle.Visible = false;
             dataGridView2.DataSource= dm.SevkiyatDetayGöster(sevkiyatid);
+
         }
 
         private void CMSMI_SevkiyatDetayEkle_Click(object sender, EventArgs e)
         {
+            btn_guncelle.Visible = false;
             if (sevkiyatDetaylar.Count != 0)
             {
                 dm.SevkiyatDetayEkle(sevkiyatDetaylar, sevkiyatid);
@@ -131,7 +137,8 @@ namespace DepoGirisApp
 
         private void CMSMI_Sil_Click(object sender, EventArgs e)
         {
-
+            dm.SevkiyatSil(sevkiyatid);
+            GridDoldur();
         }
 
         private void CMSMI_Düzenle_Click(object sender, EventArgs e)
@@ -155,7 +162,24 @@ namespace DepoGirisApp
 
         private void CMSMI_Düzenle2_Click(object sender, EventArgs e)
         {
-
+            if (sevkiyatDetaylar.Count != 0)
+            {
+                SevkiyatDetay sd = sevkiyatDetaylar[sevkiyatdetayid];
+                cb_urun.SelectedValue = sd.Urun_ID;
+                cb_renk.SelectedValue = sd.Renk_ID;
+                cb_kalite.SelectedValue = sd.Kalite_ID;
+                tb_miktar.Text = sd.Miktar.ToString();
+                btn_guncelle.Visible = true;
+            }
+            else
+            {
+                SevkiyatDetay sd = dm.SevkiyatDetayGetir(sevkiyatdetayid);
+                cb_urun.SelectedValue = sd.Urun_ID;
+                cb_renk.SelectedValue = sd.Renk_ID;
+                cb_kalite.SelectedValue = sd.Kalite_ID;
+                tb_miktar.Text = sd.Miktar.ToString();
+                btn_guncelle.Visible = true;
+            }
         }
 
         private void dataGridView2_MouseClick(object sender, MouseEventArgs e)
@@ -179,6 +203,47 @@ namespace DepoGirisApp
                         contextMenuStrip2.Show(dataGridView2, new Point(e.X, e.Y));
                     }
                 }
+            }
+        }
+
+        private void btn_guncelle_Click(object sender, EventArgs e)
+        {
+            btn_guncelle.Visible = false;
+            if (sevkiyatDetaylar.Count != 0)
+            {
+                sevkiyatDetaylar.Remove(sevkiyatDetaylar[sevkiyatdetayid]);
+                SevkiyatDetay sd = new SevkiyatDetay();
+                sd.Urun_ID = Convert.ToInt32(cb_urun.SelectedValue);
+                UrunKod u = dm.UrunGetir(sd.Urun_ID);
+                sd.UrunKodu = u.tanim;
+                sd.UrunAciklama = u.Aciklama;
+                sd.Renk_ID = Convert.ToByte(cb_renk.SelectedValue);
+                Renk r = dm.RenkGetir(sd.Renk_ID);
+                sd.Renk_Isim = r.renkad;
+                sd.Kalite_ID = Convert.ToByte(cb_kalite.SelectedValue);
+                KaliteTipi k = dm.KaliteGetir(sd.Kalite_ID);
+                sd.Kalite_Isim = k.kaliteAd;
+                sd.Miktar = Convert.ToInt32(tb_miktar.Text);
+                sevkiyatDetaylar.Add(sd);
+                MessageBox.Show("Güncelleme İşlemi Başarılı", "Bilgi");
+                GridDoldur();
+            }
+            else
+            {
+                SevkiyatDetay sd = dm.SevkiyatDetayGetir(sevkiyatdetayid);
+                sd.Urun_ID = Convert.ToInt32(cb_urun.SelectedValue);
+                sd.Renk_ID = Convert.ToByte(cb_renk.SelectedValue);
+                sd.Kalite_ID = Convert.ToByte(cb_kalite.SelectedValue);
+                sd.Miktar = Convert.ToInt32(tb_miktar.Text);
+                if (dm.SevkiyatDetayGuncelle(sd))
+                {
+                    MessageBox.Show("Güncelleme İşlemi Başarılı", "Bilgi");
+                }
+                else
+                {
+                    MessageBox.Show("İşlem sırasında bir hata oluştu.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                dataGridView2.DataSource = dm.SevkiyatDetayGöster(sevkiyatid);
             }
         }
     }

@@ -57,6 +57,7 @@
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CMSMI_Sil2 = new System.Windows.Forms.ToolStripMenuItem();
             this.CMSMI_Düzenle2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_guncelle = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -95,6 +96,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btn_guncelle);
             this.groupBox2.Controls.Add(this.btn_ekle);
             this.groupBox2.Controls.Add(this.tb_miktar);
             this.groupBox2.Controls.Add(this.label6);
@@ -318,16 +320,26 @@
             // CMSMI_Sil2
             // 
             this.CMSMI_Sil2.Name = "CMSMI_Sil2";
-            this.CMSMI_Sil2.Size = new System.Drawing.Size(180, 22);
+            this.CMSMI_Sil2.Size = new System.Drawing.Size(116, 22);
             this.CMSMI_Sil2.Text = "Sil";
             this.CMSMI_Sil2.Click += new System.EventHandler(this.CMSMI_Sil2_Click);
             // 
             // CMSMI_Düzenle2
             // 
             this.CMSMI_Düzenle2.Name = "CMSMI_Düzenle2";
-            this.CMSMI_Düzenle2.Size = new System.Drawing.Size(180, 22);
+            this.CMSMI_Düzenle2.Size = new System.Drawing.Size(116, 22);
             this.CMSMI_Düzenle2.Text = "Düzenle";
             this.CMSMI_Düzenle2.Click += new System.EventHandler(this.CMSMI_Düzenle2_Click);
+            // 
+            // btn_guncelle
+            // 
+            this.btn_guncelle.Location = new System.Drawing.Point(666, 81);
+            this.btn_guncelle.Name = "btn_guncelle";
+            this.btn_guncelle.Size = new System.Drawing.Size(75, 23);
+            this.btn_guncelle.TabIndex = 9;
+            this.btn_guncelle.Text = "Güncelle";
+            this.btn_guncelle.UseVisualStyleBackColor = true;
+            this.btn_guncelle.Click += new System.EventHandler(this.btn_guncelle_Click);
             // 
             // SevkiyatIslemleri
             // 
@@ -384,5 +396,6 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem CMSMI_Sil2;
         private System.Windows.Forms.ToolStripMenuItem CMSMI_Düzenle2;
+        private System.Windows.Forms.Button btn_guncelle;
     }
 }

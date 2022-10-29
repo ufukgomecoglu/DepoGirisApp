@@ -701,6 +701,21 @@ namespace DataAccessLayer
                 con.Close();
             }
         }
+        public void SevkiyatSil(int sevkiyatid)
+        {
+            cmd.CommandText = "DELETE SevkiyatDetay WHERE Sevkiyat_ID=@id";
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@id", sevkiyatid);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+            cmd.CommandText = "DELETE Sevkiyatlar WHERE ID=@id";
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@id", sevkiyatid);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
         #endregion
         #region DepoStok Metotları
         public bool DepoStokEkleBulGuncelle(int urun_id,byte renk_id, byte kalite_id)
@@ -919,6 +934,66 @@ namespace DataAccessLayer
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();
+        }
+        public SevkiyatDetay SevkiyatDetayGetir(int sevkiyatdetayid)
+        {
+            SevkiyatDetay sd = new SevkiyatDetay();
+            try
+            {
+                cmd.CommandText = "SELECT S.ID, S.Urun_ID, K.tanim, K.aciklama, S.Renk_ID, R.renkad, S.Kalite_ID, KA.kaliteAd, S.Miktar FROM SevkiyatDetay AS S JOIN kod_liste AS K ON K.Kimlik = S.ID JOIN renk_liste AS R ON R.Kimlik = S.ID JOIN kalite_liste AS KA ON KA.Kimlik = S.ID WHERE S.ID= @ID ";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@ID", sevkiyatdetayid);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    sd=new SevkiyatDetay()
+                    {
+                        ID = reader.GetInt32(0),
+                        Urun_ID = reader.GetInt32(1),
+                        UrunKodu = reader.GetString(2),
+                        UrunAciklama = reader.GetString(3),
+                        Renk_ID = reader.GetByte(4),
+                        Renk_Isim = reader.GetString(5),
+                        Kalite_ID = reader.GetByte(6),
+                        Kalite_Isim = reader.GetString(7),
+                        Miktar = reader.GetInt32(8),
+                    };
+                }
+                return sd;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        public bool SevkiyatDetayGuncelle(SevkiyatDetay sd)
+        {
+            try
+            {
+                cmd.CommandText = "UPDATE SevkiyatDetay SET Urun_ID=@Urun_ID, Renk_ID=@Renk_ID, Kalite_ID=@Kalite_ID, Miktar=@Miktar WHERE ID=@id";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@Urun_ID", sd.Urun_ID);
+                cmd.Parameters.AddWithValue("@Renk_ID", sd.Renk_ID);
+                cmd.Parameters.AddWithValue("@Kalite_ID", sd.Kalite_ID);
+                cmd.Parameters.AddWithValue("@Miktar", sd.Miktar);
+                cmd.Parameters.AddWithValue("@id", sd.ID);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
         }
         #endregion
     }
