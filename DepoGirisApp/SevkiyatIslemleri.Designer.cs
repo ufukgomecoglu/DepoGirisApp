@@ -53,7 +53,6 @@
             this.CMSMI_detaygoster = new System.Windows.Forms.ToolStripMenuItem();
             this.CMSMI_SevkiyatDetayEkle = new System.Windows.Forms.ToolStripMenuItem();
             this.CMSMI_Sil = new System.Windows.Forms.ToolStripMenuItem();
-            this.CMSMI_Düzenle = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CMSMI_Sil2 = new System.Windows.Forms.ToolStripMenuItem();
             this.CMSMI_Düzenle2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -276,10 +275,9 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CMSMI_detaygoster,
             this.CMSMI_SevkiyatDetayEkle,
-            this.CMSMI_Sil,
-            this.CMSMI_Düzenle});
+            this.CMSMI_Sil});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(175, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(175, 70);
             // 
             // CMSMI_detaygoster
             // 
@@ -301,13 +299,6 @@
             this.CMSMI_Sil.Size = new System.Drawing.Size(174, 22);
             this.CMSMI_Sil.Text = "Sil";
             this.CMSMI_Sil.Click += new System.EventHandler(this.CMSMI_Sil_Click);
-            // 
-            // CMSMI_Düzenle
-            // 
-            this.CMSMI_Düzenle.Name = "CMSMI_Düzenle";
-            this.CMSMI_Düzenle.Size = new System.Drawing.Size(174, 22);
-            this.CMSMI_Düzenle.Text = "Düzenle";
-            this.CMSMI_Düzenle.Click += new System.EventHandler(this.CMSMI_Düzenle_Click);
             // 
             // contextMenuStrip2
             // 
@@ -392,7 +383,6 @@
         private System.Windows.Forms.ToolStripMenuItem CMSMI_detaygoster;
         private System.Windows.Forms.ToolStripMenuItem CMSMI_SevkiyatDetayEkle;
         private System.Windows.Forms.ToolStripMenuItem CMSMI_Sil;
-        private System.Windows.Forms.ToolStripMenuItem CMSMI_Düzenle;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem CMSMI_Sil2;
         private System.Windows.Forms.ToolStripMenuItem CMSMI_Düzenle2;

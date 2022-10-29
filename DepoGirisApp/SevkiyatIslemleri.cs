@@ -90,7 +90,7 @@ namespace DepoGirisApp
                 dataGridView1.Columns["Kullanici_ID"].Visible = false;
             dataGridView2.DataSource = null;
             dataGridView2.DataSource = sevkiyatDetaylar;
-            if (dataGridView2.DataSource!= null)
+            if (dataGridView2.DataSource != null)
             {
                 dataGridView2.Columns["ID"].Visible = dataGridView2.Columns["Urun_ID"].Visible = dataGridView2.Columns["Renk_ID"].Visible = dataGridView2.Columns["Kalite_ID"].Visible = dataGridView2.Columns["Sevkiyat_ID"].Visible = false;
             }
@@ -114,7 +114,7 @@ namespace DepoGirisApp
         private void CMSMI_detaygoster_Click(object sender, EventArgs e)
         {
             btn_guncelle.Visible = false;
-            dataGridView2.DataSource= dm.SevkiyatDetayGöster(sevkiyatid);
+            dataGridView2.DataSource = dm.SevkiyatDetayGöster(sevkiyatid);
 
         }
 
@@ -141,14 +141,9 @@ namespace DepoGirisApp
             GridDoldur();
         }
 
-        private void CMSMI_Düzenle_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void CMSMI_Sil2_Click(object sender, EventArgs e)
         {
-            if (sevkiyatDetaylar.Count!=0)
+            if (sevkiyatDetaylar.Count != 0)
             {
                 sevkiyatDetaylar.Remove(sevkiyatDetaylar[sevkiyatdetayid]);
                 GridDoldur();
