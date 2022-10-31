@@ -941,6 +941,7 @@ namespace DataAccessLayer
             cmd.ExecuteNonQuery();
             con.Close();
         }
+       
         #endregion
         #region SevkiyatDetayMetotları
         public void SevkiyatDetayEkle(List<SevkiyatDetay> s, int sevkiyatid)

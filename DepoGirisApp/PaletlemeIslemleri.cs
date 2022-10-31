@@ -165,5 +165,12 @@ namespace DepoGirisApp
             };
             document.Print();
         }
+
+        private void CMSMI_Ekle_Click(object sender, EventArgs e)
+        {
+            dm.DepoGirisDepoPaletIDGuncelle(depoGirisler,depoPaletId);
+            depoGirisler = new List<DepoGiris>();
+            GridDoldur();
+        }
     }
 }

@@ -30,18 +30,19 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.btn_ekle = new System.Windows.Forms.Button();
             this.mtb_UrunBarkodNo = new System.Windows.Forms.MaskedTextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.btn_ekle = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CMSMI_Sil = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CMSMI_PaletDetay = new System.Windows.Forms.ToolStripMenuItem();
             this.CMSMI_PaletSil = new System.Windows.Forms.ToolStripMenuItem();
+            this.CMSMI_Ekle = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -63,14 +64,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Palete Oluştur";
             // 
-            // label1
+            // btn_ekle
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Urun Barkod No";
+            this.btn_ekle.Location = new System.Drawing.Point(162, 51);
+            this.btn_ekle.Name = "btn_ekle";
+            this.btn_ekle.Size = new System.Drawing.Size(75, 23);
+            this.btn_ekle.TabIndex = 2;
+            this.btn_ekle.Text = "Yeni Ekle";
+            this.btn_ekle.UseVisualStyleBackColor = true;
+            this.btn_ekle.Click += new System.EventHandler(this.btn_ekle_Click);
             // 
             // mtb_UrunBarkodNo
             // 
@@ -80,6 +82,15 @@
             this.mtb_UrunBarkodNo.Size = new System.Drawing.Size(139, 20);
             this.mtb_UrunBarkodNo.TabIndex = 1;
             this.mtb_UrunBarkodNo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mtb_UrunBarkodNo_KeyDown);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(84, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Urun Barkod No";
             // 
             // groupBox2
             // 
@@ -129,16 +140,6 @@
             this.dataGridView2.TabIndex = 0;
             this.dataGridView2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView2_MouseClick);
             // 
-            // btn_ekle
-            // 
-            this.btn_ekle.Location = new System.Drawing.Point(162, 51);
-            this.btn_ekle.Name = "btn_ekle";
-            this.btn_ekle.Size = new System.Drawing.Size(75, 23);
-            this.btn_ekle.TabIndex = 2;
-            this.btn_ekle.Text = "Ekle";
-            this.btn_ekle.UseVisualStyleBackColor = true;
-            this.btn_ekle.Click += new System.EventHandler(this.btn_ekle_Click);
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -149,7 +150,7 @@
             // CMSMI_Sil
             // 
             this.CMSMI_Sil.Name = "CMSMI_Sil";
-            this.CMSMI_Sil.Size = new System.Drawing.Size(180, 22);
+            this.CMSMI_Sil.Size = new System.Drawing.Size(86, 22);
             this.CMSMI_Sil.Text = "Sil";
             this.CMSMI_Sil.Click += new System.EventHandler(this.CMSMI_Sil_Click);
             // 
@@ -157,9 +158,10 @@
             // 
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CMSMI_PaletDetay,
-            this.CMSMI_PaletSil});
+            this.CMSMI_PaletSil,
+            this.CMSMI_Ekle});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(171, 48);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(171, 70);
             // 
             // CMSMI_PaletDetay
             // 
@@ -174,6 +176,13 @@
             this.CMSMI_PaletSil.Size = new System.Drawing.Size(180, 22);
             this.CMSMI_PaletSil.Text = "Sil";
             this.CMSMI_PaletSil.Click += new System.EventHandler(this.CMSMI_PaletSil_Click);
+            // 
+            // CMSMI_Ekle
+            // 
+            this.CMSMI_Ekle.Name = "CMSMI_Ekle";
+            this.CMSMI_Ekle.Size = new System.Drawing.Size(170, 22);
+            this.CMSMI_Ekle.Text = "Ürün Ekle";
+            this.CMSMI_Ekle.Click += new System.EventHandler(this.CMSMI_Ekle_Click);
             // 
             // PaletlemeIslemleri
             // 
@@ -213,5 +222,6 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem CMSMI_PaletDetay;
         private System.Windows.Forms.ToolStripMenuItem CMSMI_PaletSil;
+        private System.Windows.Forms.ToolStripMenuItem CMSMI_Ekle;
     }
 }
