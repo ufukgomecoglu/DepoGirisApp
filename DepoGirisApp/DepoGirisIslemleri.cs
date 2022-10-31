@@ -44,7 +44,8 @@ namespace DepoGirisApp
             {
                 if (dm.DepoGirisEkle(d))
                 {
-                    dm.DepoStokEkleBulGuncelle(p.ProductCode, p.Color, p.Quality);
+                    int sayi = dm.DepoStokEkleBulGuncelle(p.ProductCode, p.Color, p.Quality);
+                    dm.DepoGirisGuncelle(d.Barkod, sayi);
                 }
                 else
                 {
@@ -62,7 +63,7 @@ namespace DepoGirisApp
         private void GridDoldur()
         {
             dataGridView1.DataSource = dm.DepogirisListReader(AnaForm.LoginUser.Kimlik);
-            dataGridView1.Columns["Product_Id"].Visible = dataGridView1.Columns["KaliteHata_Id"].Visible = dataGridView1.Columns["Urun_ID"].Visible = dataGridView1.Columns["Renk_ID"].Visible = dataGridView1.Columns["Kalite_ID"].Visible = dataGridView1.Columns["DepoPalet_ID"].Visible = dataGridView1.Columns["Sevkiyat_ID"].Visible = dataGridView1.Columns["DepoHata_ID"].Visible = dataGridView1.Columns["Sicil"].Visible = false;
+            dataGridView1.Columns["Product_Id"].Visible = dataGridView1.Columns["KaliteHata_Id"].Visible = dataGridView1.Columns["Urun_ID"].Visible = dataGridView1.Columns["Renk_ID"].Visible = dataGridView1.Columns["Kalite_ID"].Visible = dataGridView1.Columns["DepoPalet_ID"].Visible = dataGridView1.Columns["Sevkiyat_ID"].Visible = dataGridView1.Columns["DepoHata_ID"].Visible = dataGridView1.Columns["Sicil"].Visible = dataGridView1.Columns["DepoStok_ID"].Visible = false;
             dataGridView1.Columns["UrunAciklama"].Width = 500;
         }
     }

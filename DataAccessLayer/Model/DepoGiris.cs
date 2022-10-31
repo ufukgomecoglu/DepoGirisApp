@@ -28,5 +28,6 @@ namespace DataAccessLayer.Model
         public int DepoPalet_ID { get; set; }
         public int Sevkiyat_ID { get; set; }
         public int DepoHata_ID { get; set; }
+        public int DepoStok_ID { get; set; }
     }
 }
