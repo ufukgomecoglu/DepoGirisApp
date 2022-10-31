@@ -30,7 +30,6 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.iŞLEMLERToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_PaletBarkoduCikar = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_TIRYuklemesi = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btn_paletlemeislemleri = new System.Windows.Forms.Button();
@@ -55,23 +54,15 @@
             // iŞLEMLERToolStripMenuItem
             // 
             this.iŞLEMLERToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.TSMI_PaletBarkoduCikar,
             this.TSMI_TIRYuklemesi});
             this.iŞLEMLERToolStripMenuItem.Name = "iŞLEMLERToolStripMenuItem";
             this.iŞLEMLERToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
             this.iŞLEMLERToolStripMenuItem.Text = "İŞLEMLER";
             // 
-            // TSMI_PaletBarkoduCikar
-            // 
-            this.TSMI_PaletBarkoduCikar.Name = "TSMI_PaletBarkoduCikar";
-            this.TSMI_PaletBarkoduCikar.Size = new System.Drawing.Size(173, 22);
-            this.TSMI_PaletBarkoduCikar.Text = "Paletleme İşlemleri";
-            this.TSMI_PaletBarkoduCikar.Click += new System.EventHandler(this.TSMI_PaletBarkoduCikar_Click);
-            // 
             // TSMI_TIRYuklemesi
             // 
             this.TSMI_TIRYuklemesi.Name = "TSMI_TIRYuklemesi";
-            this.TSMI_TIRYuklemesi.Size = new System.Drawing.Size(173, 22);
+            this.TSMI_TIRYuklemesi.Size = new System.Drawing.Size(180, 22);
             this.TSMI_TIRYuklemesi.Text = "TIR Yüklemesi ";
             this.TSMI_TIRYuklemesi.Click += new System.EventHandler(this.TSMI_TIRYuklemesi_Click_1);
             // 
@@ -162,7 +153,6 @@
         #endregion
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem iŞLEMLERToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem TSMI_PaletBarkoduCikar;
         private System.Windows.Forms.ToolStripMenuItem TSMI_TIRYuklemesi;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btn_urungir;
