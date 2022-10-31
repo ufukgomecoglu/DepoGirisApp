@@ -80,5 +80,14 @@ namespace DepoGirisApp
                 pi.ShowDialog();
             }
         }
+
+        private void btn_paletlemeislemleri_Click(object sender, EventArgs e)
+        {
+            PaletlemeIslemleri pi = new PaletlemeIslemleri();
+            if (Application.OpenForms.OfType<PaletlemeIslemleri>().Count() == 0)
+            {
+                pi.ShowDialog();
+            }
+        }
     }
 }

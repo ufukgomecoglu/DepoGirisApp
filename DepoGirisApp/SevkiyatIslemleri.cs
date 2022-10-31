@@ -113,6 +113,7 @@ namespace DepoGirisApp
 
         private void CMSMI_detaygoster_Click(object sender, EventArgs e)
         {
+            sevkiyatDetaylar = new List<SevkiyatDetay>();
             btn_guncelle.Visible = false;
             dataGridView2.DataSource = dm.SevkiyatDetayGöster(sevkiyatid);
 

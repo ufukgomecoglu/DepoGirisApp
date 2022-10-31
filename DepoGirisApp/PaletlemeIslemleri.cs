@@ -18,89 +18,141 @@ namespace DepoGirisApp
     {
         DataModel dm = new DataModel();
         List<DepoGiris> depoGirisler = new List<DepoGiris>();
-        int sayi = 0;
-        int kod_liste_kimlik = 0;
-        byte renk_liste_kimlik = 0;
+        int depoGirisId = 0;
+        int depoPaletId = 0;
         public PaletlemeIslemleri()
         {
             InitializeComponent();
             this.WindowState = FormWindowState.Maximized;
         }
 
-        
-
         private void PaletlemeIslemleri_Load(object sender, EventArgs e)
         {
-            tb_barkodno.Select();
-            label2.Text = "";
+            mtb_UrunBarkodNo.Select();
             GridDoldur();
         }
 
-        private void FormTemizle()
+        private void mtb_UrunBarkodNo_KeyDown(object sender, KeyEventArgs e)
         {
-            tb_barkodno.Text = "";
+            if (e.KeyCode==Keys.Enter)
+            {
+                DepoGiris dp = dm.DepoGirisGetir(mtb_UrunBarkodNo.Text);
+                string urunBarkod = "";
+                foreach (DepoGiris item in depoGirisler)
+                {
+                    if (mtb_UrunBarkodNo.Text == item.Barkod)
+                    {
+                        urunBarkod = item.Barkod;
+                    }
+                }
+                if (dp.DepoPalet_ID==0 && mtb_UrunBarkodNo.Text!=urunBarkod )
+                {
+                    depoGirisler.Add(dp);
+                }
+                else
+                {
+                    MessageBox.Show("Bu ürün palet eklenmiştir.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                GridDoldur();
+                mtb_UrunBarkodNo.Text = "";
+                mtb_UrunBarkodNo.Select();
+            }
         }
+
+        private void btn_ekle_Click(object sender, EventArgs e)
+        {
+            DepoPalet dp = new DepoPalet();
+            dp.BarkodNo = (dm.DepoPaletSonIDBulma()+1).ToString("D10");
+            dp.Kullanici_ID = AnaForm.LoginUser.Kimlik;
+            int id = dm.DepoPaletEkle(dp);
+            if (id != -1)
+            {
+                dm.DepoGirisDepoPaletIDGuncelle(depoGirisler, id);
+                depoGirisler = new List<DepoGiris>();
+                printDoc(dp.BarkodNo);
+                mtb_UrunBarkodNo.Select();
+            }
+            else
+            {
+                MessageBox.Show("Bir hata oluştu.", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            GridDoldur();
+        }
+
+        private void CMSMI_Sil_Click(object sender, EventArgs e)
+        {
+            if (depoGirisler.Count != 0)
+            {
+                depoGirisler.Remove(depoGirisler[depoGirisId]);
+                GridDoldur();
+            }
+            else
+            {
+                dm.DepoGirisDepoPaletIDGuncelle(depoGirisId);
+                dataGridView1.DataSource = dm.DepoGirisDepoPaletDetayGöster(depoPaletId);
+            }
+        }
+
+        private void CMSMI_PaletDetay_Click(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = dm.DepoGirisDepoPaletDetayGöster(depoPaletId);
+        }
+
+        private void CMSMI_PaletSil_Click(object sender, EventArgs e)
+        {
+            dm.DepoPaletSil(depoPaletId);
+            GridDoldur();
+        }
+
+        private void dataGridView1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                var hit = dataGridView1.HitTest(e.X, e.Y);
+                dataGridView1.ClearSelection();
+                if (hit.RowIndex != -1)
+                {
+                    if (depoGirisler.Count != 0)
+                    {
+                        dataGridView1.Rows[hit.RowIndex].Selected = true;
+                        depoGirisId = hit.RowIndex;
+                        contextMenuStrip1.Show(dataGridView1, new Point(e.X, e.Y));
+                    }
+                    else
+                    {
+                        dataGridView1.Rows[hit.RowIndex].Selected = true;
+                        depoGirisId = Convert.ToInt32(dataGridView1.Rows[hit.RowIndex].Cells["ID"].Value);
+                        depoPaletId = Convert.ToInt32(dataGridView1.Rows[hit.RowIndex].Cells["DepoPalet_ID"].Value);
+                        contextMenuStrip1.Show(dataGridView1, new Point(e.X, e.Y));
+                    }
+                }
+            }
+        }
+
+        private void dataGridView2_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                var hit = dataGridView2.HitTest(e.X, e.Y);
+                dataGridView2.ClearSelection();
+                if (hit.RowIndex != -1)
+                {
+                    dataGridView2.Rows[hit.RowIndex].Selected = true;
+                    depoPaletId = Convert.ToInt32(dataGridView2.Rows[hit.RowIndex].Cells["ID"].Value);
+                    contextMenuStrip2.Show(dataGridView2, new Point(e.X, e.Y));
+                }
+            }
+        }
+
         private void GridDoldur()
         {
             dataGridView1.DataSource = null;
             dataGridView1.DataSource = depoGirisler;
-            dataGridView1.Columns["Product_Id"].Visible = dataGridView1.Columns["DepoPaletliUrun_ID"].Visible = dataGridView1.Columns["UrunKodu"].Visible = false;
-            dataGridView2.DataSource = dm.DepoPaletListele();
-            dataGridView2.Columns["Kod_liste_Kimlik"].Visible = dataGridView2.Columns["Renk_liste_kimlik"].Visible = dataGridView2.Columns["kullanici_liste_kimlik"].Visible = false;
-        }
-
-        private void tb_barkodno_TextChanged(object sender, EventArgs e)
-        {
-            if (tb_barkodno.Text.Length == 10)
-            {
-                DepoGiris dg = dm.DepoGirisGetir(tb_barkodno.Text);
-                Product p = dm.BarkodNoGöreProductBul(tb_barkodno.Text);
-                if (dg.DepoPalet_ID == 0)
-                {
-                    sayi = sayi + 1;
-                    kod_liste_kimlik = p.ProductCode;
-                    renk_liste_kimlik = p.Color;
-                    depoGirisler.Add(dg);
-                }
-                label2.Text = sayi.ToString();
-                GridDoldur();
-                FormTemizle();
-                tb_barkodno.Select();
-            }
-        }
-
-        private void btn_paletbarkodnocıkart_Click(object sender, EventArgs e)
-        {
-            DepoPaletliUrun dpu = new DepoPaletliUrun();
-            int barkodno = dm.DepoPaletListele().Count;
-            dpu.BarkodNo = PaletBarkodNoOlustur(barkodno);
-            dpu.Adet = sayi;
-            dpu.Kod_liste_Kimlik = kod_liste_kimlik;
-            dpu.Renk_liste_kimlik= renk_liste_kimlik;
-            dpu.kullanici_liste_kimlik = AnaForm.LoginUser.Kimlik;
-            if (dm.DepoPaletEkle(dpu))
-            {
-                if (dm.DepoGirisDepoPaletIDGuncelle(depoGirisler, dm.DepoPaletListele().Count))
-                {
-                    depoGirisler.Clear();
-                    sayi = 0;
-                    kod_liste_kimlik = 0;
-                    renk_liste_kimlik = 0;
-                    printDoc(dpu.BarkodNo);
-                    GridDoldur();
-                    FormTemizle();
-                    tb_barkodno.Select();
-                }
-            }
-        }
-        private string PaletBarkodNoOlustur(int barkodno)
-        {
-            string barkod = (barkodno+1).ToString("D10");
-            return barkod;
+            dataGridView1.Columns["Sicil"].Visible = dataGridView1.Columns["Kullanici_Isim"].Visible = dataGridView1.Columns["Product_ID"].Visible = dataGridView1.Columns["KaliteHata_Id"].Visible = dataGridView1.Columns["Urun_ID"].Visible = dataGridView1.Columns["Renk_ID"].Visible = dataGridView1.Columns["Kalite_ID"].Visible = dataGridView1.Columns["Sevkiyat_ID"].Visible = dataGridView1.Columns["DepoHata_ID"].Visible = false;
+            dataGridView2.DataSource = dm.DepoPaletReader();
         }
         private void printDoc(string barkod)
         {
-
             PrintDocument document = new PrintDocument();
             BarcodeDraw bdraw = BarcodeDrawFactory.GetSymbology(BarcodeSymbology.Code128);
             Image barcodeImage = bdraw.Draw(barkod, 50);
