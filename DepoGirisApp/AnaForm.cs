@@ -59,7 +59,7 @@ namespace DepoGirisApp
         private void btn_sevkiyatolustur_Click(object sender, EventArgs e)
         {
             SevkiyatIslemleri si = new SevkiyatIslemleri();
-            if (Application.OpenForms.OfType<SevkiyatIslemleri>().Count() == 0)
+            if (Application.OpenForms.OfType<SevkiyatIslemleri>().Count() <= 0)
             {
                 si.ShowDialog();
             }

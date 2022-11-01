@@ -1040,7 +1040,7 @@ namespace DataAccessLayer
             List<SevkiyatDetay> sevkiyatDetaylar = new List<SevkiyatDetay>();
             try
             {
-                cmd.CommandText = "SELECT S.ID, S.Urun_ID, K.tanim, K.aciklama, S.Renk_ID, R.renkad, S.Kalite_ID, KA.kaliteAd, S.Miktar FROM SevkiyatDetay AS S JOIN kod_liste AS K ON K.Kimlik = S.ID JOIN renk_liste AS R ON R.Kimlik = S.ID JOIN kalite_liste AS KA ON KA.Kimlik = S.ID WHERE S.Sevkiyat_ID= @ID ";
+                cmd.CommandText = "SELECT S.ID, S.Urun_ID, K.tanim, K.aciklama, S.Renk_ID, R.renkad, S.Kalite_ID, KA.kaliteAd, S.Miktar FROM SevkiyatDetay AS S \r\nJOIN kod_liste AS K ON K.Kimlik = S.Urun_ID JOIN renk_liste AS R ON R.Kimlik = S.Renk_ID JOIN kalite_liste AS KA ON KA.Kimlik = S.Kalite_ID WHERE S.Sevkiyat_ID= @ID ";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@ID", sevkiyatid);
                 con.Open();
@@ -1085,7 +1085,7 @@ namespace DataAccessLayer
             SevkiyatDetay sd = new SevkiyatDetay();
             try
             {
-                cmd.CommandText = "SELECT S.ID, S.Urun_ID, K.tanim, K.aciklama, S.Renk_ID, R.renkad, S.Kalite_ID, KA.kaliteAd, S.Miktar FROM SevkiyatDetay AS S JOIN kod_liste AS K ON K.Kimlik = S.ID JOIN renk_liste AS R ON R.Kimlik = S.ID JOIN kalite_liste AS KA ON KA.Kimlik = S.ID WHERE S.ID= @ID ";
+                cmd.CommandText = "SELECT S.ID, S.Urun_ID, K.tanim, K.aciklama, S.Renk_ID, R.renkad, S.Kalite_ID, KA.kaliteAd, S.Miktar FROM SevkiyatDetay AS S JOIN kod_liste AS K ON K.Kimlik = S.Urun_ID JOIN renk_liste AS R ON R.Kimlik = S.Renk_ID JOIN kalite_liste AS KA ON KA.Kimlik = S.Kalite_ID WHERE S.ID= @ID ";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@ID", sevkiyatdetayid);
                 con.Open();
