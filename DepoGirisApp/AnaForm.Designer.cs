@@ -32,11 +32,13 @@
             this.iŞLEMLERToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_TIRYuklemesi = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btn_TIRyukleme = new System.Windows.Forms.Button();
             this.btn_paletlemeislemleri = new System.Windows.Forms.Button();
             this.btn_depostok = new System.Windows.Forms.Button();
             this.btn_sevkiyatolustur = new System.Windows.Forms.Button();
             this.btn_uruntakip = new System.Windows.Forms.Button();
             this.btn_urungir = new System.Windows.Forms.Button();
+            this.btn_depohata = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -62,12 +64,13 @@
             // TSMI_TIRYuklemesi
             // 
             this.TSMI_TIRYuklemesi.Name = "TSMI_TIRYuklemesi";
-            this.TSMI_TIRYuklemesi.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_TIRYuklemesi.Size = new System.Drawing.Size(150, 22);
             this.TSMI_TIRYuklemesi.Text = "TIR Yüklemesi ";
-            this.TSMI_TIRYuklemesi.Click += new System.EventHandler(this.TSMI_TIRYuklemesi_Click_1);
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btn_depohata);
+            this.groupBox1.Controls.Add(this.btn_TIRyukleme);
             this.groupBox1.Controls.Add(this.btn_paletlemeislemleri);
             this.groupBox1.Controls.Add(this.btn_depostok);
             this.groupBox1.Controls.Add(this.btn_sevkiyatolustur);
@@ -79,6 +82,17 @@
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
+            // 
+            // btn_TIRyukleme
+            // 
+            this.btn_TIRyukleme.AutoSize = true;
+            this.btn_TIRyukleme.Location = new System.Drawing.Point(462, 20);
+            this.btn_TIRyukleme.Name = "btn_TIRyukleme";
+            this.btn_TIRyukleme.Size = new System.Drawing.Size(86, 23);
+            this.btn_TIRyukleme.TabIndex = 5;
+            this.btn_TIRyukleme.Text = "TIR Yüklemesi";
+            this.btn_TIRyukleme.UseVisualStyleBackColor = true;
+            this.btn_TIRyukleme.Click += new System.EventHandler(this.btn_TIRyukleme_Click);
             // 
             // btn_paletlemeislemleri
             // 
@@ -132,6 +146,17 @@
             this.btn_urungir.UseVisualStyleBackColor = true;
             this.btn_urungir.Click += new System.EventHandler(this.btn_urungir_Click);
             // 
+            // btn_depohata
+            // 
+            this.btn_depohata.AutoSize = true;
+            this.btn_depohata.Location = new System.Drawing.Point(7, 49);
+            this.btn_depohata.Name = "btn_depohata";
+            this.btn_depohata.Size = new System.Drawing.Size(142, 23);
+            this.btn_depohata.TabIndex = 6;
+            this.btn_depohata.Text = "Depoda Oluşan Hata Girişi";
+            this.btn_depohata.UseVisualStyleBackColor = true;
+            this.btn_depohata.Click += new System.EventHandler(this.btn_depohata_Click);
+            // 
             // AnaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -160,5 +185,7 @@
         private System.Windows.Forms.Button btn_sevkiyatolustur;
         private System.Windows.Forms.Button btn_depostok;
         private System.Windows.Forms.Button btn_paletlemeislemleri;
+        private System.Windows.Forms.Button btn_TIRyukleme;
+        private System.Windows.Forms.Button btn_depohata;
     }
 }

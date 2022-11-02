@@ -115,9 +115,9 @@ namespace DepoGirisApp
                 depoGirisler.Clear();
                 depoPaletler.Clear();
                 sevkiyatDetaylar.Clear();
+                GridDoldur();
+                dgv_sevkiyatdetay.DataSource = null;
             }
-            GridDoldur();
-            dgv_sevkiyatdetay.DataSource = null;
         }
 
         private void mtb_barkod_KeyDown(object sender, KeyEventArgs e)
