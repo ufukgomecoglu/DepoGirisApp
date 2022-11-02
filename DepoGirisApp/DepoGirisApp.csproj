@@ -61,6 +61,12 @@
     <Compile Include="DepoGirisIslemleri.Designer.cs">
       <DependentUpon>DepoGirisIslemleri.cs</DependentUpon>
     </Compile>
+    <Compile Include="DepoHataIslemleri.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DepoHataIslemleri.Designer.cs">
+      <DependentUpon>DepoHataIslemleri.cs</DependentUpon>
+    </Compile>
     <Compile Include="DepoStokTakip.cs">
       <SubType>Form</SubType>
     </Compile>

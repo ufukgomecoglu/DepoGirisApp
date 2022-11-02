@@ -62,7 +62,8 @@ namespace DepoGirisApp
 
         private void btn_depohata_Click(object sender, EventArgs e)
         {
-
+            DepoHataIslemleri dhı = new DepoHataIslemleri();
+            dhı.ShowDialog();
         }
     }
 }
