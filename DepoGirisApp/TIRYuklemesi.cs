@@ -17,6 +17,7 @@ namespace DepoGirisApp
         DataModel dm = new DataModel();
         List<DepoGiris> depoGirisler = new List<DepoGiris>();
         List<DepoPalet> depoPaletler = new List<DepoPalet>();
+        List<SevkiyatDetay> sevkiyatDetaylar = new List<SevkiyatDetay>();
         int sevkiyatid = 0;
         public TIRYuklemesi()
         {
@@ -57,7 +58,66 @@ namespace DepoGirisApp
 
         private void CMSMI_Yukle_Click(object sender, EventArgs e)
         {
+            bool dogruMu = true;
+            List<DepoGiris> depogirisstokid = new List<DepoGiris>();
+            int urunid = 0;
+            byte renkid = 0;
+            byte kaliteid = 0;
+            int stokid = 0;
+            int miktar = 0;
+            for (int i = 0; i < sevkiyatDetaylar.Count; i++)
+            {
+                urunid= sevkiyatDetaylar[i].Urun_ID;
+                renkid = sevkiyatDetaylar[i].Renk_ID;
+                kaliteid = sevkiyatDetaylar[i].Kalite_ID;
+                stokid = dm.DepoStokIdBul(urunid, renkid, kaliteid);
+                miktar = miktar + sevkiyatDetaylar[i].Miktar;
+                for (int j = 0; j < depoGirisler.Count; j++)
+                {
+                    if (stokid == depoGirisler[j].DepoStok_ID)
+                    {
+                        depogirisstokid.Add(depoGirisler[j]);
+                    }
+                }
+                if (sevkiyatDetaylar[i].Miktar == depogirisstokid.Count)
+                {
+                    dogruMu = true;
+                    if (i == sevkiyatDetaylar.Count - 1)
+                    {
+                        if (miktar == depoGirisler.Count)
+                        {
+                            dogruMu = true;
+                        }
+                        else
+                        {
+                            dogruMu = false;
+                        }
+                    }
+                    
+                }
+                else
+                {
+                    dogruMu = false;
+                }
+                depogirisstokid.Clear();
+                if (dogruMu==false)
+                {
+                    break;
+                }
+            }
             
+            if (dogruMu==true)
+            {
+                dm.DepoStokMiktarGuncelle(depoGirisler);
+                dm.DepoPaletDurumGuncelle(depoPaletler);
+                dm.DepoGirisGuncelle(depoGirisler, sevkiyatid);
+                dm.SevkiyatGuncelle(sevkiyatid);
+                depoGirisler.Clear();
+                depoPaletler.Clear();
+                sevkiyatDetaylar.Clear();
+            }
+            GridDoldur();
+            dgv_sevkiyatdetay.DataSource = null;
         }
 
         private void mtb_barkod_KeyDown(object sender, KeyEventArgs e)
@@ -87,7 +147,9 @@ namespace DepoGirisApp
 
         private void CMSMI_DetayGoster_Click(object sender, EventArgs e)
         {
+            sevkiyatDetaylar.Clear();
             dgv_sevkiyatdetay.DataSource= dm.SevkiyatDetayGöster(sevkiyatid);
+            sevkiyatDetaylar.AddRange(dm.SevkiyatDetayGöster(sevkiyatid));
             dgv_sevkiyatdetay.Columns["Urun_ID"].Visible = dgv_sevkiyatdetay.Columns["Renk_ID"].Visible = dgv_sevkiyatdetay.Columns["Kalite_ID"].Visible = dgv_sevkiyatdetay.Columns["Sevkiyat_ID"].Visible = false;
         }
     }

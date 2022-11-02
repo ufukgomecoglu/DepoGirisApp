@@ -480,7 +480,29 @@ namespace DataAccessLayer
                 con.Close();
             }
         }
-
+        public void DepoGirisGuncelle(List<DepoGiris> dg, int sevkiyatID)
+        {
+            cmd.CommandText = "UPDATE DepoGiris SET Durum= 0, Sevkiyat_ID=@Sevkiyat_ID WHERE Id = @id";
+            con.Open();
+            foreach (DepoGiris item in dg)
+            {
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@Sevkiyat_ID", sevkiyatID);
+                cmd.Parameters.AddWithValue("@id", item.Id);
+                cmd.ExecuteNonQuery();
+            }
+            con.Close();
+        }
+        public void DepoGirisGuncelle(string barkod, int stokid)
+        {
+            cmd.CommandText = "UPDATE DepoGiris Set DepoStok_ID = @DepoStok_ID WHERE barkod=@id";
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@DepoStok_ID", stokid);
+            cmd.Parameters.AddWithValue("@id", barkod);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
         #endregion
         #region Musteri Metotları
         public List<Musteri> MusteriListele()
@@ -796,12 +818,12 @@ namespace DataAccessLayer
             cmd.ExecuteNonQuery();
             con.Close();
         }
-        public void DepoGirisGuncelle(string barkod, int stokid)
+        public void SevkiyatGuncelle(int sevkiyaid)
         {
-            cmd.CommandText = "UPDATE DepoGiris Set DepoStok_ID = @DepoStok_ID WHERE barkod=@id";
+            cmd.CommandText = "UPDATE Sevkiyatlar SET Durum=1, SevkEdilenTarih=@SevkEdilenTarih  WHERE ID=@id";
             cmd.Parameters.Clear();
-            cmd.Parameters.AddWithValue("@DepoStok_ID", stokid);
-            cmd.Parameters.AddWithValue("@id", barkod);
+            cmd.Parameters.AddWithValue("@id", sevkiyaid);
+            cmd.Parameters.AddWithValue("@SevkEdilenTarih ", DateTime.Now);
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();
@@ -898,6 +920,63 @@ namespace DataAccessLayer
             {
                 con.Close();
             }
+        }
+        public int DepoStokIdBul(int urunid, byte renkid, byte kaliteid)
+        {
+            int id = 0;
+            try
+            {
+                cmd.CommandText = "SELECT ID FROM DepoStoklar WHERE Urun_ID = @Urun_ID AND Renk_ID=@Renk_ID AND Kalite_ID = @Kalite_ID ";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@Urun_ID", urunid);
+                cmd.Parameters.AddWithValue("@Renk_ID", renkid);
+                cmd.Parameters.AddWithValue("@Kalite_ID", kaliteid);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    DepoStok ds = new DepoStok()
+                    {
+                        ID=reader.GetInt32(0),
+                    };
+                    id=ds.ID;
+                }
+                return id;
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        public void DepoStokMiktarGuncelle(List<DepoGiris> dg)
+        {
+            DepoStok ds = new DepoStok();
+           
+            foreach (DepoGiris item in dg)
+            {
+                cmd.CommandText = "SELECT  Stok FROM DepoStoklar WHERE ID = @id";
+                con.Open();
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id", item.DepoStok_ID);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    ds.Stok = reader.GetInt32(0);
+                }
+                con.Close();
+                cmd.CommandText = "UPDATE DepoStoklar SET Stok=@stok WHERE ID = @id ";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id", item.DepoStok_ID);
+                cmd.Parameters.AddWithValue("@stok", ds.Stok - 1);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+            
         }
         #endregion
         #region DepoPalet Metot
@@ -1016,6 +1095,18 @@ namespace DataAccessLayer
             {
                 con.Close();
             }
+        }
+        public void DepoPaletDurumGuncelle(List<DepoPalet> dp)
+        {
+            cmd.CommandText = "UPDATE DepoPaletler Set Durum = 0 WHERE ID = @id";
+            con.Open();
+            foreach (DepoPalet item in dp)
+            {
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id",item.ID);
+                cmd.ExecuteNonQuery();
+            }
+            con.Close();
         }
         #endregion
         #region SevkiyatDetayMetotları
