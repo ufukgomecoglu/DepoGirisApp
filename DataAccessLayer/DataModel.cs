@@ -493,6 +493,16 @@ namespace DataAccessLayer
             }
             con.Close();
         }
+        public void DepoGirisGuncelle(int depogirisid, int depohataid)
+        {
+            cmd.CommandText = "UPDATE DepoGiris SET Durum= 0, DepoHata_ID=@DepoHata_ID WHERE Id = @id";
+            con.Open();
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@DepoHata_ID", depohataid);
+            cmd.Parameters.AddWithValue("@id", depogirisid);
+            cmd.ExecuteNonQuery();
+            con.Close();
+        }
         public void DepoGirisGuncelle(string barkod, int stokid)
         {
             cmd.CommandText = "UPDATE DepoGiris Set DepoStok_ID = @DepoStok_ID WHERE barkod=@id";
@@ -850,7 +860,7 @@ namespace DataAccessLayer
                     cmd.Parameters.AddWithValue("@urun_ID", urun_id);
                     cmd.Parameters.AddWithValue("@renk_ID", renk_id);
                     cmd.Parameters.AddWithValue("@kalite_ID", kalite_id);
-                    sayi1 = Convert.ToInt32(cmd.ExecuteScalar()); 
+                    sayi1 = Convert.ToInt32(cmd.ExecuteScalar());
                 }
                 if (sayi == 1)
                 {
@@ -937,9 +947,9 @@ namespace DataAccessLayer
                 {
                     DepoStok ds = new DepoStok()
                     {
-                        ID=reader.GetInt32(0),
+                        ID = reader.GetInt32(0),
                     };
-                    id=ds.ID;
+                    id = ds.ID;
                 }
                 return id;
             }
@@ -955,7 +965,7 @@ namespace DataAccessLayer
         public void DepoStokMiktarGuncelle(List<DepoGiris> dg)
         {
             DepoStok ds = new DepoStok();
-           
+
             foreach (DepoGiris item in dg)
             {
                 cmd.CommandText = "SELECT  Stok FROM DepoStoklar WHERE ID = @id";
@@ -976,7 +986,28 @@ namespace DataAccessLayer
                 cmd.ExecuteNonQuery();
                 con.Close();
             }
-            
+
+        }
+        public void DepoStokMiktarGuncelle(int depostokid)
+        {
+            DepoStok ds = new DepoStok();
+            cmd.CommandText = "SELECT  Stok FROM DepoStoklar WHERE ID = @id";
+            con.Open();
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@id", depostokid);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                ds.Stok = reader.GetInt32(0);
+            }
+            con.Close();
+            cmd.CommandText = "UPDATE DepoStoklar SET Stok=@stok WHERE ID = @id ";
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@id", depostokid);
+            cmd.Parameters.AddWithValue("@stok", ds.Stok - 1);
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
         }
         #endregion
         #region DepoPalet Metot
@@ -1077,7 +1108,7 @@ namespace DataAccessLayer
                 cmd.Parameters.AddWithValue("@BarkodNo", barkodno);
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
-                while(reader.Read())
+                while (reader.Read())
                 {
                     dp = new DepoPalet()
                     {
@@ -1103,7 +1134,7 @@ namespace DataAccessLayer
             foreach (DepoPalet item in dp)
             {
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@id",item.ID);
+                cmd.Parameters.AddWithValue("@id", item.ID);
                 cmd.ExecuteNonQuery();
             }
             con.Close();
@@ -1225,6 +1256,37 @@ namespace DataAccessLayer
             catch (Exception)
             {
                 return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        #endregion
+        #region DepoHata Metotları
+        public List<DepoHata> DepoHataListele()
+        {
+            List<DepoHata> depoHatalar = new List<DepoHata>();
+            try
+            {
+                cmd.CommandText = "SELECT * FROM DepoHatalar";
+                cmd.Parameters.Clear();
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    depoHatalar.Add(new DepoHata()
+                    {
+                        ID = reader.GetInt32(0),
+                        Isim = reader.GetString(1)
+                    });
+                }
+                return depoHatalar;
+            }
+            catch (Exception)
+            {
+
+                return null;
             }
             finally
             {

@@ -111,6 +111,9 @@
     <EmbeddedResource Include="DepoGirisIslemleri.resx">
       <DependentUpon>DepoGirisIslemleri.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DepoHataIslemleri.resx">
+      <DependentUpon>DepoHataIslemleri.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DepoStokTakip.resx">
       <DependentUpon>DepoStokTakip.cs</DependentUpon>
     </EmbeddedResource>
