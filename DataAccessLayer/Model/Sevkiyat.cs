@@ -16,5 +16,6 @@ namespace DataAccessLayer.Model
         public DateTime SevkEdilenTarih { get; set; }
         public byte Kullanici_ID { get; set; }
         public string kullanici_adi { get; set; }
+        public string Aciklama { get; set; }
     }
 }

@@ -32,6 +32,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btn_sevkiyatolustur = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btn_guncelle = new System.Windows.Forms.Button();
             this.btn_ekle = new System.Windows.Forms.Button();
             this.tb_miktar = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -56,7 +57,8 @@
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CMSMI_Sil2 = new System.Windows.Forms.ToolStripMenuItem();
             this.CMSMI_Düzenle2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.btn_guncelle = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.tb_aciklama = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -69,6 +71,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.tb_aciklama);
+            this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.btn_sevkiyatolustur);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.dtp_sevkiyattarih);
@@ -77,7 +81,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(13, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(775, 206);
+            this.groupBox1.Size = new System.Drawing.Size(775, 317);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Sevkiyat Bilgileri";
@@ -105,12 +109,22 @@
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.cb_urun);
             this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Location = new System.Drawing.Point(7, 47);
+            this.groupBox2.Location = new System.Drawing.Point(7, 158);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(762, 153);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Ürun Bilgileri";
+            // 
+            // btn_guncelle
+            // 
+            this.btn_guncelle.Location = new System.Drawing.Point(666, 81);
+            this.btn_guncelle.Name = "btn_guncelle";
+            this.btn_guncelle.Size = new System.Drawing.Size(75, 23);
+            this.btn_guncelle.TabIndex = 9;
+            this.btn_guncelle.Text = "Güncelle";
+            this.btn_guncelle.UseVisualStyleBackColor = true;
+            this.btn_guncelle.Click += new System.EventHandler(this.btn_guncelle_Click);
             // 
             // btn_ekle
             // 
@@ -251,9 +265,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox4.Controls.Add(this.dataGridView2);
-            this.groupBox4.Location = new System.Drawing.Point(13, 225);
+            this.groupBox4.Location = new System.Drawing.Point(13, 336);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(1152, 219);
+            this.groupBox4.Size = new System.Drawing.Size(1152, 221);
             this.groupBox4.TabIndex = 2;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Sevkiyat Detay";
@@ -266,7 +280,7 @@
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Location = new System.Drawing.Point(7, 20);
             this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(1139, 193);
+            this.dataGridView2.Size = new System.Drawing.Size(1139, 195);
             this.dataGridView2.TabIndex = 0;
             this.dataGridView2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView2_MouseClick);
             // 
@@ -322,21 +336,28 @@
             this.CMSMI_Düzenle2.Text = "Düzenle";
             this.CMSMI_Düzenle2.Click += new System.EventHandler(this.CMSMI_Düzenle2_Click);
             // 
-            // btn_guncelle
+            // label7
             // 
-            this.btn_guncelle.Location = new System.Drawing.Point(666, 81);
-            this.btn_guncelle.Name = "btn_guncelle";
-            this.btn_guncelle.Size = new System.Drawing.Size(75, 23);
-            this.btn_guncelle.TabIndex = 9;
-            this.btn_guncelle.Text = "Güncelle";
-            this.btn_guncelle.UseVisualStyleBackColor = true;
-            this.btn_guncelle.Click += new System.EventHandler(this.btn_guncelle_Click);
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 56);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(50, 13);
+            this.label7.TabIndex = 5;
+            this.label7.Text = "Açıklama";
+            // 
+            // tb_aciklama
+            // 
+            this.tb_aciklama.Location = new System.Drawing.Point(63, 56);
+            this.tb_aciklama.Multiline = true;
+            this.tb_aciklama.Name = "tb_aciklama";
+            this.tb_aciklama.Size = new System.Drawing.Size(685, 96);
+            this.tb_aciklama.TabIndex = 6;
             // 
             // SevkiyatIslemleri
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1172, 450);
+            this.ClientSize = new System.Drawing.Size(1172, 563);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
@@ -387,5 +408,7 @@
         private System.Windows.Forms.ToolStripMenuItem CMSMI_Sil2;
         private System.Windows.Forms.ToolStripMenuItem CMSMI_Düzenle2;
         private System.Windows.Forms.Button btn_guncelle;
+        private System.Windows.Forms.TextBox tb_aciklama;
+        private System.Windows.Forms.Label label7;
     }
 }

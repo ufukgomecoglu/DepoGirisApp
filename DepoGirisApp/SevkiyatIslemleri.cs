@@ -31,6 +31,7 @@ namespace DepoGirisApp
             s.Musteri_ID = Convert.ToInt32(cb_musteri.SelectedValue);
             s.SevkTarih = dtp_sevkiyattarih.Value.Date;
             s.Kullanici_ID = AnaForm.LoginUser.Kimlik;
+            s.Aciklama = tb_aciklama.Text;
             if (dm.SevkiyatEkle(s))
             {
                 MessageBox.Show("Ekleme İşlemi Başarılı", "Bilgi");

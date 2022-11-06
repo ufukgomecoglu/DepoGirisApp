@@ -65,5 +65,11 @@ namespace DepoGirisApp
             DepoHataIslemleri dhı = new DepoHataIslemleri();
             dhı.ShowDialog();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MusteriGecmisi mg = new MusteriGecmisi();
+            mg.ShowDialog();
+        }
     }
 }

@@ -28,47 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.iŞLEMLERToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_TIRYuklemesi = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btn_depohata = new System.Windows.Forms.Button();
             this.btn_TIRyukleme = new System.Windows.Forms.Button();
             this.btn_paletlemeislemleri = new System.Windows.Forms.Button();
             this.btn_depostok = new System.Windows.Forms.Button();
             this.btn_sevkiyatolustur = new System.Windows.Forms.Button();
             this.btn_uruntakip = new System.Windows.Forms.Button();
             this.btn_urungir = new System.Windows.Forms.Button();
-            this.btn_depohata = new System.Windows.Forms.Button();
-            this.menuStrip1.SuspendLayout();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.iŞLEMLERToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(703, 24);
-            this.menuStrip1.TabIndex = 3;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // iŞLEMLERToolStripMenuItem
-            // 
-            this.iŞLEMLERToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.TSMI_TIRYuklemesi});
-            this.iŞLEMLERToolStripMenuItem.Name = "iŞLEMLERToolStripMenuItem";
-            this.iŞLEMLERToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
-            this.iŞLEMLERToolStripMenuItem.Text = "İŞLEMLER";
-            // 
-            // TSMI_TIRYuklemesi
-            // 
-            this.TSMI_TIRYuklemesi.Name = "TSMI_TIRYuklemesi";
-            this.TSMI_TIRYuklemesi.Size = new System.Drawing.Size(150, 22);
-            this.TSMI_TIRYuklemesi.Text = "TIR Yüklemesi ";
-            // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.btn_depohata);
             this.groupBox1.Controls.Add(this.btn_TIRyukleme);
             this.groupBox1.Controls.Add(this.btn_paletlemeislemleri);
@@ -76,12 +50,23 @@
             this.groupBox1.Controls.Add(this.btn_sevkiyatolustur);
             this.groupBox1.Controls.Add(this.btn_uruntakip);
             this.groupBox1.Controls.Add(this.btn_urungir);
-            this.groupBox1.Location = new System.Drawing.Point(12, 27);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(679, 279);
+            this.groupBox1.Size = new System.Drawing.Size(679, 294);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.groupBox1.Text = "Menüler";
+            // 
+            // btn_depohata
+            // 
+            this.btn_depohata.AutoSize = true;
+            this.btn_depohata.Location = new System.Drawing.Point(7, 49);
+            this.btn_depohata.Name = "btn_depohata";
+            this.btn_depohata.Size = new System.Drawing.Size(142, 23);
+            this.btn_depohata.TabIndex = 6;
+            this.btn_depohata.Text = "Depoda Oluşan Hata Girişi";
+            this.btn_depohata.UseVisualStyleBackColor = true;
+            this.btn_depohata.Click += new System.EventHandler(this.btn_depohata_Click);
             // 
             // btn_TIRyukleme
             // 
@@ -146,16 +131,15 @@
             this.btn_urungir.UseVisualStyleBackColor = true;
             this.btn_urungir.Click += new System.EventHandler(this.btn_urungir_Click);
             // 
-            // btn_depohata
+            // button1
             // 
-            this.btn_depohata.AutoSize = true;
-            this.btn_depohata.Location = new System.Drawing.Point(7, 49);
-            this.btn_depohata.Name = "btn_depohata";
-            this.btn_depohata.Size = new System.Drawing.Size(142, 23);
-            this.btn_depohata.TabIndex = 6;
-            this.btn_depohata.Text = "Depoda Oluşan Hata Girişi";
-            this.btn_depohata.UseVisualStyleBackColor = true;
-            this.btn_depohata.Click += new System.EventHandler(this.btn_depohata_Click);
+            this.button1.Location = new System.Drawing.Point(156, 48);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // AnaForm
             // 
@@ -163,22 +147,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(703, 318);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.menuStrip1);
             this.Name = "AnaForm";
             this.Text = "AnaForm";
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem iŞLEMLERToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem TSMI_TIRYuklemesi;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btn_urungir;
         private System.Windows.Forms.Button btn_uruntakip;
@@ -187,5 +164,6 @@
         private System.Windows.Forms.Button btn_paletlemeislemleri;
         private System.Windows.Forms.Button btn_TIRyukleme;
         private System.Windows.Forms.Button btn_depohata;
+        private System.Windows.Forms.Button button1;
     }
 }

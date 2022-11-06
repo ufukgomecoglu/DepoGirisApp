@@ -29,5 +29,8 @@ namespace DataAccessLayer.Model
         public int Sevkiyat_ID { get; set; }
         public int DepoHata_ID { get; set; }
         public int DepoStok_ID { get; set; }
+        public int Musteri_ID { get; set; }
+        public string Isim { get; set; }
+        public DateTime SevkEdilenTarih { get; set; }
     }
 }
